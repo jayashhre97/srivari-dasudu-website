@@ -59,7 +59,7 @@ const translations = {
     'footer.mantra': 'Om Namo Venkatesaya ✦ Sarve Janah Sukhino Bhavantu',
 
     // Hero
-    'hero.mantra': 'Om Namo Venkatesaya',
+    'hero.mantra': 'Jai Srimannarayana',
     'hero.desc':
       'A sacred devotional platform to invoke the boundless grace of Lord Sri Venkateswara Swamy through authentic Vedic rituals, time-tested remedies, and sacred cow service.',
     'hero.remedies': 'Explore Remedies',
@@ -183,11 +183,11 @@ const translations = {
     'contact.copied': 'Copied',
 
     // Pages banners
-    'muhurtham.eyebrow': 'Vedic Astrology & Auspicious Timing',
-    'muhurtham.title': 'Auspicious Muhurtham Guidance',
+    'muhurtham.eyebrow': 'Sacred Timing & Divine Guidance',
+    'muhurtham.title': 'Auspicious Muhurthams',
     'muhurtham.lead':
-      'Precise calculation of sacred lagna timings for marriage, housewarming, upanayanam, naming ceremonies, and business inaugurations by Founder & Spiritual Guide Sri N. V. Ram Kishore Acharyulu.',
-    'muhurtham.cta': 'Request Muhurtham Calculation →',
+      "Every sacred beginning deserves an auspicious moment. Seek divine blessings and begin life's important milestones at the right time.",
+    'muhurtham.cta': 'Request a Muhurtham',
 
     'pitru.eyebrow': 'Sacred Vedic Rites & Ancestral Duty',
     'pitru.title': 'Pitru Devata Seva & Shraddha Vidhanam',
@@ -288,7 +288,7 @@ const translations = {
     'footer.copy': 'శ్రీ వేంకటేశ్వర స్వామికి అంకితం. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.',
     'footer.mantra': 'ఓం నమో వేంకటేశాయ ✦ సర్వే జనాః సుఖినో భవంతు',
 
-    'hero.mantra': 'ఓం నమో వేంకటేశాయ',
+    'hero.mantra': 'జై శ్రీమన్నారాయణ',
     'hero.desc':
       'శ్రీ వేంకటేశ్వర స్వామి అనుగ్రహం కోసం ప్రామాణిక వైదిక కార్యక్రమాలు, పరిహారాలు మరియు పవిత్ర గోసేవను అందించే ఆధ్యాత్మిక వేదిక.',
     'hero.remedies': 'పరిహారాలు చూడండి',
@@ -404,11 +404,11 @@ const translations = {
     'contact.copy': 'కాపీ',
     'contact.copied': 'కాపీ అయింది',
 
-    'muhurtham.eyebrow': 'వేద జ్యోతిష్యం & శుభ సమయం',
-    'muhurtham.title': 'శుభ ముహూర్త మార్గదర్శనం',
+    'muhurtham.eyebrow': 'పవిత్ర ముహూర్తం & దైవ మార్గదర్శనం',
+    'muhurtham.title': 'శుభ ముహూర్తాలు',
     'muhurtham.lead':
-      'వివాహం, గృహప్రవేశం, ఉపనయనం, నామకరణం, వ్యాపార ప్రారంభాలకు ఖచ్చితమైన శుభ లగ్న ముహూర్త నిర్ణయం.',
-    'muhurtham.cta': 'ముహూర్త నిర్ణయం అభ్యర్థించండి →',
+      'ప్రతి పవిత్ర ప్రారంభానికి శుభ ముహూర్తం అవసరం. దైవాశీస్సులతో జీవిత ముఖ్య మైలురాళ్లను సరైన సమయంలో ప్రారంభించండి.',
+    'muhurtham.cta': 'ముహూర్తం అభ్యర్థించండి',
 
     'pitru.eyebrow': 'పవిత్ర వైదిక కర్మలు & పితృ రుణం',
     'pitru.title': 'పితృ దేవత సేవ & శ్రాద్ధ విధానం',
