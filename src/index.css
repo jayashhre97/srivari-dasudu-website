@@ -5,19 +5,32 @@
 
 :root {
   /* Temple Green, Antique Gold & Ivory Palette â Exact Vedic Temple Theme */
-  --color-primary: #073B2A;           /* Deep Temple Green */
-  --color-dark-bg: #05291F;           /* Dark Forest Green */
-  --color-page-bg: #FFF8E9;           /* Warm Ivory */
-  --color-card: #FFFEFA;              /* Warm White Card Surface */
-  --color-antique-gold: #C9972D;      /* Antique Gold Accent & Border */
-  --color-light-gold: #E8B94F;        /* Rich Gold */
-  --color-border: #DCCB9B;            /* Sacred Neutral Border */
-  --color-text-dark: #183C2A;         /* Dark Devotional Text */
-  --color-heading: #073B2A;           /* Deep Green Headings on Light Surfaces */
-  --color-pale-green: #E7EDE4;        /* Secondary Pale Green Badges & Boxes */
-  --color-sandalwood: #F4EAD4;        /* Sandalwood Cream */
-  --color-ivory: #FFF8E9;             /* Warm Ivory Text for Dark Surfaces */
-  --color-white-warm: #FFFEFA;        /* Warm White */
+  --color-primary: #073B2A;
+  /* Deep Temple Green */
+  --color-dark-bg: #05291F;
+  /* Dark Forest Green */
+  --color-page-bg: #FFF8E9;
+  /* Warm Ivory */
+  --color-card: #FFFEFA;
+  /* Warm White Card Surface */
+  --color-antique-gold: #C9972D;
+  /* Antique Gold Accent & Border */
+  --color-light-gold: #E8B94F;
+  /* Rich Gold */
+  --color-border: #DCCB9B;
+  /* Sacred Neutral Border */
+  --color-text-dark: #183C2A;
+  /* Dark Devotional Text */
+  --color-heading: #073B2A;
+  /* Deep Green Headings on Light Surfaces */
+  --color-pale-green: #E7EDE4;
+  /* Secondary Pale Green Badges & Boxes */
+  --color-sandalwood: #F4EAD4;
+  /* Sandalwood Cream */
+  --color-ivory: #FFF8E9;
+  /* Warm Ivory Text for Dark Surfaces */
+  --color-white-warm: #FFFEFA;
+  /* Warm White */
 
   /* Backward Compatibility Mappings */
   --bg-page: var(--color-page-bg);
@@ -70,7 +83,9 @@
 }
 
 /* Base Reset & Core Styles */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -99,7 +114,12 @@ body {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   font-weight: 700;
   line-height: 1.25;
@@ -294,13 +314,11 @@ header.scrolled {
 /* Brand */
 .brand {
   font-family: var(--font-serif);
-  font-size: 1.65rem;
-  font-weight: 700;
   color: var(--color-light-gold);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
   user-select: none;
   flex-shrink: 0;
   transition: transform 0.2s ease;
@@ -326,13 +344,36 @@ header.scrolled {
   box-shadow: 0 0 18px rgba(214, 180, 90, 0.6);
 }
 
-.brand span {
-  white-space: nowrap;
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
 }
 
-.brand b {
-  color: var(--color-ivory);
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.12rem, 1.58vw, 1.45rem);
   font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  color: #F6D87E;
+  background: linear-gradient(180deg, #FFF3C4 0%, #ECC55D 62%, #C9982E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.35));
+}
+
+.brand-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(0.76rem, 1vw, 0.92rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: #FAF3E0;
 }
 
 /* Desktop Navigation Menu */
@@ -528,6 +569,7 @@ nav button.nav-link.active::after {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -565,18 +607,17 @@ nav button.nav-link.active::after {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.42); /* Decreased brightness only - zero color filters */
+  filter: brightness(0.42);
+  /* Decreased brightness only - zero color filters */
 }
 
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.15) 50%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.15) 50%,
+      rgba(0, 0, 0, 0.45) 100%);
   pointer-events: none;
   z-index: 2;
 }
@@ -804,8 +845,10 @@ html[data-lang='te'] .hero-heading--mantra {
   font-weight: 700 !important;
   border-radius: var(--radius-full) !important;
   background: rgba(11, 38, 28, 0.85) !important;
-  color: #FFFDF8 !important; /* Crisp, pure radiant ivory */
-  border: 2px solid var(--color-light-gold) !important; /* Thick, luminous gold outline */
+  color: #FFFDF8 !important;
+  /* Crisp, pure radiant ivory */
+  border: 2px solid var(--color-light-gold) !important;
+  /* Thick, luminous gold outline */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(214, 180, 90, 0.35) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -839,6 +882,7 @@ html[data-lang='te'] .hero-heading--mantra {
   .hero-lamp.lamp-left {
     left: 24px;
   }
+
   .hero-lamp.lamp-right {
     right: 24px;
   }
@@ -849,40 +893,49 @@ html[data-lang='te'] .hero-heading--mantra {
     padding: 65px 16px 65px;
     min-height: auto;
   }
+
   .hero-ornamental-frame {
     inset: 8px;
   }
+
   .hero-lamp {
     display: none;
   }
+
   .hero-corner {
     width: 42px;
     height: 42px;
   }
+
   .hero-corner svg {
     width: 42px;
     height: 42px;
   }
+
   .hero-edge-filigree {
     left: 48px;
     right: 48px;
   }
+
   .hero-lotus-divider {
     max-width: 280px;
     margin-bottom: 18px;
   }
+
   .hero-btn-group {
     flex-direction: column;
     width: 100%;
     max-width: 290px;
     margin: 0 auto;
   }
+
   .hero-btn-group .btn {
     width: 100%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .hero-btn-primary:hover,
   .hero-btn-ghost:hover {
     transform: none;
@@ -1286,6 +1339,7 @@ html[data-lang='te'] .hero-heading--mantra {
   .temple-intro-container {
     padding: 36px 20px;
   }
+
   .home-short-intro {
     padding: 28px 18px;
   }
@@ -1379,8 +1433,13 @@ html[data-lang='te'] .hero-heading--mantra {
 }
 
 @keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ring-middle {
@@ -2137,10 +2196,29 @@ html[data-lang='te'] .hero-heading--mantra {
   border-style: solid;
 }
 
-.arch-tl { top: 8px; left: 8px; border-width: 3px 0 0 3px; }
-.arch-tr { top: 8px; right: 8px; border-width: 3px 3px 0 0; }
-.arch-bl { bottom: 8px; left: 8px; border-width: 0 0 3px 3px; }
-.arch-br { bottom: 8px; right: 8px; border-width: 0 3px 3px 0; }
+.arch-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 3px 0 0 3px;
+}
+
+.arch-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 3px 3px 0 0;
+}
+
+.arch-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 3px 3px;
+}
+
+.arch-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 3px 3px 0;
+}
 
 .cta-content-wrap {
   position: relative;
@@ -2227,6 +2305,7 @@ html[data-lang='te'] .hero-heading--mantra {
 }
 
 @media (max-width: 600px) {
+
   .contact-info-card,
   .contact-faq-card {
     padding: 28px 20px;
@@ -2860,9 +2939,20 @@ html[data-lang='te'] .hero-heading--mantra {
 }
 
 @keyframes pulseGreen {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(76, 175, 80, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
 }
 
 .daily-card-title {
@@ -3294,6 +3384,7 @@ html[data-lang='te'] .hero-heading--mantra {
     bottom: 16px;
     right: 16px;
   }
+
   .floating-btn {
     padding: 10px 18px;
     font-size: 0.86rem;
@@ -3331,8 +3422,13 @@ html[data-lang='te'] .hero-heading--mantra {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalIn {
@@ -3340,6 +3436,7 @@ html[data-lang='te'] .hero-heading--mantra {
     transform: scale(0.94) translateY(12px);
     opacity: 0;
   }
+
   to {
     transform: scale(1) translateY(0);
     opacity: 1;
@@ -4270,10 +4367,30 @@ footer button.footer-link:hover {
   pointer-events: none;
   opacity: 0.85;
 }
-.remedies-hero-corner.corner-tl { top: 18px; left: 20px; border-width: 2px 0 0 2px; }
-.remedies-hero-corner.corner-tr { top: 18px; right: 20px; border-width: 2px 2px 0 0; }
-.remedies-hero-corner.corner-bl { bottom: 18px; left: 20px; border-width: 0 0 2px 2px; }
-.remedies-hero-corner.corner-br { bottom: 18px; right: 20px; border-width: 0 2px 2px 0; }
+
+.remedies-hero-corner.corner-tl {
+  top: 18px;
+  left: 20px;
+  border-width: 2px 0 0 2px;
+}
+
+.remedies-hero-corner.corner-tr {
+  top: 18px;
+  right: 20px;
+  border-width: 2px 2px 0 0;
+}
+
+.remedies-hero-corner.corner-bl {
+  bottom: 18px;
+  left: 20px;
+  border-width: 0 0 2px 2px;
+}
+
+.remedies-hero-corner.corner-br {
+  bottom: 18px;
+  right: 20px;
+  border-width: 0 2px 2px 0;
+}
 
 .remedies-hero-badge {
   display: inline-flex;
@@ -4330,6 +4447,7 @@ footer button.footer-link:hover {
   background: rgba(5, 41, 31, 0.6) !important;
   backdrop-filter: blur(4px);
 }
+
 .remedies-back-btn:hover {
   background: rgba(201, 151, 45, 0.2) !important;
   border-color: var(--color-light-gold) !important;
@@ -4340,7 +4458,7 @@ footer button.footer-link:hover {
   padding: 56px 0 72px;
   background-color: var(--color-page-bg, #FFF8E9);
   background-image: radial-gradient(circle at 12% 18%, rgba(201, 151, 45, 0.04) 0%, transparent 45%),
-                    radial-gradient(circle at 88% 82%, rgba(7, 59, 42, 0.04) 0%, transparent 45%);
+    radial-gradient(circle at 88% 82%, rgba(7, 59, 42, 0.04) 0%, transparent 45%);
 }
 
 .remedies-intro-header {
@@ -4794,6 +4912,7 @@ footer button.footer-link:hover {
   padding: 0 4px;
   transition: transform 0.2s ease;
 }
+
 .remedy-modal-close:hover {
   transform: scale(1.15);
   color: #FFFDF8;
@@ -5322,7 +5441,7 @@ footer button.footer-link:hover {
   padding: 44px 0 72px;
   background-color: var(--color-page-bg, #FFF8E9);
   background-image: radial-gradient(circle at 8% 12%, rgba(201, 151, 45, 0.04) 0%, transparent 45%),
-                    radial-gradient(circle at 92% 88%, rgba(7, 59, 42, 0.04) 0%, transparent 45%);
+    radial-gradient(circle at 92% 88%, rgba(7, 59, 42, 0.04) 0%, transparent 45%);
 }
 
 .remedy-detail-inner-wrap {
@@ -5512,7 +5631,7 @@ footer button.footer-link:hover {
   background: linear-gradient(180deg, #073B2A 0%, #05291F 100%);
   border: 1.5px solid var(--color-antique-gold);
   border-radius: 10px;
-  min-width: 175px;
+  min-width: 245px;
   padding: 6px 4px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   opacity: 0;
@@ -5664,7 +5783,7 @@ footer button.footer-link:hover {
 .godhanam-hero {
   position: relative;
   background: linear-gradient(135deg, rgba(8, 41, 31, 0.94) 0%, rgba(11, 56, 41, 0.96) 50%, rgba(5, 35, 26, 0.98) 100%),
-              url('/images/cow.jpg') center/cover no-repeat;
+    url('/images/cow.jpg') center/cover no-repeat;
   padding: 84px 24px 76px;
   text-align: center;
   color: #FFFDF8;
@@ -5734,6 +5853,7 @@ footer button.footer-link:hover {
   background: rgba(5, 41, 31, 0.6) !important;
   backdrop-filter: blur(4px);
 }
+
 .godhanam-learn-btn:hover {
   background: rgba(201, 151, 45, 0.25) !important;
   border-color: var(--color-light-gold) !important;
@@ -6500,12 +6620,10 @@ footer button.footer-link:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(3, 24, 18, 0.72) 0%,
-    rgba(3, 24, 18, 0.38) 42%,
-    rgba(3, 24, 18, 0.62) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(3, 24, 18, 0.72) 0%,
+      rgba(3, 24, 18, 0.38) 42%,
+      rgba(3, 24, 18, 0.62) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -6542,10 +6660,12 @@ footer button.footer-link:hover {
 }
 
 @media (max-width: 600px) {
+
   .goseva-80vh-wrap,
   .goseva-60vh-wrap {
     padding-top: 16px;
   }
+
   .goseva-compact-card {
     padding: 10px 14px;
     margin: 0 10px;
@@ -6871,6 +6991,150 @@ footer button.footer-link:hover {
   font-size: 0.82rem;
   color: #444;
   line-height: 1.4;
+}
+
+.vedic-roadmap-box {
+  margin-top: 40px;
+}
+
+.vedic-roadmap-head {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.vedic-roadmap-title {
+  margin: 8px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  color: var(--color-heading);
+}
+
+.vedic-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .vedic-roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vedic-roadmap-card {
+  padding: 20px 18px;
+  border: 1.5px solid rgba(201, 151, 45, 0.4);
+  background: linear-gradient(180deg, #fffaf0 0%, #fffdf8 100%);
+}
+
+.vedic-roadmap-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.vedic-roadmap-icon {
+  font-size: 1.3rem;
+}
+
+.vedic-roadmap-badge {
+  color: var(--color-antique-gold);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.vedic-roadmap-card h4 {
+  margin: 0 0 10px;
+  font-family: var(--font-serif);
+  color: var(--color-heading);
+  font-size: 1.28rem;
+  line-height: 1.35;
+}
+
+.vedic-roadmap-card p {
+  margin: 0;
+  color: var(--color-text-dark);
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+
+.vedic-sequence-note {
+  width: 100%;
+  margin: 0 0 36px;
+  padding: 28px 30px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #063829 0%, #094a36 100%);
+  border: 2px solid var(--color-antique-gold);
+  box-shadow: 0 14px 34px rgba(5, 41, 31, 0.18);
+  color: var(--color-ivory);
+  text-align: left;
+}
+
+.vedic-sequence-header {
+  margin-bottom: 18px;
+}
+
+.vedic-sequence-badge {
+  display: inline-block;
+  color: var(--color-light-gold);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.vedic-sequence-heading {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.05rem);
+  line-height: 1.25;
+  color: #fff8e9;
+}
+
+.vedic-sequence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.vedic-sequence-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 248, 233, 0.08);
+  border-left: 4px solid var(--color-light-gold);
+  font-size: clamp(1.04rem, 1.4vw, 1.18rem);
+  line-height: 1.65;
+  color: rgba(255, 248, 233, 0.96);
+}
+
+.vedic-sequence-list li strong {
+  color: var(--color-light-gold);
+  font-weight: 700;
+}
+
+.vedic-seq-icon {
+  font-size: 1.35rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .vedic-sequence-note {
+    padding: 22px 18px;
+  }
+
+  .vedic-sequence-list li {
+    padding: 12px 14px;
+    font-size: 1rem;
+  }
 }
 
 /* 3. Four Vedas Cards Section */
@@ -7266,10 +7530,29 @@ footer button.footer-link:hover {
   pointer-events: none;
 }
 
-.form-corner.corner-tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
-.form-corner.corner-tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
-.form-corner.corner-bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
-.form-corner.corner-br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+.form-corner.corner-tl {
+  top: 12px;
+  left: 12px;
+  border-width: 2px 0 0 2px;
+}
+
+.form-corner.corner-tr {
+  top: 12px;
+  right: 12px;
+  border-width: 2px 2px 0 0;
+}
+
+.form-corner.corner-bl {
+  bottom: 12px;
+  left: 12px;
+  border-width: 0 0 2px 2px;
+}
+
+.form-corner.corner-br {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 2px 2px 0;
+}
 
 .vedic-form-header {
   text-align: center;
@@ -7544,10 +7827,21 @@ footer button.footer-link:hover {
   background-image: url('/images/homam.jpg');
 }
 
-.page-banner--pos-20 { background-position: 50% 20%; }
-.page-banner--pos-25 { background-position: 50% 25%; }
-.page-banner--pos-40 { background-position: 50% 40%; }
-.page-banner--pos-92 { background-position: 50% 92%; }
+.page-banner--pos-20 {
+  background-position: 50% 20%;
+}
+
+.page-banner--pos-25 {
+  background-position: 50% 25%;
+}
+
+.page-banner--pos-40 {
+  background-position: 50% 40%;
+}
+
+.page-banner--pos-92 {
+  background-position: 50% 92%;
+}
 
 .temple-lotus-divider.align-start {
   justify-content: flex-start;
@@ -7557,8 +7851,13 @@ footer button.footer-link:hover {
   justify-content: center;
 }
 
-.divider-line.line-short { max-width: 60px; }
-.divider-line.line-medium { max-width: 120px; }
+.divider-line.line-short {
+  max-width: 60px;
+}
+
+.divider-line.line-medium {
+  max-width: 120px;
+}
 
 .detail-sec-divider,
 .remedies-intro-divider,
@@ -8116,6 +8415,7 @@ footer button.footer-link:hover {
 }
 
 @media (max-width: 768px) {
+
   .seva-intro-card,
   .page-consult-strip {
     padding: 28px 20px;
@@ -8125,6 +8425,7 @@ footer button.footer-link:hover {
     grid-template-columns: 1fr;
   }
 }
+
 /* ==========================================================================
    SMARTAM PAGE
    ========================================================================== */
@@ -8589,6 +8890,7 @@ footer button.footer-link:hover {
 }
 
 @media (max-width: 720px) {
+
   .smartam-hero-header,
   .kamyamu-hero-header {
     padding: 56px 18px 48px;
@@ -8610,6 +8912,99 @@ footer button.footer-link:hover {
   }
 }
 
+/* Smarta Seva (Samuhika Havanalu) Additions */
+.smarta-seva-schedule-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 22px;
+  max-width: 900px;
+}
+
+.smarta-strip-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 250, 238, 0.94);
+  border: 1px solid rgba(201, 151, 45, 0.55);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.smarta-strip-cost {
+  background: var(--color-primary);
+  color: var(--color-light-gold);
+  padding: 2px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.smarta-limited-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: linear-gradient(135deg, #8B2518 0%, #B43822 100%);
+  color: #FFF9EE;
+  border: 1px solid #F3D17A;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.smarta-card-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #FFF9EC;
+  border: 1px solid rgba(201, 151, 45, 0.45);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.smarta-price-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.smarta-price-lbl {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.smarta-price-val {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.smarta-seat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(139, 37, 24, 0.1);
+  color: #8B2518;
+  border: 1px solid rgba(139, 37, 24, 0.28);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 /* ==========================================================================
    CONTACT PAGE — Enquiry Form, Bank Details & Donations
    ========================================================================== */
@@ -8625,6 +9020,7 @@ footer button.footer-link:hover {
 }
 
 @media (max-width: 600px) {
+
   .contact-enquiry-card,
   .contact-bank-card,
   .contact-donate-card {
@@ -8994,6 +9390,7 @@ html[data-lang='te'] body {
     opacity: 0;
     transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -9145,6 +9542,102 @@ html[data-lang='te'] body {
   color: var(--color-text-dark);
   line-height: 1.75;
   font-size: 1rem;
+}
+
+.muh-visit-overview {
+  max-width: 900px;
+  margin: 28px auto 0;
+}
+
+.muh-visit-head {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.muh-visit-head h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-serif);
+  color: var(--color-heading);
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+}
+
+.muh-visit-head p {
+  margin: 0;
+  color: var(--color-text-dark);
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.muh-samagri-overview {
+  margin-top: 24px;
+}
+
+.muh-samagri-heading {
+  margin: 0 0 14px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  color: var(--color-heading);
+}
+
+.muh-checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.muh-checkbox-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  border: 1.5px solid rgba(201, 151, 45, 0.35);
+  border-radius: 16px;
+  background: #fffcf5;
+  padding: 16px 14px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.muh-checkbox-card:hover {
+  border-color: var(--color-antique-gold);
+}
+
+.muh-checkbox-card.is-selected {
+  border-color: var(--color-antique-gold);
+  box-shadow: 0 0 0 2px rgba(201, 151, 45, 0.18), 0 10px 24px rgba(7, 59, 42, 0.08);
+  background: linear-gradient(180deg, #fff8e9, #fffdf8);
+}
+
+.muh-checkbox-input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.muh-checkbox-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.muh-checkbox-body strong {
+  color: var(--color-heading);
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+.muh-checkbox-body p {
+  margin: 0;
+  color: var(--color-text-dark);
+  opacity: 0.88;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .muh-form-section {
@@ -9405,6 +9898,7 @@ html[data-lang='te'] body {
 
   .muh-services-grid,
   .muh-option-grid,
+  .muh-checkbox-grid,
   .muh-form-row {
     grid-template-columns: 1fr;
   }
@@ -9418,3 +9912,962 @@ html[data-lang='te'] body {
   }
 }
 
+
+/* ==========================================================================
+   GO SEVA REDESIGNED PAGE STYLES
+   ========================================================================== */
+.goseva-redesign-wrapper {
+  background-color: var(--color-page-bg, #FFF8E9);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: clip;
+}
+
+.goseva-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.goseva-section {
+  padding: 68px 0;
+  scroll-margin-top: calc(var(--header-height, 76px) + 56px);
+}
+
+.goseva-section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 42px;
+}
+
+.goseva-sec-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-antique-gold);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.goseva-sec-eyebrow--gold {
+  color: var(--color-light-gold);
+}
+
+.goseva-sec-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 3.2vw, 2.55rem);
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.goseva-sec-sub {
+  font-size: 1.04rem;
+  line-height: 1.72;
+  color: var(--color-text-dark);
+  margin: 12px auto 0;
+}
+
+/* Section 3: Hero */
+.goseva-hero-banner {
+  position: relative;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 88px 20px 80px;
+  background:
+    linear-gradient(135deg, rgba(6, 42, 31, 0.84) 0%, rgba(10, 56, 40, 0.78) 50%, rgba(5, 32, 24, 0.9) 100%),
+    url('/images/kamadhenu-bg.jpg') center 35% / cover no-repeat;
+  color: #fffdf8;
+  border-bottom: 2px solid var(--color-antique-gold);
+  overflow: hidden;
+}
+
+.goseva-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(232, 185, 79, 0.16) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.goseva-hero-inner {
+  max-width: 860px;
+}
+
+.goseva-hero-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.8vw, 3.5rem);
+  line-height: 1.18;
+  margin: 0 0 16px;
+  color: #fff8e9;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.55);
+}
+
+.goseva-hero-text {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: clamp(1.04rem, 1.8vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(255, 248, 233, 0.95);
+}
+
+/* Section 4: About Go Seva */
+.goseva-about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.goseva-about-lead {
+  font-size: 1.06rem;
+  line-height: 1.78;
+  color: var(--color-text-dark);
+  margin: 16px 0 24px;
+}
+
+.goseva-highlights-grid {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.goseva-highlight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #fffefa;
+  border: 1px solid rgba(201, 151, 45, 0.35);
+  box-shadow: 0 4px 16px rgba(5, 41, 31, 0.04);
+}
+
+.goseva-highlight-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-pale-green);
+  border: 1px solid rgba(201, 151, 45, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.goseva-highlight-card h3 {
+  margin: 0 0 4px;
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  color: var(--color-primary);
+}
+
+.goseva-highlight-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-text-dark);
+}
+
+.goseva-photo-frame {
+  position: relative;
+  padding: 12px;
+  background: #fffefa;
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 18px;
+  box-shadow: 0 12px 34px rgba(5, 41, 31, 0.12);
+}
+
+.goseva-about-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.goseva-photo-caption {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-antique-gold);
+}
+
+/* Section 5: Donation Section */
+.goseva-donate-section {
+  background: var(--color-page-bg, #fff8e9);
+  border-top: 1px solid rgba(201, 151, 45, 0.25);
+  border-bottom: 1px solid rgba(201, 151, 45, 0.25);
+}
+
+.goseva-donate-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.goseva-donate-form-card {
+  position: relative;
+  background: #fffefa;
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 18px;
+  padding: 32px 28px;
+  box-shadow: 0 14px 36px rgba(5, 41, 31, 0.1);
+}
+
+.goseva-form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.goseva-amount-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.goseva-amt-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(201, 151, 45, 0.45);
+  background: #fffdf8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--color-primary);
+}
+
+.goseva-amt-btn strong {
+  font-size: 1.05rem;
+}
+
+.goseva-amt-btn span {
+  font-size: 0.74rem;
+  margin-top: 3px;
+  opacity: 0.82;
+}
+
+.goseva-amt-btn:hover {
+  border-color: var(--color-antique-gold);
+  background: #f9f2e1;
+}
+
+.goseva-amt-btn.active {
+  background: var(--color-primary);
+  color: var(--color-light-gold);
+  border-color: var(--color-antique-gold);
+  box-shadow: 0 6px 16px rgba(5, 41, 31, 0.18);
+}
+
+.goseva-custom-wrap {
+  margin-top: 10px;
+}
+
+.goseva-field-error {
+  margin: 5px 0 0;
+  color: #b42318;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.goseva-gateway-placeholder {
+  background: rgba(6, 56, 41, 0.06);
+  border: 1px dashed rgba(6, 56, 41, 0.35);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.goseva-gateway-placeholder--light {
+  background: #f9f4e6;
+  border-color: rgba(201, 151, 45, 0.55);
+}
+
+.goseva-gateway-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-light-gold);
+  margin-bottom: 6px;
+}
+
+.goseva-gateway-placeholder p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+}
+
+.goseva-upi-panel {
+  background: linear-gradient(155deg, #063829 0%, #094a36 100%);
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 18px;
+  padding: 26px 22px;
+  color: #fff8e9;
+  text-align: center;
+  box-shadow: 0 14px 36px rgba(5, 41, 31, 0.18);
+}
+
+.goseva-upi-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(232, 185, 79, 0.16);
+  border: 1px solid rgba(232, 185, 79, 0.5);
+  color: var(--color-light-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.goseva-upi-title {
+  font-family: var(--font-serif);
+  font-size: 1.38rem;
+  margin: 0 0 16px;
+  color: #fff8e9;
+}
+
+.goseva-qr-svg {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 14px;
+  display: block;
+}
+
+.goseva-upi-id-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 248, 233, 0.1);
+  border: 1px solid rgba(232, 185, 79, 0.4);
+  margin-bottom: 14px;
+}
+
+.goseva-upi-id-box code {
+  font-size: 0.8rem;
+  color: var(--color-light-gold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.goseva-copy-btn {
+  padding: 5px 10px !important;
+  font-size: 0.76rem !important;
+  color: #fff8e9 !important;
+  border-color: var(--color-light-gold) !important;
+  flex-shrink: 0;
+}
+
+.goseva-upi-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(255, 248, 233, 0.88);
+}
+
+/* Section 6: Monthly Go Pooja */
+.goseva-monthly-section {
+  background: linear-gradient(135deg, #063829 0%, #094a36 60%, #05291f 100%);
+  color: #fff8e9;
+  border-bottom: 2px solid var(--color-antique-gold);
+}
+
+.goseva-monthly-showcase {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.goseva-monthly-media {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid var(--color-antique-gold);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+.goseva-monthly-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.goseva-monthly-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  margin: 0 0 12px;
+  color: #fff8e9;
+}
+
+.goseva-monthly-desc {
+  font-size: 1.06rem;
+  line-height: 1.72;
+  color: rgba(255, 248, 233, 0.94);
+  margin: 0 0 20px;
+}
+
+.goseva-monthly-fee-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(232, 185, 79, 0.14);
+  border: 1.5px solid var(--color-light-gold);
+  margin-bottom: 20px;
+}
+
+.goseva-monthly-fee-pill .fee-label {
+  font-size: 0.92rem;
+  color: #fff8e9;
+}
+
+.goseva-monthly-fee-pill .fee-amount {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--color-light-gold);
+}
+
+.goseva-monthly-info-list {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.goseva-monthly-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 248, 233, 0.92);
+}
+
+.goseva-monthly-form-card {
+  margin-top: 38px;
+  background: #fffefa;
+  color: var(--color-text-dark);
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 18px;
+  padding: 28px 26px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
+}
+
+.goseva-monthly-form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(201, 151, 45, 0.28);
+}
+
+.goseva-monthly-form-head h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-primary);
+}
+
+/* Section 7: Go Products */
+.goseva-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.goseva-product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+.goseva-product-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.goseva-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.goseva-product-card:hover .goseva-product-media img {
+  transform: scale(1.04);
+}
+
+.goseva-product-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(6, 42, 31, 0.88);
+  color: var(--color-light-gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid rgba(232, 185, 79, 0.45);
+}
+
+.goseva-product-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.goseva-product-title {
+  font-family: var(--font-serif);
+  font-size: 1.32rem;
+  color: var(--color-primary);
+  margin: 0 0 6px;
+}
+
+.goseva-product-desc {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  margin: 0 0 18px;
+  flex: 1;
+}
+
+.goseva-product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(201, 151, 45, 0.25);
+}
+
+.goseva-product-price strong {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--color-primary);
+}
+
+.goseva-product-price span {
+  display: block;
+  font-size: 0.74rem;
+  color: #5d6e64;
+}
+
+.goseva-buy-btn {
+  padding: 9px 16px !important;
+  font-size: 0.88rem !important;
+  white-space: nowrap;
+}
+
+/* Section 8: Go Seva Activities */
+.goseva-activities-section {
+  background: #f4ead4;
+  border-top: 1px solid rgba(201, 151, 45, 0.25);
+  border-bottom: 1px solid rgba(201, 151, 45, 0.25);
+}
+
+.goseva-activity-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.goseva-activity-img-card {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.goseva-activity-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.goseva-activity-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.goseva-activity-content {
+  padding: 18px 18px 20px;
+  flex: 1;
+}
+
+.goseva-activity-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.24rem;
+  color: var(--color-primary);
+  margin: 0 0 8px;
+}
+
+.goseva-activity-content p {
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+/* Section 10: Photo Gallery */
+.goseva-gallery-section {
+  background: #f4ead4;
+  border-bottom: 1px solid rgba(201, 151, 45, 0.25);
+}
+
+.goseva-gallery-filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.goseva-filter-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(201, 151, 45, 0.45);
+  background: #fffefa;
+  color: var(--color-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.goseva-filter-pill:hover,
+.goseva-filter-pill.active {
+  background: var(--color-primary);
+  color: var(--color-light-gold);
+  border-color: var(--color-antique-gold);
+}
+
+.goseva-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.goseva-gallery-item {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid rgba(201, 151, 45, 0.45);
+  box-shadow: 0 8px 24px rgba(5, 41, 31, 0.08);
+}
+
+.goseva-gallery-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: #063829;
+  cursor: pointer;
+  text-align: left;
+  aspect-ratio: 4 / 3;
+}
+
+.goseva-gallery-trigger img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.goseva-gallery-trigger:hover img {
+  transform: scale(1.05);
+}
+
+.goseva-gallery-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 28px 16px 14px;
+  background: linear-gradient(to top, rgba(5, 34, 25, 0.92), rgba(5, 34, 25, 0.45) 60%, transparent);
+  color: #fff8e9;
+}
+
+.goseva-gallery-overlay strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-light-gold);
+  margin-bottom: 2px;
+}
+
+.goseva-gallery-overlay span {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: rgba(255, 248, 233, 0.92);
+}
+
+/* Section 11: Contact & Footer Tagline */
+.goseva-contact-section {
+  background: var(--color-page-bg, #fff8e9);
+}
+
+.goseva-footer-copy {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.goseva-footer-tagline {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-light-gold);
+}
+
+/* Modals: Product Checkout & Gallery Lightbox */
+.goseva-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: rgba(4, 24, 18, 0.78);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.goseva-modal-card,
+.goseva-lightbox-card {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fffefa;
+  border: 2px solid var(--color-antique-gold);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
+}
+
+.goseva-lightbox-card {
+  max-width: 780px;
+  padding: 18px;
+  background: #063829;
+  color: #fff8e9;
+}
+
+.goseva-lightbox-img {
+  width: 100%;
+  max-height: 68vh;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.goseva-lightbox-caption {
+  padding: 14px 6px 4px;
+}
+
+.goseva-lightbox-caption h3 {
+  margin: 0 0 4px;
+  font-family: var(--font-serif);
+  color: var(--color-light-gold);
+  font-size: 1.45rem;
+}
+
+.goseva-lightbox-caption p {
+  margin: 0;
+  color: rgba(255, 248, 233, 0.92);
+  font-size: 0.95rem;
+}
+
+.goseva-modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 5;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-antique-gold);
+  background: var(--color-primary);
+  color: var(--color-light-gold);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.goseva-modal-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.goseva-modal-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 151, 45, 0.45);
+  margin-bottom: 12px;
+}
+
+.goseva-product-category {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-antique-gold);
+  margin-bottom: 4px;
+}
+
+.goseva-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin: 0 0 8px;
+}
+
+.goseva-modal-desc {
+  font-size: 0.94rem;
+  line-height: 1.62;
+  color: var(--color-text-dark);
+  margin: 0 0 14px;
+}
+
+.goseva-modal-price-box {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f6ebd1;
+  border: 1px solid rgba(201, 151, 45, 0.5);
+}
+
+.goseva-modal-price-box strong {
+  display: block;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+}
+
+.goseva-modal-price-box span {
+  font-size: 0.8rem;
+  color: #4f6358;
+}
+
+.goseva-checkout-title {
+  font-family: var(--font-serif);
+  font-size: 1.38rem;
+  color: var(--color-primary);
+  margin: 0 0 14px;
+}
+
+.goseva-qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.goseva-qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.goseva-qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--color-antique-gold);
+  background: #fffdf8;
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.goseva-qty-input {
+  width: 52px;
+  text-align: center;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 151, 45, 0.45);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+
+  .goseva-about-grid,
+  .goseva-donate-layout,
+  .goseva-monthly-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .goseva-products-grid,
+  .goseva-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goseva-activity-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .goseva-section {
+    padding: 46px 0;
+  }
+
+  .goseva-amount-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goseva-products-grid,
+  .goseva-activity-cards-grid,
+  .goseva-gallery-grid,
+  .goseva-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .goseva-donate-form-card,
+  .goseva-modal-card {
+    padding: 20px 18px;
+  }
+}

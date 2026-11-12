@@ -3,7 +3,7 @@ import GosevaView from '../components/GosevaView';
 
 export default function GosevaPage({ onNavigate, onBook }) {
   useEffect(() => {
-    document.title = 'Go Dhanam Seva — The Sacred Gift of a Cow | Srivari Dasudu';
+    document.title = 'Go Seva – Serve, Protect & Care for Gomatha | Srivari Dasudu';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 

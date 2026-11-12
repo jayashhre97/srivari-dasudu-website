@@ -27,6 +27,14 @@ const PITRU_SERVICES = [
     action: 'Book Samvatsarikam Seva'
   },
   {
+    id: 'samasrikalu',
+    title: 'Samasrikalu (Annual Ancestral Ceremonies)',
+    subtitle: 'Yearly Samvatsarika Pitru Shraddha Vidhi',
+    desc: 'Annual ancestral ceremonies (Samasrikalu / Samvatsarikalu) performed every year on the lunar departure tithi of departed parents and elders. Includes Gotra Sankalpam, Tilodaka Tarpanam, Pinda Pradanam, Vedic mantras, and Brahmana Bhojanam.',
+    benefits: 'Sustains ancestral blessings, family harmony, progeny well-being, and spiritual fulfillment.',
+    action: 'Book Samasrikalu Seva'
+  },
+  {
     id: 'mahalaya',
     title: 'Mahalaya Pitru Paksham (Fortnight of Ancestors)',
     subtitle: 'Bhadrapada Krishna Paksha Sacred Tarpanams',
@@ -137,7 +145,7 @@ export default function PitruSevaPage({ onNavigate, onBook }) {
               Book Pitru Karma Seva &rarr;
             </button>
             <a
-              href="https://wa.me/919876543210?text=Namaskaram%20Acharyulu%20Garu,%20I%20would%20like%20to%20consult%20regarding%20Pitru%20Devata%20Seva%20(Taddinam/Maasikam/Samvatsarikam)."
+              href="https://wa.me/919876543210?text=Namaskaram%20Acharyulu%20Garu,%20I%20would%20like%20to%20consult%20regarding%20Pitru%20Devata%20Seva%20(Taddinam/Maasikam/Samvatsarikam/Samasrikalu)."
               target="_blank"
               rel="noopener noreferrer"
               className="btn ghost btn-on-dark"

@@ -12,6 +12,7 @@ import PitruSevaPage from './pages/PitruSevaPage';
 import RemediesPage from './pages/RemediesPage';
 import RemedyDetailPage from './pages/RemedyDetailPage';
 import SmartamPage from './pages/SmartamPage';
+import SmartaSevaPage from './pages/SmartaSevaPage';
 import KamyamuPage from './pages/KamyamuPage';
 import GosevaPage from './pages/GosevaPage';
 import VedicSchoolPage from './pages/VedicSchoolPage';
@@ -25,6 +26,7 @@ const VALID_PAGES = [
   'godhanam',
   'goseva',
   'smartam',
+  'smarta-seva',
   'kamyamu',
   'kamayamu',
   'remedies',
@@ -122,6 +124,8 @@ export default function App() {
         return <RemediesPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
       case 'smartam':
         return <SmartamPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
+      case 'smarta-seva':
+        return <SmartaSevaPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
       case 'kamyamu':
       case 'kamayamu':
       case 'events':
@@ -159,7 +163,7 @@ export default function App() {
       </main>
 
       {/* 8. Footer */}
-      <Footer onNavigate={navigateTo} />
+      <Footer onNavigate={navigateTo} pageMode={currentPage} />
 
       {/* Floating Quick Action - Removed from Home page as requested */}
       {currentPage !== 'home' && (

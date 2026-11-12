@@ -72,8 +72,80 @@ const CEREMONIES = [
   }
 ];
 
+const VISIT_MODES = [
+  {
+    id: 'visit-trust',
+    kickerEn: 'OPTION 1 · VISIT TRUST / ASHRAM',
+    kickerTe: 'ఎంపిక 1 · ట్రస్ట్ / ఆశ్రమ సందర్శన',
+    titleEn: 'I Will Visit the Trust',
+    titleTe: 'నేను ట్రస్ట్‌ను సందర్శిస్తాను',
+    descEn:
+      'I will visit Sri Vari Dasudu Charitable Trust (Visakhapatnam) to consult Acharyulu Garu in person for Muhurtham guidance and blessings.',
+    descTe:
+      'ముహూర్త మార్గదర్శనం మరియు ఆశీస్సుల కోసం నేను విశాఖపట్నంలోని శ్రీవారి దాసుడు ఛారిటబుల్ ట్రస్ట్ / ఆశ్రమాన్ని స్వయంగా సందర్శిస్తాను.',
+    noteEn:
+      'Trust Address: Sri Vari Dasudu Charitable Trust, Visakhapatnam, Andhra Pradesh – 530001 (7:00 AM – 12:30 PM | 4:00 PM – 8:00 PM).',
+    noteTe:
+      'ట్రస్ట్ చిరునామా: శ్రీవారి దాసుడు ఛారిటబుల్ ట్రస్ట్, విశాఖపట్నం, ఆంధ్రప్రదేశ్ – 530001 (ఉదయం 7:00 – 12:30 | సాయంత్రం 4:00 – 8:00).',
+    payloadValue: 'I Will Visit the Trust'
+  },
+  {
+    id: 'home-visit',
+    kickerEn: 'OPTION 2 · HOME / VENUE VISIT',
+    kickerTe: 'ఎంపిక 2 · స్వగృహ / వేదిక సందర్శన',
+    titleEn: 'Request a Home / Venue Visit',
+    titleTe: 'గృహ / వేదిక సందర్శన అభ్యర్థన',
+    descEn:
+      'Request Acharyulu Garu / Vedic pandits to visit your home, function hall, or ceremony venue to guide and conduct the auspicious ceremony.',
+    descTe:
+      'ఆచార్యుల వారు / వేద పండితులు మీ స్వగృహం, ఫంక్షన్ హాల్ లేదా వేదిక వద్దకు విచ్చేసి శుభకార్యాన్ని నిర్వహించాలని అభ్యర్థించండి.',
+    noteEn:
+      'Please enter your complete home or ceremony venue address below so Acharyulu Garu can plan the visit.',
+    noteTe:
+      'ఆచార్యుల వారి రాక కోసం దయచేసి మీ పూర్తి ఇంటి లేదా వేదిక చిరునామాను క్రింద నమోదు చేయండి.',
+    payloadValue: 'Request a Home / Venue Visit'
+  }
+];
+
+const SAMAGRI_MODES = [
+  {
+    id: 'without',
+    kickerEn: 'OPTION 1 · WITHOUT POOJA SAMAGRI',
+    kickerTe: 'ఎంపిక 1 · పూజా సామగ్రి లేకుండా',
+    titleEn: 'Without Pooja Samagri (I Will Arrange Myself)',
+    titleTe: 'పూజా సామగ్రి లేకుండా (నేనే ఏర్పాటు చేసుకుంటాను)',
+    descEn:
+      'If you want, you can arrange and bring the required Pooja Samagri items yourself for the ceremony.',
+    descTe:
+      'మీరు కోరుకుంటే పూజకు కావలసిన సామగ్రిని మీరే ఏర్పాటు చేసుకుని తీసుకురావచ్చు.',
+    noteEn:
+      'Without Pooja Samagri: You will arrange the required Pooja Samagri yourself (Acharyulu Garu can share a list if needed).',
+    noteTe:
+      'పూజా సామగ్రి లేకుండా: కావలసిన పూజా సామగ్రిని మీరే ఏర్పాటు చేసుకుంటారు (అవసరమైతే ఆచార్యులు జాబితా అందిస్తారు).',
+    payloadValue: 'Without Pooja Samagri (Devotee Will Arrange)'
+  },
+  {
+    id: 'with',
+    kickerEn: 'OPTION 2 · WITH POOJA SAMAGRI (COST BASED)',
+    kickerTe: 'ఎంపిక 2 · పూజా సామగ్రితో (ఖర్చు ఆధారితం)',
+    titleEn: 'With Pooja Samagri (We Will Provide - Cost Based)',
+    titleTe: 'పూజా సామగ్రితో (మేము అందిస్తాము - ఖర్చు ఆధారితం)',
+    descEn:
+      'Coming without Pooja Samagri? We will arrange and provide all required sacred items on a cost-based basis.',
+    descTe:
+      'మీ వద్ద పూజా సామగ్రి లేకపోతే, కావలసిన పవిత్ర పూజా సామగ్రిని మేము ఖర్చు ఆధారితంగా అందిస్తాము.',
+    noteEn:
+      'With Pooja Samagri (Cost Based): Complete, authentic Pooja Samagri will be provided by the Trust at actual cost.',
+    noteTe:
+      'పూజా సామగ్రితో (ఖర్చు ఆధారితం): ట్రస్ట్ ద్వారా సంపూర్ణ పూజా సామగ్రి అసలు ఖర్చు ఆధారంగా అందించబడుతుంది.',
+    payloadValue: 'With Pooja Samagri (Trust Will Provide - Cost Based)'
+  }
+];
+
 const INITIAL_FORM = {
   ceremonyType: '',
+  visitMode: 'visit-trust',
+  samagriMode: 'without',
   selectionMode: 'priest',
   preferredDate1: '',
   preferredDate2: '',
@@ -129,6 +201,81 @@ export default function MuhurthamPage({ onNavigate }) {
     setErrors((prev) => ({ ...prev, preferredDate1: '', preferredDate2: '' }));
   };
 
+  const setVisitMode = (mode, shouldScroll = false) => {
+    setForm((prev) => ({ ...prev, visitMode: mode }));
+    setErrors((prev) => ({ ...prev, location: '' }));
+    if (shouldScroll) {
+      setTimeout(scrollToForm, 50);
+    }
+  };
+
+  const setSamagriMode = (mode) => {
+    setForm((prev) => ({ ...prev, samagriMode: mode }));
+  };
+
+  const activeVisitOption = VISIT_MODES.find((v) => v.id === form.visitMode) || VISIT_MODES[0];
+  const activeSamagriOption = SAMAGRI_MODES.find((s) => s.id === form.samagriMode) || SAMAGRI_MODES[0];
+
+  const renderOptionCardGrid = (items, selectedId, onSelect) => (
+    <div className="muh-option-grid">
+      {items.map((option) => (
+        <button
+          key={option.id}
+          type="button"
+          className={`muh-option-card ${selectedId === option.id ? 'is-selected' : ''}`}
+          onClick={() => onSelect(option.id)}
+          aria-pressed={selectedId === option.id}
+        >
+          <span className="muh-option-check" aria-hidden="true">
+            {selectedId === option.id ? '✓' : ''}
+          </span>
+          <span className="muh-option-label">
+            {isEn ? option.kickerEn : option.kickerTe}
+          </span>
+          <strong>{isEn ? option.titleEn : option.titleTe}</strong>
+          <p>{isEn ? option.descEn : option.descTe}</p>
+        </button>
+      ))}
+    </div>
+  );
+
+  const renderSamagriCheckboxes = (prefix) => (
+    <>
+      <div className="muh-checkbox-grid">
+        {SAMAGRI_MODES.map((option) => {
+          const isChecked = form.samagriMode === option.id;
+          const inputId = `${prefix}-samagri-${option.id}`;
+          return (
+            <label
+              key={option.id}
+              htmlFor={inputId}
+              className={`muh-checkbox-card ${isChecked ? 'is-selected' : ''}`}
+            >
+              <input
+                id={inputId}
+                type="checkbox"
+                className="muh-checkbox-input"
+                checked={isChecked}
+                onChange={() => setSamagriMode(option.id)}
+              />
+              <div className="muh-checkbox-body">
+                <span className="muh-option-label">
+                  {isEn ? option.kickerEn : option.kickerTe}
+                </span>
+                <strong>{isEn ? option.titleEn : option.titleTe}</strong>
+                <p>{isEn ? option.descEn : option.descTe}</p>
+              </div>
+            </label>
+          );
+        })}
+      </div>
+
+      <div className="muh-priest-note" role="status">
+        {isEn ? activeSamagriOption.noteEn : activeSamagriOption.noteTe}
+      </div>
+    </>
+  );
+
   const validate = () => {
     const next = {};
     if (!form.ceremonyType) {
@@ -143,7 +290,14 @@ export default function MuhurthamPage({ onNavigate }) {
         : 'సరైన 10 అంకెల భారతీయ మొబైల్ నంబర్ ఇవ్వండి';
     }
     if (!form.location.trim()) {
-      next.location = isEn ? 'Please enter your location / address' : 'దయచేసి చిరునామా నమోదు చేయండి';
+      next.location =
+        form.visitMode === 'home-visit'
+          ? isEn
+            ? 'Please enter your home or venue address'
+            : 'దయచేసి ఇంటి లేదా వేదిక చిరునామా నమోదు చేయండి'
+          : isEn
+            ? 'Please enter your city or area'
+            : 'దయచేసి మీ నగరం లేదా ప్రాంతం నమోదు చేయండి';
     }
     if (form.selectionMode === 'preferred' && !form.preferredDate1) {
       next.preferredDate1 = isEn
@@ -158,6 +312,8 @@ export default function MuhurthamPage({ onNavigate }) {
     const ceremony = CEREMONIES.find((c) => c.id === form.ceremonyType);
     return {
       ceremonyType: ceremony ? ceremony.titleEn : form.ceremonyType,
+      visitPreference: activeVisitOption.payloadValue,
+      poojaSamagri: activeSamagriOption.payloadValue,
       muhurthamSelection:
         form.selectionMode === 'priest' ? 'Priest to Suggest Dates' : 'Devotee Preferred Dates',
       preferredDate1: form.selectionMode === 'preferred' ? form.preferredDate1 : null,
@@ -188,12 +344,14 @@ export default function MuhurthamPage({ onNavigate }) {
         'I would like to request an auspicious Muhurtham.',
         '',
         `Ceremony Type: ${payload.ceremonyType}`,
+        `Visit Preference: ${payload.visitPreference}`,
+        `Pooja Samagri: ${payload.poojaSamagri}`,
         `Muhurtham Selection: ${payload.muhurthamSelection}`,
         payload.preferredDate1 ? `Preferred Date 1: ${payload.preferredDate1}` : null,
         payload.preferredDate2 ? `Preferred Date 2: ${payload.preferredDate2}` : null,
         `Full Name: ${payload.fullName}`,
         `Phone: ${payload.phone}`,
-        `Location: ${payload.location}`,
+        `${form.visitMode === 'home-visit' ? 'Home / Venue Address' : 'Devotee Location'}: ${payload.location}`,
         payload.gotram ? `Gotram: ${payload.gotram}` : null,
         payload.nakshatram ? `Nakshatram: ${payload.nakshatram}` : null,
         payload.specialSankalpam ? `Special Sankalpam: ${payload.specialSankalpam}` : null
@@ -318,6 +476,27 @@ export default function MuhurthamPage({ onNavigate }) {
               ? 'An auspicious Muhurtham is determined by considering the Panchangam, Tithi, Nakshatram and other relevant astrological factors. Our priest will carefully review your details and guide you towards a suitable time for your sacred occasion.'
               : 'శుభ ముహూర్తం పంచాంగం, తిథి, నక్షత్రం మరియు ఇతర జ్యోతిష్య అంశాల ఆధారంగా నిర్ణయించబడుతుంది. మా ఆచార్యులు మీ వివరాలను జాగ్రత్తగా పరిశీలించి సరైన సమయానికి మార్గనిర్దేశం చేస్తారు.'}
           </p>
+        </div>
+
+        <div className="muh-visit-overview">
+          <div className="muh-visit-head">
+            <h3>
+              {isEn ? 'Choose How You Would Like to Consult' : 'సంప్రదింపు & సేవ విధానాన్ని ఎంచుకోండి'}
+            </h3>
+            <p>
+              {isEn
+                ? 'Choose whether you will visit the Trust or request a home / venue visit by Acharyulu Garu.'
+                : 'మీరు ట్రస్ట్‌ను సందర్శిస్తారా లేదా ఆచార్యుల వారి గృహ / వేదిక సందర్శనను అభ్యర్థిస్తారా అనేది ఎంచుకోండి.'}
+            </p>
+          </div>
+          {renderOptionCardGrid(VISIT_MODES, form.visitMode, (id) => setVisitMode(id, true))}
+
+          <div className="muh-samagri-overview">
+            <h4 className="muh-samagri-heading">
+              {isEn ? 'Pooja Samagri Arrangement' : 'పూజా సామగ్రి ఏర్పాట్లు'}
+            </h4>
+            {renderSamagriCheckboxes('overview')}
+          </div>
         </div>
       </section>
 
@@ -499,9 +678,24 @@ export default function MuhurthamPage({ onNavigate }) {
                 )}
               </fieldset>
 
-              {/* C. Devotee Details */}
+              {/* C. Visit Preference */}
               <fieldset className="muh-fieldset">
-                <legend>{isEn ? 'C. Devotee Details' : 'సి. భక్తుల వివరాలు'}</legend>
+                <legend>{isEn ? 'C. Visit Preference' : 'సి. సందర్శన విధానం'}</legend>
+                {renderOptionCardGrid(VISIT_MODES, form.visitMode, (id) => setVisitMode(id, false))}
+                <div className="muh-priest-note" role="status">
+                  {isEn ? activeVisitOption.noteEn : activeVisitOption.noteTe}
+                </div>
+              </fieldset>
+
+              {/* D. Pooja Samagri */}
+              <fieldset className="muh-fieldset">
+                <legend>{isEn ? 'D. Pooja Samagri' : 'డి. పూజా సామగ్రి'}</legend>
+                {renderSamagriCheckboxes('form')}
+              </fieldset>
+
+              {/* E. Devotee Details */}
+              <fieldset className="muh-fieldset">
+                <legend>{isEn ? 'E. Devotee Details' : 'ఇ. భక్తుల వివరాలు'}</legend>
                 <div className="muh-form-row">
                   <div className="form-field-group">
                     <label className="field-label" htmlFor="fullName">
@@ -544,7 +738,14 @@ export default function MuhurthamPage({ onNavigate }) {
 
                 <div className="form-field-group">
                   <label className="field-label" htmlFor="location">
-                    {isEn ? 'Location / Address' : 'స్థలం / చిరునామా'} <span className="req">*</span>
+                    {form.visitMode === 'home-visit'
+                      ? isEn
+                        ? 'Home / Ceremony Venue Address'
+                        : 'ఇంటి / కార్యక్రమ వేదిక చిరునామా'
+                      : isEn
+                        ? 'Your City / Area'
+                        : 'మీ నగరం / ప్రాంతం'}{' '}
+                    <span className="req">*</span>
                   </label>
                   <input
                     id="location"
@@ -553,9 +754,13 @@ export default function MuhurthamPage({ onNavigate }) {
                     autoComplete="street-address"
                     className={`muh-input ${errors.location ? 'has-error' : ''}`}
                     placeholder={
-                      isEn
-                        ? 'City, area, or full address'
-                        : 'నగరం, ప్రాంతం లేదా పూర్తి చిరునామా'
+                      form.visitMode === 'home-visit'
+                        ? isEn
+                          ? 'House number, street, landmark, city'
+                          : 'ఇంటి నంబర్, వీధి, ల్యాండ్‌మార్క్, నగరం'
+                        : isEn
+                          ? 'City or area you are coming from'
+                          : 'మీరు వస్తున్న నగరం లేదా ప్రాంతం'
                     }
                     value={form.location}
                     onChange={handleChange}

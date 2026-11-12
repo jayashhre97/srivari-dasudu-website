@@ -1,3 +1,30 @@
+export const VEDIC_CURRICULUM_STEPS = [
+  {
+    id: 'start-smartham',
+    icon: '🪔',
+    badgeEn: '01 · STUDY SEQUENCE',
+    badgeTe: '01 · అధ్యయన క్రమం',
+    titleEn: 'Vedas Start with Smartham, Then Remaining 4',
+    titleTe: 'స్మార్తంతో ప్రారంభమై మిగిలిన 4 వేదాలు',
+    descEn:
+      'Vedic learning begins with Smartham (Grihya Sutras, Sandhyavandanam, and sacred samskaras), followed by the remaining four Vedas: Rigveda, Yajurveda, Samaveda, and Atharvaveda.',
+    descTe:
+      'వేద అధ్యయనం ముందుగా స్మార్తం (గృహ్య సూత్రాలు, సంధ్యావందనం, సంస్కార విధులు)తో ప్రారంభమై, ఆ తర్వాత మిగిలిన 4 వేదాలు (ఋగ్వేదం, యజుర్వేదం, సామవేదం, అథర్వవేదం) బోధించబడతాయి.'
+  },
+  {
+    id: 'entrance-exam',
+    icon: '📝',
+    badgeEn: '02 · ENTRANCE & MID-STUDY EXAM',
+    badgeTe: '02 · ప్రవేశ & మధ్యస్థాయి పరీక్ష',
+    titleEn: 'Exam to Enter Vedic School & Mid-Study Exam',
+    titleTe: 'ప్రవేశ పరీక్ష & అధ్యయన మధ్య పరీక్ష',
+    descEn:
+      'We conduct an entrance examination to enter the Vedic School—including for students joining in the middle of study—as well as mid-study assessment exams to evaluate Swara accuracy and progress.',
+    descTe:
+      'వేద పాఠశాలలో ప్రవేశం పొందడానికి (మధ్యలో చేరే విద్యార్థులతో సహా) ప్రవేశ పరీక్ష మరియు అధ్యయన మధ్యలో స్వర శుద్ధి, పురోగతి పరీక్షలు నిర్వహిస్తాము.'
+  }
+];
+
 export const VEDIC_DATA = [
   {
     id: 'rigveda',

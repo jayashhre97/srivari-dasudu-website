@@ -12,6 +12,7 @@ const translations = {
     'nav.muhurtham': 'Muhurtham',
     'nav.pitruSeva': 'Pitru Seva',
     'nav.smartam': 'Smartam',
+    'nav.smartaSeva': 'Samuhika Havanalu',
     'nav.kamyamu': 'Kamyamu',
     'nav.bookSeva': 'Book Seva',
 
@@ -40,6 +41,7 @@ const translations = {
     'footer.pitru': 'Pitru Devata Seva',
     'footer.goseva': 'Goseva & Cow Protection',
     'footer.smartam': 'Smartam (Gruha Functions)',
+    'footer.smartaSeva': 'Samuhika Havanalu',
     'footer.kamyamu': 'Kamyamu (Vedic Homams)',
     'footer.remedies': 'Spiritual Remedies',
     'footer.vedic': 'Vedic School',
@@ -192,7 +194,7 @@ const translations = {
     'pitru.eyebrow': 'Sacred Vedic Rites & Ancestral Duty',
     'pitru.title': 'Pitru Devata Seva & Shraddha Vidhanam',
     'pitru.lead':
-      'Authentic performance of Taddinam, Maasikam, Samvatsarikam, Mahalaya Tarpanams, and Narayana Bali under the guidance of Sri N. V. Ram Kishore Acharyulu.',
+      'Authentic performance of Taddinam, Maasikam, Samvatsarikam, Samasrikalu, Mahalaya Tarpanams, and Narayana Bali under the guidance of Sri N. V. Ram Kishore Acharyulu.',
     'pitru.cta': 'Consult for Shraddha Seva →',
 
     'smartam.badge': 'Smartha Samskaras & Auspicious Functions',
@@ -245,6 +247,7 @@ const translations = {
     'nav.muhurtham': 'ముహూర్తం',
     'nav.pitruSeva': 'పితృ సేవ',
     'nav.smartam': 'స్మార్తం',
+    'nav.smartaSeva': 'సామూహిక హవనాలు',
     'nav.kamyamu': 'కామ్యము',
     'nav.bookSeva': 'సేవ బుక్ చేయండి',
 
@@ -270,6 +273,7 @@ const translations = {
     'footer.pitru': 'పితృ దేవత సేవ',
     'footer.goseva': 'గోసేవ & గో సంరక్షణ',
     'footer.smartam': 'స్మార్తం (గృహ శుభకార్యాలు)',
+    'footer.smartaSeva': 'సామూహిక హవనాలు',
     'footer.kamyamu': 'కామ్యము (వైదిక హోమాలు)',
     'footer.remedies': 'ఆధ్యాత్మిక పరిహారాలు',
     'footer.vedic': 'వేద పాఠశాల',
@@ -413,7 +417,7 @@ const translations = {
     'pitru.eyebrow': 'పవిత్ర వైదిక కర్మలు & పితృ రుణం',
     'pitru.title': 'పితృ దేవత సేవ & శ్రాద్ధ విధానం',
     'pitru.lead':
-      'తద్దినం, మాసికం, సంవత్సరీకం, మహాలయ తర్పణాలు మరియు నారాయణ బలి శాస్త్రోక్తంగా నిర్వహణ.',
+      'తద్దినం, మాసికం, సంవత్సరీకం, సమస్రికాలు, మహాలయ తర్పణాలు మరియు నారాయణ బలి శాస్త్రోక్తంగా నిర్వహణ.',
     'pitru.cta': 'శ్రాద్ధ సేవ కోసం సంప్రదించండి →',
 
     'smartam.badge': 'స్మార్త సంస్కారాలు & శుభకార్యాలు',

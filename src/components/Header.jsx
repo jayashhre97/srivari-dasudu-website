@@ -30,10 +30,11 @@ export default function Header({ activeTab, onSelectTab, onOpenQuickBooking }) {
     { id: 'muhurtham', titleKey: 'nav.muhurtham' },
     { id: 'pitru-seva', titleKey: 'nav.pitruSeva' },
     { id: 'smartam', titleKey: 'nav.smartam' },
+    { id: 'smarta-seva', titleKey: 'nav.smartaSeva' },
     { id: 'kamyamu', titleKey: 'nav.kamyamu' }
   ];
 
-  const isSevaActive = ['muhurtham', 'pitru-seva', 'smartam', 'kamyamu', 'kamayamu'].includes(activeTab);
+  const isSevaActive = ['muhurtham', 'pitru-seva', 'smartam', 'smarta-seva', 'kamyamu', 'kamayamu'].includes(activeTab);
 
   const handleNavClick = (id) => {
     onSelectTab(id);
@@ -57,8 +58,11 @@ export default function Header({ activeTab, onSelectTab, onOpenQuickBooking }) {
           tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && handleNavClick('home')}
         >
-          <img src="/images/logo.jpg" alt="Srivari Dasudu Logo" className="brand-logo-img" />
-          <span>Srivari <b>Dasudu</b></span>
+          <img src="/images/logo.jpg" alt="Sri Vari Dasudu Adyamika Kuteer Logo" className="brand-logo-img" />
+          <div className="brand-text">
+            <span className="brand-title">Sri Vari Dasudu</span>
+            <span className="brand-subtitle">Adyamika Kuteer</span>
+          </div>
         </div>
 
         <nav className={menuOpen ? 'open' : ''}>

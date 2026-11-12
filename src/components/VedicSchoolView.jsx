@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import LotusDivider from './LotusDivider';
-import { VEDIC_DATA, GURUKUL_PILLARS, DAILY_ROUTINE } from '../data/vedicData';
+import { VEDIC_DATA, VEDIC_CURRICULUM_STEPS, GURUKUL_PILLARS, DAILY_ROUTINE } from '../data/vedicData';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function VedicSchoolView({ onNavigate, onBook }) {
   const { t, isEn } = useLanguage();
   const formRef = useRef(null);
 
-  // Vedic dropdown options matching prompt exactly
+  // Vedic dropdown options matching curriculum roadmap (starting with Smartham, then 4 Vedas)
   const VEDA_OPTIONS = isEn
-    ? ['Rigveda', 'Yajurveda', 'Samaveda', 'Atharvaveda']
-    : ['ఋగ్వేదం', 'యజుర్వేదం', 'సామవేదం', 'అథర్వవేదం'];
+    ? ['Smartham (Starting Track)', 'Rigveda', 'Yajurveda', 'Samaveda', 'Atharvaveda']
+    : ['స్మార్తం (ప్రారంభ విభాగం)', 'ఋగ్వేదం', 'యజుర్వేదం', 'సామవేదం', 'అథర్వవేదం'];
 
   // Enrollment Form State
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
     gothram: '',
     fatherName: '',
     motherName: '',
-    selectedVeda: isEn ? 'Yajurveda' : 'యజుర్వేదం',
+    selectedVeda: isEn ? 'Smartham (Starting Track)' : 'స్మార్తం (ప్రారంభ విభాగం)',
     phone: '',
     nativePlace: '',
     notes: ''
@@ -49,12 +49,19 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
 
   // Scroll to Form with Preselected Veda
   const handleEnrollVeda = (vedaIdentifier) => {
-    let mappedVeda = isEn ? 'Yajurveda' : 'యజుర్వేదం';
+    let mappedVeda = isEn ? 'Smartham (Starting Track)' : 'స్మార్తం (ప్రారంభ విభాగం)';
     const lower = (vedaIdentifier || '').toLowerCase();
-    if (lower.includes('rig') || lower.includes('ఋగ్')) mappedVeda = isEn ? 'Rigveda' : 'ఋగ్వేదం';
-    else if (lower.includes('yajur') || lower.includes('యజుర్')) mappedVeda = isEn ? 'Yajurveda' : 'యజుర్వేదం';
-    else if (lower.includes('sama') || lower.includes('సామ')) mappedVeda = isEn ? 'Samaveda' : 'సామవేదం';
-    else if (lower.includes('atharva') || lower.includes('అథర్వ')) mappedVeda = isEn ? 'Atharvaveda' : 'అథర్వవేదం';
+    if (lower.includes('smar') || lower.includes('స్మార్త')) {
+      mappedVeda = isEn ? 'Smartham (Starting Track)' : 'స్మార్తం (ప్రారంభ విభాగం)';
+    } else if (lower.includes('rig') || lower.includes('ఋగ్')) {
+      mappedVeda = isEn ? 'Rigveda' : 'ఋగ్వేదం';
+    } else if (lower.includes('yajur') || lower.includes('యజుర్')) {
+      mappedVeda = isEn ? 'Yajurveda' : 'యజుర్వేదం';
+    } else if (lower.includes('sama') || lower.includes('సామ')) {
+      mappedVeda = isEn ? 'Samaveda' : 'సామవేదం';
+    } else if (lower.includes('atharva') || lower.includes('అథర్వ')) {
+      mappedVeda = isEn ? 'Atharvaveda' : 'అథర్వవేదం';
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -185,7 +192,7 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
       gothram: '',
       fatherName: '',
       motherName: '',
-      selectedVeda: isEn ? 'Yajurveda' : 'యజుర్వేదం',
+      selectedVeda: isEn ? 'Smartham (Starting Track)' : 'స్మార్తం (ప్రారంభ విభాగం)',
       phone: '',
       nativePlace: '',
       notes: ''
@@ -341,6 +348,30 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
               <span className="divider-line" />
             </div>
           </div>
+        </div>
+
+        <div className="vedic-sequence-note" role="note">
+          <div className="vedic-sequence-header">
+            <span className="vedic-sequence-badge">
+              {isEn ? '✦ VEDIC SCHOOL STUDY SEQUENCE ✦' : '✦ వేద పాఠశాల అధ్యయన క్రమం ✦'}
+            </span>
+            <h3 className="vedic-sequence-heading">
+              {isEn
+                ? 'Vedas Start with Smartham, Then the Remaining 4 Vedas'
+                : 'ముందుగా స్మార్తం — ఆ తర్వాత మిగిలిన 4 వేదాలు'}
+            </h3>
+          </div>
+          <ul className="vedic-sequence-list">
+            {VEDIC_CURRICULUM_STEPS.map((step) => (
+              <li key={step.id}>
+                <span className="vedic-seq-icon" aria-hidden="true">{step.icon}</span>
+                <div>
+                  <strong>{isEn ? step.titleEn : step.titleTe}:</strong>{' '}
+                  <span>{isEn ? step.descEn : step.descTe}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* 4 Veda Cards Grid */}
@@ -526,8 +557,8 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
 
             <p className="vedic-form-desc">
               {isEn
-                ? "Please enter the student's details below to register for the upcoming academic session. Our Patashala administration will review your application and contact you for the preliminary interview and orientation."
-                : 'రాబోయే విద్యా సంవత్సరానికి నమోదు కోసం విద్యార్థి వివరాలు నమోదు చేయండి. పాఠశాల నిర్వాహకులు దరఖాస్తును పరిశీలించి మీను సంప్రదిస్తారు.'}
+                ? "Please enter the student's details below to register for the upcoming academic session (starting with Smartham and expanding to all four Vedas). Our Patashala administration will review your application and schedule the entrance / mid-study placement exam."
+                : 'రాబోయే విద్యా సంవత్సరానికి నమోదు కోసం విద్యార్థి వివరాలు నమోదు చేయండి (స్మార్తంతో ప్రారంభమై తదుపరి నాలుగు వేదాలు బోధించబడతాయి). పాఠశాల నిర్వాహకులు దరఖాస్తును పరిశీలించి ప్రవేశ పరీక్షకు సంప్రదిస్తారు.'}
             </p>
           </div>
 
