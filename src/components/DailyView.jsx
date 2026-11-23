@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DAILY_SCHEDULE } from '../data/dailySchedule';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function DailyView({ onNavigate }) {
+  const { t, isEn } = useLanguage();
   const [currentHour, setCurrentHour] = useState(() => {
     const d = new Date();
     return d.getHours() + d.getMinutes() / 60;
@@ -19,14 +21,11 @@ export default function DailyView({ onNavigate }) {
     <div className="page-wrapper daily-page">
       <div className="page-banner page-banner--hills page-banner--pos-20">
         <div className="wrap">
-          <div className="eyebrow">Nitya Kainkaryam &amp; Temple Worship</div>
-          <h1>Daily Devotional Schedule</h1>
-          <p className="page-banner-lead">
-            Sacred rituals performed daily from dawn to dusk following ancient Tirumala Agamic traditions
-            at Sri Mudupula Venkanna Temple.
-          </p>
+          <div className="eyebrow">{t('daily.eyebrow')}</div>
+          <h1>{t('daily.title')}</h1>
+          <p className="page-banner-lead">{t('daily.lead')}</p>
           <button className="btn ghost" onClick={() => onNavigate('home')}>
-            &larr; Back to Home
+            {t('common.backHome')}
           </button>
         </div>
       </div>
@@ -39,12 +38,8 @@ export default function DailyView({ onNavigate }) {
           <div className="card-corner corner-br" />
 
           <div className="daily-schedule-header">
-            <h2 className="daily-section-title">
-              Pancha Kala Pooja Vidhanam
-            </h2>
-            <div className="daily-section-sub">
-              Five-fold daily worship ceremonies conducted in the divine presence
-            </div>
+            <h2 className="daily-section-title">{t('daily.sectionTitle')}</h2>
+            <div className="daily-section-sub">{t('daily.sectionSub')}</div>
           </div>
 
           <div className="daily-schedule-list">
@@ -66,14 +61,14 @@ export default function DailyView({ onNavigate }) {
                     {isActive && (
                       <span className="active-tag-badge">
                         <span className="active-pulse-dot" />
-                        Active Now
+                        {t('daily.activeNow')}
                       </span>
                     )}
                   </div>
 
                   <div className="schedule-content-col">
-                    <h3 className="schedule-item-title">{item.title}</h3>
-                    <p className="schedule-item-desc">{item.desc}</p>
+                    <h3 className="schedule-item-title">{isEn ? item.title : item.titleTe}</h3>
+                    <p className="schedule-item-desc">{isEn ? item.desc : item.descTe}</p>
                   </div>
                 </div>
               );

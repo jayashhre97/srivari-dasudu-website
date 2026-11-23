@@ -7,12 +7,10 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
   const { t, isEn } = useLanguage();
   const formRef = useRef(null);
 
-  // Vedic dropdown options matching curriculum roadmap (starting with Smartham, then 4 Vedas)
   const VEDA_OPTIONS = isEn
     ? ['Smartham (Starting Track)', 'Rigveda', 'Yajurveda', 'Samaveda', 'Atharvaveda']
     : ['స్మార్తం (ప్రారంభ విభాగం)', 'ఋగ్వేదం', 'యజుర్వేదం', 'సామవేదం', 'అథర్వవేదం'];
 
-  // Enrollment Form State
   const [formData, setFormData] = useState({
     studentName: '',
     studentAge: '',
@@ -31,14 +29,12 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
   const [submittedData, setSubmittedData] = useState(null);
   const [showRoutine, setShowRoutine] = useState(false);
 
-  // Handle Input Changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
-    // Clear field-specific error
     if (formErrors[name]) {
       setFormErrors((prev) => ({
         ...prev,
@@ -47,7 +43,6 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
     }
   };
 
-  // Scroll to Form with Preselected Veda
   const handleEnrollVeda = (vedaIdentifier) => {
     let mappedVeda = isEn ? 'Smartham (Starting Track)' : 'స్మార్తం (ప్రారంభ విభాగం)';
     const lower = (vedaIdentifier || '').toLowerCase();
@@ -73,48 +68,46 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
     }
   };
 
-  // Validate Form
   const validateForm = () => {
     const errors = {};
 
     if (!formData.studentName.trim()) {
-      errors.studentName = isEn ? 'Student Name is required' : 'విద్యార్థి పేరు తప్పనిసరి';
+      errors.studentName = t('vedic.errName');
     }
 
     const ageNum = parseInt(formData.studentAge, 10);
     if (!formData.studentAge) {
-      errors.studentAge = isEn ? 'Student Age is required' : 'వయస్సు తప్పనిసరి';
+      errors.studentAge = t('vedic.errAgeReq');
     } else if (isNaN(ageNum) || ageNum < 6 || ageNum > 30) {
-      errors.studentAge = 'Student age must be between 6 and 30 years for Gurukul admission';
+      errors.studentAge = t('vedic.errAgeRange');
     }
 
     if (!formData.gothram.trim()) {
-      errors.gothram = isEn ? 'Gothram is required' : 'గోత్రం తప్పనిసరి';
+      errors.gothram = t('vedic.errGothram');
     }
 
     if (!formData.fatherName.trim()) {
-      errors.fatherName = isEn ? "Father's Name is required" : 'తండ్రి పేరు తప్పనిసరి';
+      errors.fatherName = t('vedic.errFather');
     }
 
     if (!formData.motherName.trim()) {
-      errors.motherName = isEn ? "Mother's Name is required" : 'తల్లి పేరు తప్పనిసరి';
+      errors.motherName = t('vedic.errMother');
     }
 
     if (!formData.selectedVeda) {
-      errors.selectedVeda = isEn ? 'Please select a Veda' : 'వేదం ఎంపిక తప్పనిసరి';
+      errors.selectedVeda = t('vedic.errVeda');
     }
 
     const phoneClean = formData.phone.replace(/[^0-9]/g, '');
     if (!formData.phone.trim()) {
-      errors.phone = isEn ? 'Contact Mobile / WhatsApp number is required' : 'ఫోన్ నంబర్ తప్పనిసరి';
+      errors.phone = t('vedic.errPhoneReq');
     } else if (phoneClean.length < 10) {
-      errors.phone = 'Please enter a valid 10-digit mobile number';
+      errors.phone = t('vedic.errPhoneValid');
     }
 
     return errors;
   };
 
-  // Handle Form Submission with Backend API Dispatch & Duplicate Prevention
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -132,7 +125,6 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
       let enrollmentId = null;
       let record = null;
 
-      // 1. Dispatch to Hostinger PHP backend API
       try {
         const response = await fetch('/api/enroll.php', {
           method: 'POST',
@@ -148,11 +140,9 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
           }
         }
       } catch (apiErr) {
-        // Fallback for static dev server
         console.warn('API endpoint not running; proceeding with client confirmation', apiErr);
       }
 
-      // 2. Client fallback record generation
       if (!enrollmentId) {
         enrollmentId = `SRV-VED-${new Date().getFullYear()}-${Math.floor(100000 + Math.random() * 900000)}`;
         record = {
@@ -162,7 +152,6 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
         };
       }
 
-      // 3. Backup to browser persistence
       try {
         const existing = JSON.parse(localStorage.getItem('srivari_vedic_enrollments') || '[]');
         existing.unshift(record);
@@ -179,11 +168,10 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
       }
     } catch (err) {
       setIsSubmitting(false);
-      setSubmitError('Unable to process enrollment. Please try again or reach the Acharyulu on WhatsApp.');
+      setSubmitError(t('vedic.submitFail'));
     }
   };
 
-  // Reset Form for New Submission
   const handleResetForm = () => {
     setSubmittedData(null);
     setFormData({
@@ -203,63 +191,21 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
 
   return (
     <div className="page-wrapper vedic-school-page">
-      {/* =========================================================================
-          1. HERO SECTION – VEDIC EDUCATION
-          ========================================================================= */}
       <section className="vedic-hero-section" aria-label="Vedic Gurukulam Hero">
         <div className="vedic-hero-bg-overlay" aria-hidden="true" />
         <div className="vedic-hero-frame" aria-hidden="true" />
 
         <div className="wrap vedic-hero-container">
           <div className="vedic-hero-text">
-            <div className="vedic-hero-badge">
-              <span className="badge-star">✦</span>
-              <span>{t('vedic.badge')}</span>
-              <span className="badge-star">✦</span>
-            </div>
-
             <h1 className="vedic-hero-title">{t('vedic.title')}</h1>
-
             <div className="vedic-hero-telugu">{t('vedic.telugu')}</div>
-
             <p className="vedic-hero-subtitle">{t('vedic.subtitle')}</p>
-
-            <div className="vedic-hero-actions">
-              <button
-                type="button"
-                className="btn primary vedic-hero-cta"
-                onClick={() => {
-                  if (formRef.current) {
-                    formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-              >
-                <span>{t('vedic.enroll')}</span>
-                <span className="btn-arrow">&rarr;</span>
-              </button>
-
-              <button
-                type="button"
-                className="btn ghost vedic-ghost-btn"
-                onClick={() => {
-                  const el = document.getElementById('four-vedas-section');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                <span>{t('vedic.explore')}</span>
-                <span className="btn-arrow">&darr;</span>
-              </button>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* =========================================================================
-          2. GURU TEACHING & GURUKUL VALUES OVERVIEW
-          ========================================================================= */}
       <section className="wrap vedic-intro-section" aria-label="Guru Teaching Introduction">
         <div className="vedic-intro-grid">
-          {/* Left Column: Visual Image */}
           <div className="vedic-intro-media">
             <div className="vedic-media-frame">
               <img
@@ -270,48 +216,38 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   e.target.src = '/images/cards/event-01-homam.jpg';
                 }}
               />
-              <div className="media-caption-badge">
-                {isEn ? 'Oral Vedic Transmission' : 'శ్రుతి పరంపర'}
-              </div>
+              <div className="media-caption-badge">{t('vedic.oralBadge')}</div>
             </div>
           </div>
 
-          {/* Right Column: Educational Narrative */}
           <div className="vedic-intro-content">
             <div className="temple-eyebrow align-start">
               <span className="eyebrow-symbol">✦</span>
-              <span>SACRED LEARNING &amp; TRADITION</span>
+              <span>{t('vedic.introEyebrow')}</span>
               <span className="eyebrow-symbol">✦</span>
             </div>
 
-            <h2 className="vedic-sec-heading">
-              Authentic Vedic Adhyayana Under Revered Archakas
-            </h2>
+            <h2 className="vedic-sec-heading">{t('vedic.introTitle')}</h2>
 
             <LotusDivider align="start" />
 
-            <p className="vedic-body-text">
-              The Vedas are eternal (Apaurusheya) and preserved through uncorrupted oral transmission from Guru to Shishya. At <strong>Srivari Dasudu Veda Pathashala</strong>, young students are initiated with Upanayana Samskara and trained rigorously in sacred Swara recitation, Sandhyavandanam, and Vedic rituals.
-            </p>
+            <p className="vedic-body-text">{t('vedic.introP1')}</p>
 
-            <p className="vedic-body-text">
-              Under the auspices of <strong>Chief Priest Sri N. V. Ram Kishore Acharyulu</strong> (Sri Bhu Sametha Vaibhava Venkateswara Swamy Temple, Visakhapatnam), our Gurukul nurtures moral purity, sharp memory, devotion to Gomata, and mastery of Vedic Mantras.
-            </p>
+            <p className="vedic-body-text">{t('vedic.introP2')}</p>
 
-            {/* Key Gurukul Highlights */}
             <div className="vedic-highlights-row">
               <div className="vedic-highlight-item">
                 <span className="hl-icon">🪔</span>
                 <div>
-                  <strong>Free Education &amp; Satvik Food</strong>
-                  <p>All boarding, lodging, clothing, and books provided freely.</p>
+                  <strong>{t('vedic.hlFreeTitle')}</strong>
+                  <p>{t('vedic.hlFreeDesc')}</p>
                 </div>
               </div>
               <div className="vedic-highlight-item">
                 <span className="hl-icon">📜</span>
                 <div>
-                  <strong>Recognized Veda Certificates</strong>
-                  <p>Preparation for TTD, Veda Pathashala, and Maharishi Veda exams.</p>
+                  <strong>{t('vedic.hlCertTitle')}</strong>
+                  <p>{t('vedic.hlCertDesc')}</p>
                 </div>
               </div>
             </div>
@@ -319,25 +255,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
         </div>
       </section>
 
-      {/* =========================================================================
-          3. FOUR VEDAS – EDUCATIONAL SECTION
-          ========================================================================= */}
       <section id="four-vedas-section" className="wrap vedic-four-vedas-section" aria-label="The Four Vedas">
         <div className="temple-sec-head seva-sec-head">
           <div className="sec-head-content">
             <div className="temple-eyebrow">
               <span className="eyebrow-symbol">✦</span>
-              <span>{isEn ? 'Chaturveda Samhita' : 'చతుర్వేదాలు'}</span>
+              <span>{t('vedic.fourEyebrow')}</span>
               <span className="eyebrow-symbol">✦</span>
             </div>
-            <h2 className="temple-sec-title">
-              {isEn ? 'The Four Eternal Vedas' : 'నాలుగు అనాది వేదాలు'}
-            </h2>
-            <div className="temple-sec-subtitle">
-              {isEn
-                ? 'Comprehensive Vedic disciplines taught with sacred swara intonation'
-                : 'పవిత్ర స్వరోచ్ఛారణతో బోధించే సంపూర్ణ వేద విద్యలు'}
-            </div>
+            <h2 className="temple-sec-title">{t('vedic.fourTitle')}</h2>
+            <div className="temple-sec-subtitle">{t('vedic.fourSub')}</div>
 
             <div className="temple-lotus-divider" aria-hidden="true">
               <span className="divider-line" />
@@ -352,14 +279,8 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
 
         <div className="vedic-sequence-note" role="note">
           <div className="vedic-sequence-header">
-            <span className="vedic-sequence-badge">
-              {isEn ? '✦ VEDIC SCHOOL STUDY SEQUENCE ✦' : '✦ వేద పాఠశాల అధ్యయన క్రమం ✦'}
-            </span>
-            <h3 className="vedic-sequence-heading">
-              {isEn
-                ? 'Vedas Start with Smartham, Then the Remaining 4 Vedas'
-                : 'ముందుగా స్మార్తం — ఆ తర్వాత మిగిలిన 4 వేదాలు'}
-            </h3>
+            <span className="vedic-sequence-badge">{t('vedic.seqBadge')}</span>
+            <h3 className="vedic-sequence-heading">{t('vedic.seqHeading')}</h3>
           </div>
           <ul className="vedic-sequence-list">
             {VEDIC_CURRICULUM_STEPS.map((step) => (
@@ -374,48 +295,41 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
           </ul>
         </div>
 
-        {/* 4 Veda Cards Grid */}
         <div className="vedic-cards-grid">
           {VEDIC_DATA.map((veda) => (
             <article className="temple-card veda-card" key={veda.id}>
-              {/* Corner Ornaments */}
               <div className="card-corner corner-tl" aria-hidden="true" />
               <div className="card-corner corner-tr" aria-hidden="true" />
               <div className="card-corner corner-bl" aria-hidden="true" />
               <div className="card-corner corner-br" aria-hidden="true" />
 
-              {/* Veda Image Banner */}
               <div className="veda-card-media">
                 <img
                   src={veda.image}
-                  alt={`${veda.name} Vedic Education`}
+                  alt={`${isEn ? veda.name : veda.teluguName} Vedic Education`}
                   className="veda-card-img"
                   loading="lazy"
                   onError={(e) => {
                     e.target.src = veda.fallbackImage;
                   }}
                 />
-                <span className="veda-pill-badge">{veda.name}</span>
+                <span className="veda-pill-badge">{isEn ? veda.name : veda.teluguName}</span>
               </div>
 
-              {/* Veda Card Content */}
               <div className="veda-card-body">
                 <h3 className="veda-card-title">
                   {isEn ? veda.name : veda.teluguName}
                 </h3>
-                {veda.subtitle && (
-                  <div className="veda-card-sub">{veda.subtitle}</div>
+                {(isEn ? veda.subtitle : veda.subtitleTe) && (
+                  <div className="veda-card-sub">{isEn ? veda.subtitle : veda.subtitleTe}</div>
                 )}
 
-                <p className="veda-card-desc">{veda.desc}</p>
+                <p className="veda-card-desc">{isEn ? veda.desc : veda.descTe}</p>
 
-                {/* Core Curriculum Pills */}
                 <div className="veda-curriculum-box">
-                  <div className="curriculum-title">
-                    {isEn ? 'Key Syllabus:' : 'ముఖ్య పాఠ్యాంశాలు:'}
-                  </div>
+                  <div className="curriculum-title">{t('vedic.keySyllabus')}</div>
                   <ul>
-                    {veda.coreSubjects.map((sub, idx) => (
+                    {(isEn ? veda.coreSubjects : veda.coreSubjectsTe).map((sub, idx) => (
                       <li key={idx}>
                         <span className="bullet">✦</span>
                         <span>{sub}</span>
@@ -424,26 +338,24 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   </ul>
                 </div>
 
-                {/* Meta Information */}
                 <div className="veda-meta-row">
                   <div>
-                    <span className="meta-lbl">Age Group:</span>
-                    <span className="meta-val">{veda.ageGroup}</span>
+                    <span className="meta-lbl">{t('vedic.ageGroup')}</span>
+                    <span className="meta-val">{isEn ? veda.ageGroup : veda.ageGroupTe}</span>
                   </div>
                   <div>
-                    <span className="meta-lbl">Course Period:</span>
-                    <span className="meta-val">{veda.duration}</span>
+                    <span className="meta-lbl">{t('vedic.coursePeriod')}</span>
+                    <span className="meta-val">{isEn ? veda.duration : veda.durationTe}</span>
                   </div>
                 </div>
 
-                {/* Enrollment CTA */}
                 <div className="veda-card-actions">
                   <button
                     type="button"
                     className="btn primary veda-enroll-btn"
-                    onClick={() => handleEnrollVeda(veda.name)}
+                    onClick={() => handleEnrollVeda(isEn ? veda.name : veda.teluguName)}
                   >
-                    <span>Enroll Now</span>
+                    <span>{t('vedic.enrollNow')}</span>
                     <span className="btn-arrow">&rarr;</span>
                   </button>
                 </div>
@@ -453,9 +365,6 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
         </div>
       </section>
 
-      {/* =========================================================================
-          4. WHY CHOOSE OUR VEDIC SCHOOL?
-          ========================================================================= */}
       <section className="wrap vedic-why-section" aria-label="Why Choose Our Vedic School">
         <div className="vedic-why-banner-wrap">
           <div className="vedic-why-banner">
@@ -471,57 +380,55 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
             <div className="why-banner-content">
               <div className="vedic-hero-badge vedic-hero-badge--tight">
                 <span className="badge-star">✦</span>
-                <span>{isEn ? 'Pandita Parampara · Gurukul Ethos' : 'పండిత పరంపర · గురుకుల సంప్రదాయం'}</span>
+                <span>{t('vedic.whyBadge')}</span>
                 <span className="badge-star">✦</span>
               </div>
-              <h2 className="why-banner-title">
-                Why Choose Srivari Dasudu Veda Pathashala?
-              </h2>
-              <p className="why-banner-desc">
-                Dedicated to awakening Vedic consciousness and character through pure scriptural discipline and guru kripa.
-              </p>
+              <h2 className="why-banner-title">{t('vedic.whyTitle')}</h2>
+              <p className="why-banner-desc">{t('vedic.whyDesc')}</p>
             </div>
           </div>
         </div>
 
-        {/* 5 Gurukul Pillars Grid */}
         <div className="vedic-pillars-grid">
           {GURUKUL_PILLARS.map((pillar) => (
             <div className="temple-card pillar-card" key={pillar.id}>
               <div className="pillar-icon">{pillar.icon}</div>
-              <div className="pillar-telugu">{pillar.teluguTitle}</div>
-              <h4 className="pillar-title">{pillar.title}</h4>
-              <p className="pillar-desc">{pillar.desc}</p>
+              {isEn ? (
+                <>
+                  <div className="pillar-telugu">{pillar.teluguTitle}</div>
+                  <h4 className="pillar-title">{pillar.title}</h4>
+                  <p className="pillar-desc">{pillar.desc}</p>
+                </>
+              ) : (
+                <>
+                  <h4 className="pillar-title">{pillar.teluguTitle}</h4>
+                  <p className="pillar-desc">{pillar.descTe}</p>
+                </>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Toggle Routine Button */}
         <div className="vedic-routine-toggle-wrap">
           <button
             type="button"
             className="btn ghost vedic-routine-toggle"
             onClick={() => setShowRoutine(!showRoutine)}
           >
-            <span>{showRoutine
-              ? (isEn ? 'Hide Daily Gurukul Routine ▲' : 'దినచర్యను దాచండి ▲')
-              : (isEn ? 'View Daily Gurukul Schedule ▼' : 'దినచర్య చూడండి ▼')}</span>
+            <span>{showRoutine ? t('vedic.hideRoutine') : t('vedic.showRoutine')}</span>
           </button>
         </div>
 
-        {/* Daily Routine Schedule Accordion */}
         {showRoutine && (
           <div className="vedic-routine-container">
-            <h3 className="routine-heading">
-              దినచర్య — Daily Gurukul Schedule (Brahmamuhurtha to Ratri Suktam)
-            </h3>
+            <h3 className="routine-heading">{t('vedic.routineHeading')}</h3>
             <div className="routine-timeline">
               {DAILY_ROUTINE.map((item, idx) => (
                 <div className="routine-row" key={idx}>
                   <div className="routine-time">{item.time}</div>
                   <div className="routine-info">
-                    <strong>{item.title}</strong>
-                    <p>{item.desc}</p>
+                    <strong>{isEn ? item.title : item.titleTe}</strong>
+                    <p>{isEn ? item.desc : item.descTe}</p>
                   </div>
                 </div>
               ))}
@@ -530,85 +437,88 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
         )}
       </section>
 
-      {/* =========================================================================
-          5. VEDIC SCHOOL ADMISSION / ENROLLMENT FORM
-          ========================================================================= */}
       <section ref={formRef} id="admission-form" className="wrap vedic-form-section" aria-label="Admission Form">
         <div className="vedic-form-wrapper">
-          {/* Subtle Corner Motifs */}
           <div className="form-corner corner-tl" aria-hidden="true" />
           <div className="form-corner corner-tr" aria-hidden="true" />
           <div className="form-corner corner-bl" aria-hidden="true" />
           <div className="form-corner corner-br" aria-hidden="true" />
 
-          {/* Form Header */}
           <div className="vedic-form-header">
             <div className="form-badge">
               <span className="badge-star">✦</span>
-              <span>
-                {isEn ? 'Veda Pathashala Enrollment' : 'వేద పాఠశాల ప్రవేశ దరఖాస్తు'}
-              </span>
+              <span>{t('vedic.formBadge')}</span>
               <span className="badge-star">✦</span>
             </div>
 
-            <h2 className="vedic-form-title">
-              {isEn ? 'Enroll in Vedic Education' : 'వేద విద్యలో నమోదు చేసుకోండి'}
-            </h2>
+            <h2 className="vedic-form-title">{t('vedic.formTitle')}</h2>
 
-            <p className="vedic-form-desc">
-              {isEn
-                ? "Please enter the student's details below to register for the upcoming academic session (starting with Smartham and expanding to all four Vedas). Our Patashala administration will review your application and schedule the entrance / mid-study placement exam."
-                : 'రాబోయే విద్యా సంవత్సరానికి నమోదు కోసం విద్యార్థి వివరాలు నమోదు చేయండి (స్మార్తంతో ప్రారంభమై తదుపరి నాలుగు వేదాలు బోధించబడతాయి). పాఠశాల నిర్వాహకులు దరఖాస్తును పరిశీలించి ప్రవేశ పరీక్షకు సంప్రదిస్తారు.'}
-            </p>
+            <p className="vedic-form-desc">{t('vedic.formDesc')}</p>
           </div>
 
-          {/* Form Submission Success Banner */}
           {submittedData ? (
             <div className="vedic-success-card">
               <div className="success-icon">🎉</div>
-              <h3 className="success-heading">
-                {isEn
-                  ? 'Enrollment Application Submitted Successfully!'
-                  : 'దరఖాస్తు విజయవంతంగా స్వీకరించబడింది'}
-              </h3>
+              <h3 className="success-heading">{t('vedic.successTitle')}</h3>
 
               <div className="success-details-box">
                 <div className="success-ref">
-                  Application Ref No: <strong>{submittedData.enrollmentId}</strong>
+                  {t('vedic.refNo')} <strong>{submittedData.enrollmentId}</strong>
                 </div>
                 <div className="success-summary">
-                  <div><strong>Student Name:</strong> {submittedData.studentName} ({submittedData.studentAge} yrs)</div>
-                  <div><strong>Selected Veda:</strong> {submittedData.selectedVeda}</div>
-                  <div><strong>Gothram:</strong> {submittedData.gothram}</div>
-                  <div><strong>Father:</strong> {submittedData.fatherName} | <strong>Mother:</strong> {submittedData.motherName}</div>
-                  <div><strong>Phone:</strong> {submittedData.phone}</div>
+                  <div>
+                    <strong>{t('vedic.lblStudent')}</strong> {submittedData.studentName} ({submittedData.studentAge} {t('vedic.yrs')})
+                  </div>
+                  <div>
+                    <strong>{t('vedic.lblVeda')}</strong> {submittedData.selectedVeda}
+                  </div>
+                  <div>
+                    <strong>{t('vedic.lblGothram')}</strong> {submittedData.gothram}
+                  </div>
+                  <div>
+                    <strong>{t('vedic.lblFather')}</strong> {submittedData.fatherName} |{' '}
+                    <strong>{t('vedic.lblMother')}</strong> {submittedData.motherName}
+                  </div>
+                  <div>
+                    <strong>{t('vedic.lblPhone')}</strong> {submittedData.phone}
+                  </div>
                 </div>
               </div>
 
-              <p className="success-note">
-                A copy of your registration has been archived for our Chief Priest. You can also send the confirmation directly via WhatsApp for expedited review.
-              </p>
+              <p className="success-note">{t('vedic.successNote')}</p>
 
               <div className="success-actions">
                 <a
                   href={`https://wa.me/919876543210?text=${encodeURIComponent(
-                    `*Vedic School Enrollment Application*\n` +
-                    `*Ref No:* ${submittedData.enrollmentId}\n` +
-                    `*Student:* ${submittedData.studentName} (Age: ${submittedData.studentAge})\n` +
-                    `*Veda Chosen:* ${submittedData.selectedVeda}\n` +
-                    `*Gothram:* ${submittedData.gothram}\n` +
-                    `*Father:* ${submittedData.fatherName}\n` +
-                    `*Mother:* ${submittedData.motherName}\n` +
-                    `*Phone:* ${submittedData.phone}\n` +
-                    (submittedData.nativePlace ? `*Native Place:* ${submittedData.nativePlace}\n` : '') +
-                    (submittedData.notes ? `*Notes:* ${submittedData.notes}\n` : '') +
-                    `Namaste Acharya! We have submitted our Vedic Pathashala admission application.`
+                    isEn
+                      ? `*Vedic School Enrollment Application*\n` +
+                        `*Ref No:* ${submittedData.enrollmentId}\n` +
+                        `*Student:* ${submittedData.studentName} (Age: ${submittedData.studentAge})\n` +
+                        `*Veda Chosen:* ${submittedData.selectedVeda}\n` +
+                        `*Gothram:* ${submittedData.gothram}\n` +
+                        `*Father:* ${submittedData.fatherName}\n` +
+                        `*Mother:* ${submittedData.motherName}\n` +
+                        `*Phone:* ${submittedData.phone}\n` +
+                        (submittedData.nativePlace ? `*Native Place:* ${submittedData.nativePlace}\n` : '') +
+                        (submittedData.notes ? `*Notes:* ${submittedData.notes}\n` : '') +
+                        `Namaste Acharya! We have submitted our Vedic Pathashala admission application.`
+                      : `*వేద పాఠశాల ప్రవేశ దరఖాస్తు*\n` +
+                        `*సంఖ్య:* ${submittedData.enrollmentId}\n` +
+                        `*విద్యార్థి:* ${submittedData.studentName} (వయస్సు: ${submittedData.studentAge})\n` +
+                        `*వేదం:* ${submittedData.selectedVeda}\n` +
+                        `*గోత్రం:* ${submittedData.gothram}\n` +
+                        `*తండ్రి:* ${submittedData.fatherName}\n` +
+                        `*తల్లి:* ${submittedData.motherName}\n` +
+                        `*ఫోన్:* ${submittedData.phone}\n` +
+                        (submittedData.nativePlace ? `*స్వస్థలం:* ${submittedData.nativePlace}\n` : '') +
+                        (submittedData.notes ? `*గమనికలు:* ${submittedData.notes}\n` : '') +
+                        `నమస్కారం ఆచార్యులు గారు! వేద పాఠశాల ప్రవేశ దరఖాస్తు సమర్పించాము.`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn primary success-wa-btn"
                 >
-                  <span>Forward Details on WhatsApp</span>
+                  <span>{t('vedic.forwardWa')}</span>
                   <span>💬</span>
                 </a>
 
@@ -617,25 +527,23 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   className="btn ghost vedic-ghost-btn"
                   onClick={handleResetForm}
                 >
-                  Submit Another Application
+                  {t('vedic.submitAnother')}
                 </button>
               </div>
             </div>
           ) : (
-            /* Enrollment Input Form */
             <form className="vedic-admission-form" onSubmit={handleSubmit} noValidate>
               <div className="form-grid-two">
-                {/* 1. Student Name */}
                 <div className="form-field-group">
                   <label htmlFor="studentName" className="field-label">
-                    {isEn ? 'Student Name' : 'విద్యార్థి పేరు'} <span className="req">*</span>
+                    {t('vedic.lblStudentName')} <span className="req">*</span>
                   </label>
                   <input
                     type="text"
                     id="studentName"
                     name="studentName"
                     className={`form-input ${formErrors.studentName ? 'input-error' : ''}`}
-                    placeholder="Enter student's full name"
+                    placeholder={t('vedic.phStudent')}
                     value={formData.studentName}
                     onChange={handleInputChange}
                     required
@@ -645,17 +553,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   )}
                 </div>
 
-                {/* 2. Student Age */}
                 <div className="form-field-group">
                   <label htmlFor="studentAge" className="field-label">
-                    {isEn ? 'Student Age' : 'విద్యార్థి వయస్సు'} <span className="req">*</span>
+                    {t('vedic.lblStudentAge')} <span className="req">*</span>
                   </label>
                   <input
                     type="number"
                     id="studentAge"
                     name="studentAge"
                     className={`form-input ${formErrors.studentAge ? 'input-error' : ''}`}
-                    placeholder="Age (e.g. 7 – 18)"
+                    placeholder={t('vedic.phAge')}
                     min="6"
                     max="30"
                     value={formData.studentAge}
@@ -669,17 +576,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
               </div>
 
               <div className="form-grid-two">
-                {/* 3. Gothram */}
                 <div className="form-field-group">
                   <label htmlFor="gothram" className="field-label">
-                    {isEn ? 'Gothram' : 'గోత్రం'} <span className="req">*</span>
+                    {t('vedic.lblGothramField')} <span className="req">*</span>
                   </label>
                   <input
                     type="text"
                     id="gothram"
                     name="gothram"
                     className={`form-input ${formErrors.gothram ? 'input-error' : ''}`}
-                    placeholder="e.g. Bharadwaja, Kasyapa, Harita"
+                    placeholder={t('vedic.phGothram')}
                     value={formData.gothram}
                     onChange={handleInputChange}
                     required
@@ -689,10 +595,9 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   )}
                 </div>
 
-                {/* 4. Select Veda */}
                 <div className="form-field-group">
                   <label htmlFor="selectedVeda" className="field-label">
-                    {isEn ? 'Select Veda' : 'అధ్యయనం చేయదలిచిన వేదం'} <span className="req">*</span>
+                    {t('vedic.lblSelectVeda')} <span className="req">*</span>
                   </label>
                   <select
                     id="selectedVeda"
@@ -702,7 +607,7 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                     onChange={handleInputChange}
                     required
                   >
-{VEDA_OPTIONS.map((opt) => (
+                    {VEDA_OPTIONS.map((opt) => (
                       <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
@@ -713,17 +618,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
               </div>
 
               <div className="form-grid-two">
-                {/* 5. Father's Name */}
                 <div className="form-field-group">
                   <label htmlFor="fatherName" className="field-label">
-                    {isEn ? "Father's Name" : 'తండ్రి పేరు'} <span className="req">*</span>
+                    {t('vedic.lblFatherName')} <span className="req">*</span>
                   </label>
                   <input
                     type="text"
                     id="fatherName"
                     name="fatherName"
                     className={`form-input ${formErrors.fatherName ? 'input-error' : ''}`}
-                    placeholder="Enter father's name"
+                    placeholder={t('vedic.phFather')}
                     value={formData.fatherName}
                     onChange={handleInputChange}
                     required
@@ -733,17 +637,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   )}
                 </div>
 
-                {/* 6. Mother's Name */}
                 <div className="form-field-group">
                   <label htmlFor="motherName" className="field-label">
-                    {isEn ? "Mother's Name" : 'తల్లి పేరు'} <span className="req">*</span>
+                    {t('vedic.lblMotherName')} <span className="req">*</span>
                   </label>
                   <input
                     type="text"
                     id="motherName"
                     name="motherName"
                     className={`form-input ${formErrors.motherName ? 'input-error' : ''}`}
-                    placeholder="Enter mother's name"
+                    placeholder={t('vedic.phMother')}
                     value={formData.motherName}
                     onChange={handleInputChange}
                     required
@@ -755,17 +658,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
               </div>
 
               <div className="form-grid-two">
-                {/* 7. Contact Mobile */}
                 <div className="form-field-group">
                   <label htmlFor="phone" className="field-label">
-                    {isEn ? 'Contact Phone / WhatsApp' : 'ఫోన్ నంబర్'} <span className="req">*</span>
+                    {t('vedic.lblPhoneField')} <span className="req">*</span>
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
                     className={`form-input ${formErrors.phone ? 'input-error' : ''}`}
-                    placeholder="10-digit mobile number"
+                    placeholder={t('vedic.phPhone')}
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
@@ -775,47 +677,43 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   )}
                 </div>
 
-                {/* 8. Native Place / City */}
                 <div className="form-field-group">
                   <label htmlFor="nativePlace" className="field-label">
-                    {isEn ? 'Native Place / District' : 'స్వస్థలం / జిల్లా'}
+                    {t('vedic.lblNative')}
                   </label>
                   <input
                     type="text"
                     id="nativePlace"
                     name="nativePlace"
                     className="form-input"
-                    placeholder="e.g. Visakhapatnam, Rajahmundry, Guntur"
+                    placeholder={t('vedic.phNative')}
                     value={formData.nativePlace}
                     onChange={handleInputChange}
                   />
                 </div>
               </div>
 
-              {/* 9. Prior Education & Notes */}
               <div className="form-field-group form-field-group--spaced">
                 <label htmlFor="notes" className="field-label">
-                  {isEn ? 'Prior Sanskrit / Vedic Exposure & Special Remarks' : 'గమనికలు'}
+                  {t('vedic.lblNotes')}
                 </label>
                 <textarea
                   id="notes"
                   name="notes"
                   className="form-textarea"
                   rows="3"
-                  placeholder="Mention previous Upanayanam status, school grade, or any specific prayer requests..."
+                  placeholder={t('vedic.phNotes')}
                   value={formData.notes}
                   onChange={handleInputChange}
                 />
               </div>
 
-              {/* Submit Error Alert if any */}
               {submitError && (
                 <div className="form-submit-error">
                   ⚠️ {submitError}
                 </div>
               )}
 
-              {/* Submit CTA */}
               <div className="form-submit-wrap">
                 <button
                   type="submit"
@@ -823,16 +721,16 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    <span>Submitting Application...</span>
+                    <span>{t('vedic.submitting')}</span>
                   ) : (
                     <>
-                      <span>Submit Enrollment</span>
+                      <span>{t('vedic.submitEnroll')}</span>
                       <span className="btn-arrow">&rarr;</span>
                     </>
                   )}
                 </button>
                 <div className="form-security-note">
-                  🔒 Information is securely stored and reviewed solely by Srivari Dasudu Patashala Trust.
+                  🔒 {t('vedic.securityNote')}
                 </div>
               </div>
             </form>
@@ -840,28 +738,21 @@ export default function VedicSchoolView({ onNavigate, onBook }) {
         </div>
       </section>
 
-      {/* =========================================================================
-          6. DIRECT CONTACT & LOCATION INFORMATION
-          ========================================================================= */}
       <section className="wrap vedic-footer-contact" aria-label="Gurukul Contact Information">
         <div className="vedic-contact-box">
-          <h3 className="contact-box-title">
-            సంప్రదింపుల వివరాలు — Veda Pathashala Office
-          </h3>
-          <p className="contact-box-sub">
-            For personal visits, sponsorships, or direct consultations with the Acharyas:
-          </p>
+          <h3 className="contact-box-title">{t('vedic.contactTitle')}</h3>
+          <p className="contact-box-sub">{t('vedic.contactSub')}</p>
           <div className="contact-details-grid">
             <div>
-              <strong>📍 Location:</strong><br />
-              Sri Mudupula Venkanna Temple Complex, Visakhapatnam, Andhra Pradesh
+              <strong>📍 {t('vedic.contactLoc')}</strong><br />
+              {t('vedic.contactLocVal')}
             </div>
             <div>
-              <strong>📞 Direct Helpline:</strong><br />
+              <strong>📞 {t('vedic.contactHelp')}</strong><br />
               +91 98765 43210 (9:00 AM – 6:00 PM)
             </div>
             <div>
-              <strong>✉ Email:</strong><br />
+              <strong>✉ {t('vedic.contactEmail')}</strong><br />
               vedapathashala@srivaridasudu.org
             </div>
           </div>

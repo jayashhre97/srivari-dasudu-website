@@ -6,11 +6,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'శ్రీ చండీ హోమం',
     category: 'protection',
     desc: 'Grand invocation of Goddess Durga Parameswari in her fierce Chandi swaroopam to vanquish insurmountable obstacles, evil eye (drishti doshas), legal battles, and planetary curses.',
+    descTe:
+      'అమ్మవారి చండీ స్వరూపంలో దుర్గా పరమేశ్వరిని ఆహ్వానించి విఘ్నాలు, దృష్టి దోషాలు, కోర్టు కేసులు మరియు గ్రహ శాపాలను నివారించే మహా హోమం.',
     duration: '4 Hours min time',
+    durationTe: 'కనీసం 4 గంటలు',
     price: '15,000',
     image: '/images/cards/event-04-chandi.jpg',
     deity: 'Goddess Sri Chandi Parameswari',
-    fruits: 'Shatru Samharam, Court Case Relief, Ultimate Evil Eye Protection'
+    deityTe: 'శ్రీ చండీ పరమేశ్వరి అమ్మవారు',
+    fruits: 'Shatru Samharam, Court Case Relief, Ultimate Evil Eye Protection',
+    fruitsTe: 'శత్రు సంహారం, కోర్టు కేసు ఉపశమనం, దృష్టి దోష రక్షణ'
   },
   {
     no: 2,
@@ -19,11 +24,17 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'శ్రీ శత చండీ మహాయాగం',
     category: 'protection',
     desc: 'A majestic 5-day spiritual fire ritual involving 100 recitations of Sri Durga Saptashati by learned Vedic ritviks, culminating in a colossal Purnahuti for supreme state and family welfare.',
+    descTe:
+      'వేద రిత్విక్కులచే 100 సార్లు దుర్గా సప్తశతి పారాయణంతో 5 రోజుల పాటు నిర్వహించే మహా యాగం. కుటుంబ–రాజ్య శ్రేయస్సు కోసం ఘన పూర్ణాహుతితో ముగుస్తుంది.',
     duration: '5 Days Yagam',
+    durationTe: '5 రోజుల యాగం',
     price: 'On Request',
+    priceTe: 'అభ్యర్థన మేరకు',
     image: '/images/cards/event-07-sata-chandi.jpg',
     deity: 'Goddess Mahakali, Mahalakshmi, Mahasaraswati',
-    fruits: 'Supreme Victory, Eradication of Generational Curses, Boundless Prosperity'
+    deityTe: 'మహాకాళి, మహాలక్ష్మి, మహాసరస్వతి అమ్మవార్లు',
+    fruits: 'Supreme Victory, Eradication of Generational Curses, Boundless Prosperity',
+    fruitsTe: 'పరమ విజయం, వంశ శాప నివారణ, అపార సంపద'
   },
   {
     no: 3,
@@ -32,11 +43,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'మహా సుదర్శన హోమం',
     category: 'vaishnava',
     desc: 'Supreme Vaishnava fire offering invoking Lord Sudarshana (the divine discus of Sri Maha Vishnu) to remove black magic, acute health issues, fears, and psychic negativities.',
+    descTe:
+      'శ్రీ మహావిష్ణువు చక్రాయుధమైన సుదర్శనుని ఆహ్వానించి బ్లాక్ మ్యాజిక్, తీవ్ర ఆరోగ్య సమస్యలు, భయాలు మరియు మానసిక ప్రతికూలతలను నివారించే వైష్ణవ హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-05-sudarshana.jpg',
     deity: 'Lord Sri Chakra Sudarshana & Maha Vishnu',
-    fruits: 'Aura Cleansing, Vanquishing Enmity, Physical & Mental Shield'
+    deityTe: 'శ్రీ చక్ర సుదర్శనుడు & మహావిష్ణువు',
+    fruits: 'Aura Cleansing, Vanquishing Enmity, Physical & Mental Shield',
+    fruitsTe: 'ఆవరణ శుద్ధి, శత్రు నివారణ, శారీరక–మానసిక రక్షణ'
   },
   {
     no: 4,
@@ -45,11 +61,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'సుదర్శన నృసింహ సంయుక్త హోమం',
     category: 'vaishnava',
     desc: 'Combined potent invocation of Lord Sudarshana and Lord Ugra Narasimha Swamy. Destroys hidden enemies, business sabotage, chronic illnesses, and fear of untimely distress.',
+    descTe:
+      'సుదర్శనుడు మరియు ఉగ్ర నృసింహ స్వామి సంయుక్త ఆహ్వానం. గుప్త శత్రువులు, వ్యాపార విఘ్నాలు, దీర్ఘకాలిక రోగాలు మరియు అకాల భయాలను నివారిస్తుంది.',
     duration: '4 Hours',
+    durationTe: '4 గంటలు',
     price: '',
     image: '/images/cards/event-12-sudarshana-narasimha.jpg',
     deity: 'Lord Sri Sudarshana & Sri Lakshmi Narasimha Swamy',
-    fruits: 'Fierce Divine Armor, Victory over Chronic Debts & Adversaries'
+    deityTe: 'శ్రీ సుదర్శనుడు & శ్రీ లక్ష్మీ నృసింహ స్వామి',
+    fruits: 'Fierce Divine Armor, Victory over Chronic Debts & Adversaries',
+    fruitsTe: 'దివ్య రక్షా కవచం, దీర్ఘ రుణాలు & ప్రత్యర్థులపై విజయం'
   },
   {
     no: 5,
@@ -57,12 +78,17 @@ export const KAMYAMU_HOMAMS = [
     name: 'Lakshmi Ganapathi Homam (లక్ష్మీ గణపతి హోమం)',
     teluguName: 'శ్రీ లక్ష్మీ గణపతి హోమం',
     category: 'prosperity',
-    desc: 'The foundational Vedic ritual invoking Lord Ganesha and Goddess Lakshmi together for removing all hurdles, embarking on new ventures, and inviting auspicious wealth.',
+    desc: "The foundational Vedic ritual invoking Lord Ganesha and Goddess Lakshmi together for removing all hurdles, embarking on new ventures, and inviting auspicious wealth.",
+    descTe:
+      'విఘ్నాల నివారణ, నూతన వ్యాపార ప్రారంభం మరియు శుభ సంపద కోసం గణపతి–లక్ష్మీ సంయుక్త ఆహ్వానంతో చేసే మూల వైదిక హోమం.',
     duration: '2.5 Hours',
+    durationTe: '2.5 గంటలు',
     price: '',
     image: '/images/cards/event-11-lakshmi-ganapathi.jpg',
     deity: 'Lord Maha Ganapathi & Goddess Maha Lakshmi',
-    fruits: 'Hurdle-Free Beginnings, Business Inception, Family Fortune'
+    deityTe: 'మహా గణపతి & మహాలక్ష్మి అమ్మవారు',
+    fruits: 'Hurdle-Free Beginnings, Business Inception, Family Fortune',
+    fruitsTe: 'నిర్విఘ్న ప్రారంభాలు, వ్యాపార ఆరంభం, కుటుంబ సంపద'
   },
   {
     no: 6,
@@ -71,11 +97,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'శ్రీ సూక్త సహిత మహాలక్ష్మి హోమం',
     category: 'prosperity',
     desc: 'Sacred fire offering performed with 108 red lotus blossoms, cow ghee, bilva fruits, and Sri Sukta mantras invoking Goddess Lakshmi to end financial distress and bring stable prosperity.',
+    descTe:
+      '108 ఎర్ర తామరలు, గోఘృతం, బిల్వ ఫలాలు మరియు శ్రీసూక్త మంత్రాలతో ఆర్థిక కష్టాల నివారణకు లక్ష్మీదేవిని ఆహ్వానించే హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-14-lakshmi.jpg',
     deity: 'Goddess Sri Maha Lakshmi & Lord Venkateswara',
-    fruits: 'Steady Cashflow, Commercial Success, Debt Eradication'
+    deityTe: 'శ్రీ మహాలక్ష్మి & శ్రీ వేంకటేశ్వర స్వామి',
+    fruits: 'Steady Cashflow, Commercial Success, Debt Eradication',
+    fruitsTe: 'స్థిర ఆదాయం, వ్యాపార విజయం, రుణ విముక్తి'
   },
   {
     no: 7,
@@ -84,11 +115,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'మహా మృత్యుంజయ ఆయుష్య హోమం',
     category: 'health',
     desc: 'Potent Vedic fire rite with the Tryambakam mantra to conquer fear of untimely death, relieve severe ailments, overcome coma/ICU crises, and grant long, radiant life.',
+    descTe:
+      'త్ర్యంబకం మంత్రంతో అకాల మరణ భయం, తీవ్ర రోగాలు, ICU సంక్షోభాల నివారణకు మరియు దీర్ఘాయుష్షు కోసం చేసే శక్తివంతమైన హోమం.',
     duration: '3.5 Hours',
+    durationTe: '3.5 గంటలు',
     price: '',
     image: '/images/cards/event-15-mrityunjaya.jpg',
     deity: 'Lord Sri Tryambakeshwara / Mrityunjaya Rudra',
-    fruits: 'Ayushya Vriddhi (Longevity), Rejuvenation from Severe Ailments'
+    deityTe: 'శ్రీ త్ర్యంబకేశ్వర / మృత్యుంజయ రుద్రుడు',
+    fruits: 'Ayushya Vriddhi (Longevity), Rejuvenation from Severe Ailments',
+    fruitsTe: 'ఆయుష్య వృద్ధి, తీవ్ర రోగాల నుంచి పునరుజ్జీవనం'
   },
   {
     no: 8,
@@ -97,11 +133,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'శ్రీ ధన్వంతరి ఆరోగ్య ప్రదాత హోమం',
     category: 'health',
     desc: 'Fire ritual invoking Lord Dhanvantari, the supreme celestial physician and incarnation of Maha Vishnu, using 108 medicinal herbs and amrita dravyas for radiant health.',
+    descTe:
+      'మహావిష్ణు అవతారమైన ధన్వంతరి భగవాన్‌ను 108 మూలికలు మరియు అమృత ద్రవ్యాలతో ఆహ్వానించి ఆరోగ్యం ప్రసాదించే హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-13-dhanvantari.jpg',
     deity: 'Lord Sri Dhanvantari Bhagavan',
-    fruits: 'Relief from Chronic Illnesses, Surgery Success, Vital Rejuvenation'
+    deityTe: 'శ్రీ ధన్వంతరి భగవాన్',
+    fruits: 'Relief from Chronic Illnesses, Surgery Success, Vital Rejuvenation',
+    fruitsTe: 'దీర్ఘకాలిక రోగ ఉపశమనం, శస్త్రచికిత్స విజయం, శక్తి పునరుద్ధరణ'
   },
   {
     no: 9,
@@ -110,11 +151,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'నవగ్రహ శాంతి & దోష నివారణ హోమం',
     category: 'graha-shanti',
     desc: 'Harmonizing the nine planetary lords with individual samidhas (Arka, Palasa, Khadira, Apamarga, Pippala, Audumbara, Sami, Durva, Kusa) to pacify planetary afflictions and Sade-Sati.',
+    descTe:
+      'అర్క, పలాశ, ఖదిర మొదలైన సమిధలతో నవగ్రహులను శాంతిపరచి సడెసతి మరియు గ్రహ పీడలను నివారించే హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-08-navagraha.jpg',
     deity: 'Surya, Chandra, Kuja, Budha, Guru, Sukra, Sani, Rahu, Ketu',
-    fruits: 'Pacification of Sade Sati, Kuja Dosha, Kala Sarpa Dosha'
+    deityTe: 'సూర్య, చంద్ర, కుజ, బుధ, గురు, శుక్ర, శని, రాహు, కేతు',
+    fruits: 'Pacification of Sade Sati, Kuja Dosha, Kala Sarpa Dosha',
+    fruitsTe: 'సడెసతి, కుజ దోషం, కాలసర్ప దోష శాంతి'
   },
   {
     no: 10,
@@ -123,11 +169,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'శ్రీ రుద్ర హోమం — నమక చమక సహితం',
     category: 'shaiva',
     desc: 'Grand Vedic fire ritual with complete recitation of Sri Rudra Prasna (Namakam) and Chamakam for washing away sins, removing sorrow, and invoking Shiva’s grace.',
+    descTe:
+      'శ్రీ రుద్ర ప్రశ్న (నమకం) మరియు చమకం పూర్తి పఠనంతో పాపాల నివారణ, దుఃఖ హరణం మరియు శివానుగ్రహం కోసం చేసే మహా హోమం.',
     duration: '3.5 Hours',
+    durationTe: '3.5 గంటలు',
     price: '',
     image: '/images/cards/event-09-rudra-homam.jpg',
     deity: 'Lord Sri Maha Rudra / Parameswara',
-    fruits: 'Purification of Karmic Sins, Mental Equanimity, Family Protection'
+    deityTe: 'శ్రీ మహా రుద్ర / పరమేశ్వరుడు',
+    fruits: 'Purification of Karmic Sins, Mental Equanimity, Family Protection',
+    fruitsTe: 'కర్మ పాప శుద్ధి, మనఃశాంతి, కుటుంబ రక్షణ'
   },
   {
     no: 11,
@@ -136,11 +187,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'ఏకాదశ ద్రవ్య రుద్రాభిషేకం',
     category: 'shaiva',
     desc: 'Sacred ceremonial bathing of Shiva Linga with eleven auspicious dravyas (milk, curd, ghee, honey, sugar, sugarcane juice, coconut water, vibhuti, bilva, fruit juices, and sanctified water).',
+    descTe:
+      'పాలు, పెరుగు, నెయ్యి, తేనె మొదలైన ఏకాదశ ద్రవ్యాలతో శివలింగానికి చేసే పవిత్ర అభిషేకం.',
     duration: '2 Hours',
+    durationTe: '2 గంటలు',
     price: '',
     image: '/images/cards/event-06-rudra-abhishekam.jpg',
     deity: 'Lord Parameswara / Chandramouleeswara',
-    fruits: 'Relief from Planetary Torment, Serenity, Longevity'
+    deityTe: 'పరమేశ్వరుడు / చంద్రమౌళీశ్వరుడు',
+    fruits: 'Relief from Planetary Torment, Serenity, Longevity',
+    fruitsTe: 'గ్రహ పీడ ఉపశమనం, మనఃశాంతి, దీర్ఘాయుష్షు'
   },
   {
     no: 12,
@@ -149,11 +205,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'పాశుపతాస్త్ర ప్రయోగ సహిత పాశుపత హోమం',
     category: 'shaiva',
     desc: 'High-intensity Shiva rite utilizing the sacred Pasupatastra mantra for vanquishing powerful rivals, silencing slander, winning litigations, and breaking stubborn generational blocks.',
+    descTe:
+      'పాశుపతాస్త్ర మంత్రంతో శత్రు నివారణ, అపవాద నివృత్తి, కోర్టు విజయం మరియు వంశ విఘ్నాల భంగం కోసం చేసే తీవ్ర శైవ హోమం.',
     duration: '4 Hours',
+    durationTe: '4 గంటలు',
     price: '',
     image: '/images/cards/event-10-pasupatha.jpg',
     deity: 'Lord Sri Pasupatheeswara',
-    fruits: 'Victory in High-Stakes Legal Disputes, Destruction of Evil Eyes'
+    deityTe: 'శ్రీ పశుపతీశ్వరుడు',
+    fruits: 'Victory in High-Stakes Legal Disputes, Destruction of Evil Eyes',
+    fruitsTe: 'క్లిష్ట న్యాయ వివాదాలలో విజయం, దృష్టి దోష నాశనం'
   },
   {
     no: 13,
@@ -162,11 +223,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'సంకల్ప సిద్ధి & సర్వకార్య సాధక హోమం',
     category: 'prosperity',
     desc: 'Sacred fire ceremony invoking Agni Deva and Kuladaivams to ensure accomplishment of cherished family or business goals, government approvals, and property transactions.',
+    descTe:
+      'అగ్ని దేవుడు మరియు కులదైవాలను ఆహ్వానించి కుటుంబ–వ్యాపార లక్ష్యాలు, ప్రభుత్వ అనుమతులు మరియు ఆస్తి లావాదేవీల సిద్ధికి చేసే హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-01-homam.jpg',
     deity: 'Agni Deva & Sri Venkateswara Swamy',
-    fruits: 'Success in Ventures, Property Closings, Resolving Deadlocks'
+    deityTe: 'అగ్ని దేవుడు & శ్రీ వేంకటేశ్వర స్వామి',
+    fruits: 'Success in Ventures, Property Closings, Resolving Deadlocks',
+    fruitsTe: 'పనుల సిద్ధి, ఆస్తి లావాదేవీలు, అడ్డంకుల నివారణ'
   },
   {
     no: 14,
@@ -175,11 +241,16 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'వైదిక ఆయుష్య వర్ధక హోమం',
     category: 'health',
     desc: 'Traditionally performed on birthdays (Janma Nakshatra), Shashti Poorthi (60th birthday), or Bheemaratha Shanti for increasing longevity, vitality, and good health.',
+    descTe:
+      'జన్మ నక్షత్రం, షష్టి పూర్తి లేదా భీమరథ శాంతి సందర్భంగా ఆయుష్షు, శక్తి మరియు ఆరోగ్య వృద్ధికి చేసే సాంప్రదాయ హోమం.',
     duration: '2.5 Hours',
+    durationTe: '2.5 గంటలు',
     price: '',
     image: '/images/cards/remedy-1-health.jpg',
     deity: 'Lord Ayur Devata, Markandeya, Chiranjivis',
-    fruits: 'Health, Longevity, Protection from Accidents and Ill-fate'
+    deityTe: 'ఆయుర్ దేవత, మార్కండేయుడు, చిరంజీవులు',
+    fruits: 'Health, Longevity, Protection from Accidents and Ill-fate',
+    fruitsTe: 'ఆరోగ్యం, దీర్ఘాయుష్షు, ప్రమాద–అరిష్ట రక్షణ'
   },
   {
     no: 15,
@@ -188,11 +259,15 @@ export const KAMYAMU_HOMAMS = [
     teluguName: 'సంతాన ప్రాప్తి & వంశాభివృద్ధి హోమం',
     category: 'prosperity',
     desc: 'Sacred Vaishnava offering invoking Sri Santana Gopala Krishna for childless couples to mitigate Putra Doshas, blessing with noble, healthy, and devoted progeny.',
+    descTe:
+      'సంతానం లేని దంపతులకు పుత్ర దోష నివారణకు శ్రీ సంతాన గోపాల కృష్ణుని ఆహ్వానించి సుసంతాన ఆశీస్సులు ప్రసాదించే వైష్ణవ హోమం.',
     duration: '3 Hours',
+    durationTe: '3 గంటలు',
     price: '',
     image: '/images/cards/event-02-marriage.jpg',
     deity: 'Lord Sri Santana Gopala Krishna',
-    fruits: 'Blessed Progeny, Safe Pregnancy, Mitigating Genetic/Natal Doshas'
+    deityTe: 'శ్రీ సంతాన గోపాల కృష్ణుడు',
+    fruits: 'Blessed Progeny, Safe Pregnancy, Mitigating Genetic/Natal Doshas',
+    fruitsTe: 'సుసంతానం, సుఖ ప్రసవం, జన్మ/వంశ దోష నివారణ'
   }
 ];
-

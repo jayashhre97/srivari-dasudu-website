@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero({ onNavigate }) {
-  const { t } = useLanguage();
+  const { t, isEn } = useLanguage();
 
   return (
     <section className="hero" aria-label="Sri Vari Dasudu Sacred Hero Banner">
@@ -10,7 +10,6 @@ export default function Hero({ onNavigate }) {
       <div className="hero-video-wrapper" aria-hidden="true">
         <video
           className="hero-video"
-          poster="/images/hills.jpg"
           autoPlay
           loop
           muted
@@ -106,8 +105,8 @@ export default function Hero({ onNavigate }) {
 
       {/* 3. Hero Content Container */}
       <div className="wrap hero-wrap">
-        <h1 className="hero-heading hero-heading--mantra">
-          <span className="heading-line">{t('hero.mantra')}</span>
+        <h1 className="hero-heading hero-heading--single">
+          {isEn ? 'Jai Srimannarayana' : 'జై శ్రీమన్నారాయణ'}
         </h1>
 
         {/* Small Ornamental Gold Divider with Lotus Motif */}

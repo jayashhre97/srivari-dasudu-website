@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function GosevaHero({ isEn }) {
   return (
-    <section className="goseva-hero-banner" aria-label="Go Seva Hero Section">
+    <section className="goseva-hero-banner" aria-label="Gouseva Hero Section">
       <div className="goseva-hero-scrim" aria-hidden="true" />
       <div className="card-corner corner-tl" aria-hidden="true" />
       <div className="card-corner corner-tr" aria-hidden="true" />
@@ -12,7 +12,7 @@ export default function GosevaHero({ isEn }) {
       <div className="goseva-container goseva-hero-inner">
         <h1 className="goseva-hero-heading">
           {isEn
-            ? 'Go Seva – Serve, Protect & Care for Gomatha'
+            ? 'Gouseva – Serve, Protect & Care for Gomatha'
             : 'గోసేవ – గోమాతను సేవించండి, రక్షించండి & పోషించండి'}
         </h1>
 

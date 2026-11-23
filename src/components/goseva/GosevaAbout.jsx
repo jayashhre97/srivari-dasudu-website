@@ -19,14 +19,14 @@ export default function GosevaAbout({ isEn, onScrollTo }) {
             </div>
 
             <h2 id="about-goseva-heading" className="goseva-sec-heading">
-              {isEn ? 'About Go Seva' : 'గోసేవ గురించి'}
+              {isEn ? 'About Gouseva' : 'గోసేవ గురించి'}
             </h2>
 
             <LotusDivider align="start" />
 
             <p className="goseva-about-lead">
               {isEn
-                ? 'Go Seva is a sacred service dedicated to protecting and caring for cows. Through feeding, shelter, healthcare and compassion, we aim to support the well-being of Gomatha and preserve our traditional values.'
+                ? 'Gouseva is a sacred service dedicated to protecting and caring for cows. Through feeding, shelter, healthcare and compassion, we aim to support the well-being of Gomatha and preserve our traditional values.'
                 : 'గోసేవ అనేది గోవులను రక్షించడానికి మరియు సంరక్షించడానికి అంకితమైన పవిత్ర సేవ. ఆహారం, ఆశ్రయం, వైద్య సంరక్షణ మరియు కరుణ ద్వారా గోమాత సంక్షేమాన్ని మరియు మన సంప్రదాయ విలువలను కాపాడటమే మా లక్ష్యం.'}
             </p>
 

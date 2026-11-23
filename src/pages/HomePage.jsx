@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import HomeIntroduction from '../components/HomeIntroduction';
+import HomeRecentActivities from '../components/HomeRecentActivities';
 import HomeRemedies from '../components/HomeRemedies';
 import HomeMonthlyEvents from '../components/HomeMonthlyEvents';
 import HomeGosevaUpdates from '../components/HomeGosevaUpdates';
@@ -14,6 +15,9 @@ export default function HomePage({ onNavigate, onBook }) {
 
       {/* 3. Introduction to Srivari Dasudu */}
       <HomeIntroduction onNavigate={onNavigate} />
+
+      {/* 3.5 Recent Sacred Activities with Scrolling Effect */}
+      <HomeRecentActivities onNavigate={onNavigate} onBook={onBook} />
 
       {/* 4. Featured Spiritual Remedies */}
       <HomeRemedies onNavigate={onNavigate} onBook={onBook} />

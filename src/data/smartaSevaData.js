@@ -32,18 +32,18 @@ export const SMARTA_SEVA_HAVANALU = [
   {
     id: 'mulana-chandi-homam',
     no: 2,
-    nameEn: 'Moola (Mulana) Nakshatra Chandi Homam',
+    nameEn: 'Moola Nakshatra Chandi Homam',
     nameTe: 'మూలా నక్షత్ర చండీ హోమం',
-    scheduleEn: 'Every Month • Moola (Mulana) Star',
+    scheduleEn: 'Every Month • Moola Star',
     scheduleTe: 'ప్రతి మాసం • మూలా నక్షత్రం',
-    cost: null,
+    cost: '₹1,116',
     limitedSeatsEn: 'Limited Seats Only',
     limitedSeatsTe: 'పరిమిత సీట్లు మాత్రమే',
     deityEn: 'Goddess Sri Chandi Parameswari',
     deityTe: 'శ్రీ చండీ పరమేశ్వరి అమ్మవారు',
     image: '/images/cards/event-04-chandi.jpg',
     descEn:
-      'Held every month on the auspicious Moola (Mulana) Nakshatra with Devi Saptashati parayanam and Vedic ahutis to dispel deep obstacles, bestow courage, and invoke the grace of Goddess Chandi.',
+      'Held every month on the auspicious Moola Nakshatra with Devi Saptashati parayanam and Vedic ahutis to dispel deep obstacles, bestow courage, and invoke the grace of Goddess Chandi.',
     descTe:
       'ప్రతి మాసం మూలా నక్షత్రం రోజున దేవీ సప్తశతి పారాయణం మరియు వైదిక ఆహుతులతో కష్ట నివారణ, ధైర్యం మరియు అమ్మవారి సంపూర్ణ అనుగ్రహం కొరకు నిర్వహించే సామూహిక చండీ హోమం.',
     highlightsEn: [
@@ -96,7 +96,7 @@ export const SMARTA_SEVA_HAVANALU = [
     nameTe: 'స్వాతి నక్షత్ర లక్ష్మీ నరసింహ హవనం',
     scheduleEn: 'Every Month • Swathi Star',
     scheduleTe: 'ప్రతి మాసం • స్వాతి నక్షత్రం',
-    cost: null,
+    cost: '₹1,116',
     limitedSeatsEn: 'Limited Seats Only',
     limitedSeatsTe: 'పరిమిత సీట్లు మాత్రమే',
     deityEn: 'Lord Sri Lakshmi Narasimha Swamy',

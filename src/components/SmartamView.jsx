@@ -13,61 +13,24 @@ export default function SmartamView({ onNavigate, onBook }) {
         <div className="smartam-hero-frame" aria-hidden="true" />
 
         <div className="wrap smartam-hero-content">
-          <div className="smartam-hero-badge">
-            <span className="badge-star">✦</span>
-            <span>{t('smartam.badge')}</span>
-            <span className="badge-star">✦</span>
-          </div>
-
           <h1 className="smartam-hero-title">{t('smartam.title')}</h1>
-
           <div className="smartam-hero-subtitle">{t('smartam.subtitle')}</div>
-
-          <div className="smartam-hero-actions">
-            <button className="btn ghost" onClick={() => onNavigate('home')}>
-              {t('common.backHome')}
-            </button>
-            <button
-              className="btn primary"
-              onClick={() => onBook('Smartam Ceremony Consultation')}
-            >
-              {t('nav.bookSeva')} →
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* 2. PROMINENT VIZAG NOTE BANNER (AS REQUESTED BY USER) */}
+      {/* 2. PROMINENT VIZAG NOTE BANNER */}
       <section className="wrap smartam-vizag-section">
         <div className="smartam-vizag-banner">
           <div className="smartam-vizag-ornament" aria-hidden="true">✦</div>
           <div className="smartam-vizag-badge">
             <span className="sparkle">✦</span>
-            <span>
-              {isEn
-                ? 'Special Purohita Seva in Visakhapatnam'
-                : 'విశాఖపట్నం ప్రత్యేక సేవ'}
-            </span>
+            <span>{t('smartam.vizagBadge')}</span>
             <span className="sparkle">✦</span>
           </div>
 
-          <h2 className="smartam-vizag-heading">
-            {isEn
-              ? 'We are available for all auspicious ceremonies in Visakhapatnam'
-              : 'విశాఖపట్నంలో అన్ని శుభకార్యాలకు మేము అందుబాటులో ఉంటాము'}
-          </h2>
+          <h2 className="smartam-vizag-heading">{t('smartam.vizagHeading')}</h2>
 
-          <p className="smartam-vizag-desc">
-            {isEn ? (
-              <>
-                For marriage, housewarming, Satyanarayana Vratam, barsala, Annaprasana and all Smartha samskaras at your home, function hall, or kalyanamandapam in Visakhapatnam, Founder &amp; Spiritual Guide <strong>Sri N. V. Ram Kishore Acharyulu</strong> and trained Vedic pandits personally conduct the ceremonies with scriptural precision.
-              </>
-            ) : (
-              <>
-                మీ ఇంట జరిగే వివాహం, గృహప్రవేశం, సత్యనారాయణ స్వామి వ్రతం, బారసాల, మరియు అన్నప్రాశన వంటి సమస్త స్మార్త సంస్కారాలను శాస్త్రోక్తంగా నిర్వహించడానికి విశాఖపట్నంలోని మీ స్వగృహం, ఫంక్షన్ హాల్ లేదా కల్యాణ మండపానికి వ్యవస్థాపకులు &amp; ఆధ్యాత్మిక గురువు <strong>శ్రీ ఎన్. వి. రామ కిషోర్ ఆచార్యుల వారు</strong> మరియు సుశిక్షితులైన వేద పండితులు స్వయంగా విచ్చేసి పూజా కార్యక్రమాలు జరిపిస్తారు.
-              </>
-            )}
-          </p>
+          <p className="smartam-vizag-desc">{t('smartam.vizagDesc')}</p>
 
           <div className="smartam-vizag-actions">
             <button
@@ -75,15 +38,19 @@ export default function SmartamView({ onNavigate, onBook }) {
               className="btn primary smartam-cta-btn"
               onClick={() => onBook(isEn ? 'Book ceremony in Visakhapatnam' : 'విశాఖపట్నంలో శుభకార్యం బుకింగ్')}
             >
-              {isEn ? 'Book Ceremony in Vizag →' : 'శుభకార్యం బుక్ చేసుకోండి →'}
+              {t('smartam.bookVizag')}
             </button>
             <a
-              href="https://wa.me/919876543210?text=Namaskaram%20Acharyulu%20Garu,%20I%20would%20like%20to%20consult%20about%20a%20ceremony%20in%20Visakhapatnam."
+              href={`https://wa.me/919876543210?text=${encodeURIComponent(
+                isEn
+                  ? 'Namaskaram Acharyulu Garu, I would like to consult about a ceremony in Visakhapatnam.'
+                  : 'నమస్కారం ఆచార్యులు గారు, విశాఖపట్నంలో శుభకార్యం గురించి సంప్రదించాలనుకుంటున్నాను.'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn ghost smartam-wa-btn"
             >
-              {isEn ? 'Contact on WhatsApp' : 'WhatsApp ద్వారా సంప్రదించండి'}
+              {t('smartam.contactWa')}
             </a>
           </div>
         </div>
@@ -95,16 +62,10 @@ export default function SmartamView({ onNavigate, onBook }) {
           <div className="sec-head-content">
             <div className="temple-eyebrow">
               <span className="eyebrow-symbol">✦</span>
-              <span>
-                {isEn ? 'Sacred Domestic Ceremonies' : 'పవిత్ర గృహ శుభకార్యాలు'}
-              </span>
+              <span>{t('smartam.secEyebrow')}</span>
               <span className="eyebrow-symbol">✦</span>
             </div>
-            <h2 className="temple-sec-title">
-              {isEn
-                ? '5 Essential Auspicious Smartha Functions'
-                : 'స్మార్త విధులలో ముఖ్యమైన 5 శుభకార్యాలు'}
-            </h2>
+            <h2 className="temple-sec-title">{t('smartam.secTitle')}</h2>
 
             <div className="temple-lotus-divider" aria-hidden="true">
               <span className="divider-line" />
@@ -121,57 +82,58 @@ export default function SmartamView({ onNavigate, onBook }) {
         <div className="smartam-cards-grid">
           {SMARTAM_FUNCTIONS.map((item) => (
             <article className="temple-card smartam-card" key={item.id}>
-              {/* Corner Ornaments */}
               <div className="card-corner corner-tl" aria-hidden="true" />
               <div className="card-corner corner-tr" aria-hidden="true" />
               <div className="card-corner corner-bl" aria-hidden="true" />
               <div className="card-corner corner-br" aria-hidden="true" />
 
-              {/* Media Image Wrap */}
-              <div className="smartam-card-media">
+              <div className={`smartam-card-media ${item.fit === 'contain' ? 'media-contain' : ''}`}>
                 <img
                   src={item.image}
-                  alt={item.name}
-                  className="smartam-card-img"
+                  alt={isEn ? item.name : item.teluguName}
+                  className={`smartam-card-img ${item.fit === 'contain' ? 'is-contain' : ''}`}
+                  style={{
+                    objectPosition: item.imagePosition || 'center',
+                    objectFit: item.fit || 'cover'
+                  }}
                   loading="lazy"
                 />
-                <span className="smartam-card-badge">SEVA #{item.no}</span>
+                <span className="smartam-card-badge">{t('smartam.sevaNo', { no: item.no })}</span>
               </div>
 
-              {/* Card Body */}
               <div className="smartam-card-body">
                 <h3 className="smartam-card-title">
                   {isEn
                     ? item.name.replace(/\s*\([\u0C00-\u0C7F\s/]+\)$/u, '').trim()
                     : item.teluguName}
                 </h3>
-                {isEn && <div className="smartam-card-sub">{item.subtitle}</div>}
+                {isEn ? (
+                  <div className="smartam-card-sub">{item.subtitle}</div>
+                ) : (
+                  item.subtitleTe && <div className="smartam-card-sub">{item.subtitleTe}</div>
+                )}
 
-                <p className="smartam-card-desc">{item.desc}</p>
+                <p className="smartam-card-desc">{isEn ? item.desc : item.descTe}</p>
 
-                {/* Key Details Meta */}
                 <div className="smartam-meta-box">
                   <div className="meta-row">
-                    <span className="meta-lbl">{isEn ? 'Presiding Deity:' : 'అధిష్టాన దైవం:'}</span>
-                    <span className="meta-val">{item.deity}</span>
+                    <span className="meta-lbl">{t('smartam.deity')}</span>
+                    <span className="meta-val">{isEn ? item.deity : item.deityTe}</span>
                   </div>
                   <div className="meta-row">
-                    <span className="meta-lbl">{isEn ? 'Duration:' : 'నిడివి:'}</span>
-                    <span className="meta-val">{item.duration}</span>
+                    <span className="meta-lbl">{t('smartam.duration')}</span>
+                    <span className="meta-val">{isEn ? item.duration : item.durationTe}</span>
                   </div>
                   <div className="meta-row">
-                    <span className="meta-lbl">{isEn ? 'Location:' : 'స్థలం:'}</span>
-                    <span className="meta-val">{item.location}</span>
+                    <span className="meta-lbl">{t('smartam.location')}</span>
+                    <span className="meta-val">{isEn ? item.location : item.locationTe}</span>
                   </div>
                 </div>
 
-                {/* Ritual Highlights */}
                 <div className="smartam-rituals-list">
-                  <div className="rituals-list-title">
-                    {isEn ? 'Key Rituals:' : 'కార్యక్రమ విశేషాలు:'}
-                  </div>
+                  <div className="rituals-list-title">{t('smartam.keyRituals')}</div>
                   <ul>
-                    {item.ritualsList.map((ritual, idx) => (
+                    {(isEn ? item.ritualsList : item.ritualsListTe).map((ritual, idx) => (
                       <li key={idx}>
                         <span className="bullet">✦</span>
                         <span>{ritual}</span>
@@ -180,14 +142,13 @@ export default function SmartamView({ onNavigate, onBook }) {
                   </ul>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="smartam-card-actions">
                   <button
                     type="button"
                     className="btn primary smartam-book-btn"
                     onClick={() => onBook(isEn ? `${item.name} (Smartam)` : `${item.teluguName} (స్మార్తం)`)}
                   >
-                    {isEn ? 'Enquire about this ceremony →' : 'ఈ శుభకార్యం సంప్రదించండి →'}
+                    {t('smartam.enquire')}
                   </button>
                 </div>
               </div>
@@ -205,16 +166,8 @@ export default function SmartamView({ onNavigate, onBook }) {
             <span className="divider-line" />
           </div>
 
-          <h3 className="smartam-cta-heading">
-            {isEn
-              ? 'Perform your ceremony in Visakhapatnam with scriptural precision'
-              : 'విశాఖపట్నంలో మీ శుభకార్యాన్ని శాస్త్రోక్తంగా జరిపించండి'}
-          </h3>
-          <p className="smartam-cta-desc">
-            {isEn
-              ? 'Muhurtham guidance, puja materials support, and Agamic Vedic chanting ensure your household ceremonies are completed fully.'
-              : 'ముహూర్త నిర్ణయం, పూజా సామగ్రి మార్గదర్శనం, మరియు ఆగమోక్త వేద మంత్రోచ్ఛారణలతో మీ గృహ శుభకార్యాలు సంపూర్ణంగా నిర్వహించబడతాయి.'}
-          </p>
+          <h3 className="smartam-cta-heading">{t('smartam.ctaHeading')}</h3>
+          <p className="smartam-cta-desc">{t('smartam.ctaDesc')}</p>
 
           <div className="smartam-cta-buttons">
             <button
@@ -222,14 +175,14 @@ export default function SmartamView({ onNavigate, onBook }) {
               className="btn primary"
               onClick={() => onBook(isEn ? 'Smartam Samskara Booking' : 'స్మార్త సంస్కారాల బుకింగ్')}
             >
-              {isEn ? 'Contact Directly →' : 'నేరుగా సంప్రదించండి →'}
+              {t('smartam.contactDirect')}
             </button>
             <button
               type="button"
               className="btn ghost smartam-ghost-btn"
               onClick={() => onNavigate('contact')}
             >
-              {isEn ? 'Trust Contact Desk →' : 'ట్రస్ట్ సంప్రదింపు డెస్క్ →'}
+              {t('smartam.trustDesk')}
             </button>
           </div>
         </div>
@@ -237,4 +190,3 @@ export default function SmartamView({ onNavigate, onBook }) {
     </div>
   );
 }
-

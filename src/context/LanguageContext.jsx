@@ -35,7 +35,10 @@ export function LanguageProvider({ children }) {
     const fallback = translations.en;
 
     const t = (key, vars) => {
-      let text = dict[key] ?? fallback[key] ?? key;
+      // Exclusive language: never mix EN into TE (or TE into EN).
+      let text = dict[key];
+      if (text == null && lang === 'en') text = fallback[key];
+      if (text == null) text = key;
       if (vars && typeof text === 'string') {
         Object.entries(vars).forEach(([k, v]) => {
           text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));

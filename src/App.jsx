@@ -11,12 +11,14 @@ import MuhurthamPage from './pages/MuhurthamPage';
 import PitruSevaPage from './pages/PitruSevaPage';
 import RemediesPage from './pages/RemediesPage';
 import RemedyDetailPage from './pages/RemedyDetailPage';
+import RemedyItemPage from './pages/RemedyItemPage';
 import SmartamPage from './pages/SmartamPage';
 import SmartaSevaPage from './pages/SmartaSevaPage';
 import KamyamuPage from './pages/KamyamuPage';
 import GosevaPage from './pages/GosevaPage';
 import VedicSchoolPage from './pages/VedicSchoolPage';
 import ContactPage from './pages/ContactPage';
+import AdminPage from './pages/AdminPage';
 
 const VALID_PAGES = [
   'home',
@@ -25,6 +27,7 @@ const VALID_PAGES = [
   'pitru-seva',
   'godhanam',
   'goseva',
+  'gouseva',
   'smartam',
   'smarta-seva',
   'kamyamu',
@@ -34,16 +37,30 @@ const VALID_PAGES = [
   'vedicschool',
   'vedic',
   'events',
-  'contact'
+  'contact',
+  'admin'
 ];
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentRemedyId, setCurrentRemedyId] = useState(null);
+  const [currentRemedyItemNo, setCurrentRemedyItemNo] = useState(null);
   const [modalState, setModalState] = useState({
     isOpen: false,
     serviceName: '',
+    pricingType: null,
+    havanamId: null,
+    onBooked: null,
   });
+
+  const parseRemedyRoute = (lower) => {
+    const remPath = lower.replace('remedy/', '');
+    const parts = remPath.split('/').filter(Boolean);
+    if (parts.length >= 2 && /^\d+$/.test(parts[1])) {
+      return { page: 'remedy-item', categoryId: parts[0], itemNo: parts[1] };
+    }
+    return { page: 'remedy-detail', categoryId: parts[0] || remPath, itemNo: null };
+  };
 
   // Sync navigation with browser URL hash
   useEffect(() => {
@@ -52,15 +69,18 @@ export default function App() {
       const lower = rawHash.toLowerCase();
 
       if (lower.startsWith('remedy/')) {
-        const remId = lower.replace('remedy/', '');
-        setCurrentPage('remedy-detail');
-        setCurrentRemedyId(remId);
+        const route = parseRemedyRoute(lower);
+        setCurrentPage(route.page);
+        setCurrentRemedyId(route.categoryId);
+        setCurrentRemedyItemNo(route.itemNo);
       } else if (VALID_PAGES.includes(lower)) {
         setCurrentPage(lower);
         setCurrentRemedyId(null);
+        setCurrentRemedyItemNo(null);
       } else if (!lower) {
         setCurrentPage('home');
         setCurrentRemedyId(null);
+        setCurrentRemedyItemNo(null);
       }
     };
 
@@ -73,9 +93,10 @@ export default function App() {
     const lower = page.toLowerCase();
 
     if (lower.startsWith('remedy/')) {
-      const remId = lower.replace('remedy/', '');
-      setCurrentPage('remedy-detail');
-      setCurrentRemedyId(remId);
+      const route = parseRemedyRoute(lower);
+      setCurrentPage(route.page);
+      setCurrentRemedyId(route.categoryId);
+      setCurrentRemedyItemNo(route.itemNo);
       window.location.hash = `/${lower}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -84,15 +105,29 @@ export default function App() {
     if (VALID_PAGES.includes(lower)) {
       setCurrentPage(lower);
       setCurrentRemedyId(null);
+      setCurrentRemedyItemNo(null);
       window.location.hash = `/${lower}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const handleOpenBooking = (serviceName) => {
+  const handleOpenBooking = (serviceNameOrOptions) => {
+    if (typeof serviceNameOrOptions === 'object' && serviceNameOrOptions) {
+      setModalState({
+        isOpen: true,
+        serviceName: serviceNameOrOptions.serviceName || '',
+        pricingType: serviceNameOrOptions.pricingType || null,
+        havanamId: serviceNameOrOptions.havanamId || null,
+        onBooked: serviceNameOrOptions.onBooked || null,
+      });
+      return;
+    }
     setModalState({
       isOpen: true,
-      serviceName,
+      serviceName: serviceNameOrOptions || '',
+      pricingType: null,
+      havanamId: null,
+      onBooked: null,
     });
   };
 
@@ -100,12 +135,24 @@ export default function App() {
     setModalState({
       isOpen: false,
       serviceName: '',
+      pricingType: null,
+      havanamId: null,
+      onBooked: null,
     });
   };
 
   // Render the active dedicated React Page
   const renderCurrentPage = () => {
     switch (currentPage) {
+      case 'remedy-item':
+        return (
+          <RemedyItemPage
+            categoryId={currentRemedyId}
+            itemNo={currentRemedyItemNo}
+            onNavigate={navigateTo}
+            onBook={handleOpenBooking}
+          />
+        );
       case 'remedy-detail':
         return (
           <RemedyDetailPage
@@ -136,9 +183,12 @@ export default function App() {
         return <VedicSchoolPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
       case 'godhanam':
       case 'goseva':
+      case 'gouseva':
         return <GosevaPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
       case 'contact':
         return <ContactPage onNavigate={navigateTo} onBook={handleOpenBooking} />;
+      case 'admin':
+        return <AdminPage onNavigate={navigateTo} />;
       case 'home':
       default:
         return <HomePage onNavigate={navigateTo} onBook={handleOpenBooking} />;
@@ -152,9 +202,15 @@ export default function App() {
 
       {/* 1. Header Navigation */}
       <Header
-        activeTab={currentPage === 'remedy-detail' ? 'remedies' : currentPage}
+        activeTab={
+          currentPage === 'remedy-detail' || currentPage === 'remedy-item'
+            ? 'remedies'
+            : currentPage
+        }
         onSelectTab={navigateTo}
-        onOpenQuickBooking={() => handleOpenBooking('Vedic Ritual / Seva Booking')}
+        onOpenQuickBooking={(service = 'Vedic Ritual / Seva Booking', pricingType = 'general', havanamId = null) =>
+          handleOpenBooking(service, pricingType, havanamId)
+        }
       />
 
       {/* Main Dynamic React Page Mount */}
@@ -165,25 +221,13 @@ export default function App() {
       {/* 8. Footer */}
       <Footer onNavigate={navigateTo} pageMode={currentPage} />
 
-      {/* Floating Quick Action - Removed from Home page as requested */}
-      {currentPage !== 'home' && (
-        <div className="floating-action">
-          <button
-            type="button"
-            className="floating-btn"
-            aria-label="Quick WhatsApp Seva Booking"
-            onClick={() => handleOpenBooking('Devotee Inquiry & Seva')}
-          >
-            <span>🪔</span>
-            <span>Book Seva</span>
-          </button>
-        </div>
-      )}
-
       {/* Booking Modal Dialog */}
       <BookingModal
         isOpen={modalState.isOpen}
         serviceName={modalState.serviceName}
+        pricingType={modalState.pricingType}
+        havanamId={modalState.havanamId}
+        onBooked={modalState.onBooked}
         onClose={handleCloseBooking}
       />
     </div>

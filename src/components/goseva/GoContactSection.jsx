@@ -39,7 +39,7 @@ export default function GoContactSection({ isEn, onNavigate, onBook }) {
 
             <p className="remedies-cta-desc">
               {isEn
-                ? `Have questions about Go Seva donations, Monthly Go Pooja, or goshala visits? Reach out to ${GOSEVA_CONTACT_INFO.organisationName} under the guidance of Chief Priest Sri N. V. Ram Kishore Acharyulu at ${GOSEVA_CONTACT_INFO.phonePlaceholder} or ${GOSEVA_CONTACT_INFO.emailPlaceholder}.`
+                ? `Have questions about Gouseva donations, Monthly Go Pooja, or goshala visits? Reach out to ${GOSEVA_CONTACT_INFO.organisationName} under the guidance of Chief Priest Sri N. V. Ram Kishore Acharyulu at ${GOSEVA_CONTACT_INFO.phonePlaceholder} or ${GOSEVA_CONTACT_INFO.emailPlaceholder}.`
                 : `గోసేవ విరాళాలు, మాసిక గోపూజ లేదా గోశాల సందర్శన గురించి వివరాల కోసం ప్రధాన అర్చకులు శ్రీ ఎన్. వి. రామ్ కిషోర్ ఆచార్యులు గారి ఆధ్వర్యంలోని ${GOSEVA_CONTACT_INFO.organisationName} సేవా డెస్క్ (${GOSEVA_CONTACT_INFO.phonePlaceholder} · ${GOSEVA_CONTACT_INFO.emailPlaceholder}) ను సంప్రదించండి.`}
             </p>
 
@@ -47,7 +47,7 @@ export default function GoContactSection({ isEn, onNavigate, onBook }) {
               <button
                 type="button"
                 className="btn primary"
-                onClick={() => (onBook ? onBook('Go Seva & Gomatha Sankalpam') : onNavigate('contact'))}
+                onClick={() => (onBook ? onBook('Gouseva & Gomatha Sankalpam') : onNavigate('contact'))}
               >
                 {isEn ? 'Consult & Book Go Seva →' : 'గోసేవ సంప్రదింపు / బుకింగ్ →'}
               </button>

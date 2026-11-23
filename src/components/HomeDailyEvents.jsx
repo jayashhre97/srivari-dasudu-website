@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DAILY_SCHEDULE } from '../data/dailySchedule';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function HomeDailyEvents({ onNavigate }) {
+  const { t, isEn } = useLanguage();
   const [currentHour, setCurrentHour] = useState(() => {
     const d = new Date();
     return d.getHours() + d.getMinutes() / 60;
@@ -18,16 +20,16 @@ export default function HomeDailyEvents({ onNavigate }) {
   const homeDailySlots = DAILY_SCHEDULE.slice(0, 4);
 
   return (
-    <section className="temple-section daily-schedule-section" aria-label="Daily Devotional Schedule">
+    <section className="temple-section daily-schedule-section" aria-label={t('home.daily.aria')}>
       <div className="wrap">
         <div className="temple-sec-head">
           <div className="sec-head-content">
             <div className="temple-eyebrow">
               <span className="eyebrow-symbol">✦</span>
-              <span>Nitya Kainkaryam &amp; Temple Timings</span>
+              <span>{t('home.daily.eyebrow')}</span>
               <span className="eyebrow-symbol">✦</span>
             </div>
-            <h2 className="temple-sec-title">Daily Devotional Schedule</h2>
+            <h2 className="temple-sec-title">{t('home.daily.title')}</h2>
 
             <div className="temple-lotus-divider" aria-hidden="true">
               <span className="divider-line" />
@@ -38,28 +40,24 @@ export default function HomeDailyEvents({ onNavigate }) {
               <span className="divider-line" />
             </div>
 
-            <p className="temple-sec-subtitle">
-              Follow the eternal five-fold daily kainkaryams performed in honor of Sri Venkateswara Swamy,
-              bringing auspicious harmony, morning peace, and evening grace to every home.
-            </p>
+            <p className="temple-sec-subtitle">{t('home.daily.subtitle')}</p>
           </div>
 
           <button className="view-all-gold-btn" onClick={() => onNavigate('daily')}>
-            <span>Complete Daily Schedule</span>
+            <span>{t('home.daily.viewAll')}</span>
             <span className="arrow-sym">&rarr;</span>
           </button>
         </div>
 
         <div className="temple-timeline-container">
           <div className="temple-timeline-grid">
-            {homeDailySlots.map((item, idx) => {
+            {homeDailySlots.map((item) => {
               const isActive = currentHour >= item.startHour && currentHour < item.endHour;
               return (
                 <div
                   key={item.id}
                   className={`timeline-entry-card ${isActive ? 'is-active-entry' : ''}`}
                 >
-                  {/* Subtle Corner Ornaments */}
                   <div className="card-corner corner-tl" />
                   <div className="card-corner corner-tr" />
                   <div className="card-corner corner-bl" />
@@ -77,13 +75,13 @@ export default function HomeDailyEvents({ onNavigate }) {
                     {isActive && (
                       <span className="active-now-tag">
                         <span className="active-pulse-dot" />
-                        Active Kainkaryam
+                        {t('home.daily.active')}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="timeline-title">{item.title}</h3>
-                  <p className="timeline-desc">{item.desc}</p>
+                  <h3 className="timeline-title">{isEn ? item.title : item.titleTe}</h3>
+                  <p className="timeline-desc">{isEn ? item.desc : item.descTe}</p>
 
                   <div className="timeline-card-footer">
                     <button
@@ -91,7 +89,7 @@ export default function HomeDailyEvents({ onNavigate }) {
                       className="timeline-detail-link"
                       onClick={() => onNavigate('daily')}
                     >
-                      View Schedule Details &rarr;
+                      {t('home.daily.viewDetails')}
                     </button>
                   </div>
                 </div>

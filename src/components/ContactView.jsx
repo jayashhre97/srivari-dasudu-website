@@ -1,22 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
-const WHATSAPP_BASE = 'https://wa.me/919876543210?text=';
+const PHONE_DISPLAY = '+91 98765 43210';
+const PHONE_DIGITS = '919876543210';
+const EMAIL = 'seva@srivaridasudu.org';
+const WHATSAPP_BASE = `https://wa.me/${PHONE_DIGITS}?text=`;
 
 const BANK_DETAILS = [
-  { labelEn: 'Account Name', labelTe: 'ఖాతా పేరు', value: 'Sri Vari Dasudu Charitable Trust' },
-  { labelEn: 'Bank Name', labelTe: 'బ్యాంక్ పేరు', value: 'State Bank of India' },
-  { labelEn: 'Account Number', labelTe: 'ఖాతా సంఖ్య', value: '12345678901' },
-  { labelEn: 'IFSC Code', labelTe: 'IFSC కోడ్', value: 'SBIN0001234' },
-  { labelEn: 'Branch', labelTe: 'శాఖ', value: 'Visakhapatnam Main Branch' },
-  { labelEn: 'Account Type', labelTe: 'ఖాతా రకం', value: 'Current Account (Trust)' }
+  {
+    labelEn: 'Account Name',
+    labelTe: 'ఖాతా పేరు',
+    valueEn: 'Sri Vari Dasudu Adyatmika Kuteer',
+    valueTe: 'శ్రీ వారి దాసుడు ఆధ్యాత్మిక కుటీరం'
+  },
+  {
+    labelEn: 'Bank Name',
+    labelTe: 'బ్యాంక్ పేరు',
+    valueEn: 'State Bank of India',
+    valueTe: 'స్టేట్ బ్యాంక్ ఆఫ్ ఇండియా'
+  },
+  {
+    labelEn: 'Account Number',
+    labelTe: 'ఖాతా సంఖ్య',
+    valueEn: '12345678901',
+    valueTe: '12345678901'
+  },
+  {
+    labelEn: 'IFSC Code',
+    labelTe: 'IFSC కోడ్',
+    valueEn: 'SBIN0001234',
+    valueTe: 'SBIN0001234'
+  },
+  {
+    labelEn: 'Branch',
+    labelTe: 'శాఖ',
+    valueEn: 'Visakhapatnam Main Branch',
+    valueTe: 'విశాఖపట్నం మెయిన్ బ్రాంచ్'
+  },
+  {
+    labelEn: 'Account Type',
+    labelTe: 'ఖాతా రకం',
+    valueEn: 'Current Account (Trust)',
+    valueTe: 'కరెంట్ ఖాతా (ట్రస్ట్)'
+  }
 ];
 
 const DONATION_OPTIONS = [
-  { id: 'goseva', titleTe: 'గోసేవ సహాయం', titleEn: 'Goseva Support', amount: '₹1,116' },
-  { id: 'annadanam', titleTe: 'అన్నదానం', titleEn: 'Annadanam Seva', amount: '₹2,516' },
-  { id: 'vedic', titleTe: 'వేద పాఠశాల సహాయం', titleEn: 'Vedic School Support', amount: '₹5,116' },
-  { id: 'general', titleTe: 'సాధారణ దానం', titleEn: 'General Donation', amount: 'Custom' }
+  { id: 'goseva', titleTe: 'గోసేవ సహాయం', titleEn: 'Gouseva Support', amountEn: '₹1,116', amountTe: '₹1,116' },
+  { id: 'annadanam', titleTe: 'అన్నదానం', titleEn: 'Annadanam Seva', amountEn: '₹2,516', amountTe: '₹2,516' },
+  { id: 'vedic', titleTe: 'వేద పాఠశాల సహాయం', titleEn: 'Vedic School Support', amountEn: '₹5,116', amountTe: '₹5,116' },
+  {
+    id: 'general',
+    titleTe: 'సాధారణ దానం',
+    titleEn: 'General Donation',
+    amountEn: 'Custom',
+    amountTe: 'ఇష్టమైన మొత్తం'
+  }
 ];
 
 const SUBJECTS = {
@@ -25,7 +64,7 @@ const SUBJECTS = {
     'Muhurtham Guidance',
     'Pitru Seva / Shraddha',
     'Homam Booking',
-    'Goseva / Donation',
+    'Gouseva / Donation',
     'Vedic School',
     'Other'
   ],
@@ -44,18 +83,29 @@ const INITIAL_FORM = {
   name: '',
   phone: '',
   email: '',
-  subject: 'General Enquiry',
+  subject: '',
   message: ''
 };
 
-export default function ContactView({ onNavigate, onBook }) {
+export default function ContactView({ onBook }) {
   const { t, isEn, lang } = useLanguage();
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [copiedField, setCopiedField] = useState('');
+  const [selectedDonation, setSelectedDonation] = useState('goseva');
 
   const subjects = SUBJECTS[lang] || SUBJECTS.en;
+  const whatsappGreeting = isEn
+    ? 'Namaskaram Acharyulu Garu, I would like to consult regarding spiritual services.'
+    : 'నమస్కారం ఆచార్యులు గారు, ఆధ్యాత్మిక సేవల గురించి సంప్రదించాలనుకుంటున్నాను.';
+
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      subject: subjects.includes(prev.subject) ? prev.subject : subjects[0]
+    }));
+  }, [lang]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -102,58 +152,80 @@ export default function ContactView({ onNavigate, onBook }) {
     setSubmitted(true);
   };
 
-  const handleCopy = async (label, value) => {
+  const handleCopy = async (key, value) => {
     try {
       await navigator.clipboard.writeText(value);
-      setCopiedField(label);
+      setCopiedField(key);
       setTimeout(() => setCopiedField(''), 1800);
     } catch {
       setCopiedField('');
     }
   };
 
-  const handleDonation = (option) => {
+  const handleCopyAllBank = () => {
+    const block = BANK_DETAILS.map((row) => {
+      const label = isEn ? row.labelEn : row.labelTe;
+      const value = isEn ? row.valueEn : row.valueTe;
+      return `${label}: ${value}`;
+    }).join('\n');
+    handleCopy('all', block);
+  };
+
+  const handleDonationConfirm = () => {
+    const option = DONATION_OPTIONS.find((o) => o.id === selectedDonation) || DONATION_OPTIONS[0];
     const label = isEn ? option.titleEn : option.titleTe;
-    const text = `Namaskaram Acharyulu Garu, I would like to offer a donation for ${option.titleEn} (${option.amount}). Please guide me with confirmation after transfer.`;
+    const amount = isEn ? option.amountEn : option.amountTe;
+    const text = isEn
+      ? `Namaskaram Acharyulu Garu, I would like to offer a donation for ${label} (${amount}). Please guide me with confirmation after transfer.`
+      : `నమస్కారం ఆచార్యులు గారు, నేను ${label} (${amount}) కోసం దానం చేయాలనుకుంటున్నాను. ట్రాన్స్‌ఫర్ తర్వాత నిర్ధారణ మార్గదర్శనం ఇవ్వండి.`;
     window.open(`${WHATSAPP_BASE}${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
-    return label;
   };
 
   const addressLines = t('contact.addressValue').split('\n');
 
   return (
     <div className="page-wrapper contact-page">
-      <div className="page-banner page-banner--hills page-banner--pos-92">
+      <div className="page-banner page-banner--hills page-banner--pos-92 contact-hero">
         <div className="wrap">
-          <div className="eyebrow">{t('contact.eyebrow')}</div>
           <h1>{t('contact.title')}</h1>
           <p className="page-banner-lead">{t('contact.lead')}</p>
-          <button type="button" className="btn ghost" onClick={() => onNavigate('home')}>
-            {t('common.backHome')}
-          </button>
         </div>
       </div>
 
+      <section className="contact-quick-bar" aria-label={t('contact.quickLabel')}>
+        <div className="wrap contact-quick-inner">
+          <a className="contact-quick-btn contact-quick-btn--call" href={`tel:+${PHONE_DIGITS}`}>
+            <span className="contact-quick-kicker">{t('contact.quickCall')}</span>
+            <span className="contact-quick-value">{PHONE_DISPLAY}</span>
+          </a>
+          <a
+            className="contact-quick-btn contact-quick-btn--wa"
+            href={`${WHATSAPP_BASE}${encodeURIComponent(whatsappGreeting)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="contact-quick-kicker">{t('contact.quickWhatsApp')}</span>
+            <span className="contact-quick-value">{t('contact.whatsappNow')}</span>
+          </a>
+          <a className="contact-quick-btn contact-quick-btn--mail" href={`mailto:${EMAIL}`}>
+            <span className="contact-quick-kicker">{t('contact.quickEmail')}</span>
+            <span className="contact-quick-value">{EMAIL}</span>
+          </a>
+          <a className="contact-quick-btn contact-quick-btn--donate" href="#contact-donate">
+            <span className="contact-quick-kicker">{t('contact.quickDonate')}</span>
+            <span className="contact-quick-value">{t('contact.donateJump')}</span>
+          </a>
+        </div>
+      </section>
+
       <section className="page-section wrap contact-main-section">
         <div className="contact-two-column-layout">
-          <div className="temple-card contact-info-card">
-            <div className="card-corner corner-tl" />
-            <div className="card-corner corner-tr" />
-            <div className="card-corner corner-bl" />
-            <div className="card-corner corner-br" />
-
-            <div className="temple-eyebrow contact-card-eyebrow">
-              <span>{t('contact.addressEyebrow')}</span>
-            </div>
-            <h2 className="contact-card-title">
-              {isEn ? t('contact.trustEn') : t('contact.trustTe')}
-            </h2>
-
-            <p className="contact-card-lead">{t('contact.addressLead')}</p>
+          <aside className="contact-panel contact-info-card">
+            <h2 className="contact-panel-title">{t('contact.reachTitle')}</h2>
+            <p className="contact-panel-lead">{t('contact.addressLead')}</p>
 
             <div className="contact-details-list">
               <div className="contact-detail-row">
-                <div className="detail-icon-box" aria-hidden="true">📍</div>
                 <div>
                   <div className="detail-title">{t('contact.address')}</div>
                   <div className="detail-value">
@@ -168,7 +240,6 @@ export default function ContactView({ onNavigate, onBook }) {
               </div>
 
               <div className="contact-detail-row">
-                <div className="detail-icon-box" aria-hidden="true">🙏</div>
                 <div>
                   <div className="detail-title">{t('contact.founder')}</div>
                   <div className="detail-value">{t('contact.founderValue')}</div>
@@ -176,23 +247,24 @@ export default function ContactView({ onNavigate, onBook }) {
               </div>
 
               <div className="contact-detail-row">
-                <div className="detail-icon-box" aria-hidden="true">📞</div>
                 <div>
                   <div className="detail-title">{t('contact.phone')}</div>
-                  <div className="detail-value">+91 98765 43210</div>
+                  <a className="detail-value detail-link" href={`tel:+${PHONE_DIGITS}`}>
+                    {PHONE_DISPLAY}
+                  </a>
                 </div>
               </div>
 
               <div className="contact-detail-row">
-                <div className="detail-icon-box" aria-hidden="true">✉</div>
                 <div>
                   <div className="detail-title">{t('contact.email')}</div>
-                  <div className="detail-value">seva@srivaridasudu.org</div>
+                  <a className="detail-value detail-link" href={`mailto:${EMAIL}`}>
+                    {EMAIL}
+                  </a>
                 </div>
               </div>
 
               <div className="contact-detail-row">
-                <div className="detail-icon-box" aria-hidden="true">🕉</div>
                 <div>
                   <div className="detail-title">{t('contact.hours')}</div>
                   <div className="detail-value">{t('contact.hoursValue')}</div>
@@ -208,33 +280,19 @@ export default function ContactView({ onNavigate, onBook }) {
               >
                 {t('contact.bookSeva')}
               </button>
-              <a
-                href={`${WHATSAPP_BASE}${encodeURIComponent('Namaskaram Acharyulu Garu, I would like to consult regarding spiritual services.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn ghost contact-secondary-btn"
-              >
-                {t('contact.whatsappNow')}
-              </a>
             </div>
-          </div>
+          </aside>
 
-          <div className="temple-card contact-enquiry-card">
-            <div className="card-corner corner-tl" />
-            <div className="card-corner corner-tr" />
-            <div className="card-corner corner-bl" />
-            <div className="card-corner corner-br" />
-
-            <div className="temple-eyebrow contact-card-eyebrow">
-              <span>{t('contact.formEyebrow')}</span>
-            </div>
-            <h3 className="contact-faq-title">{t('contact.formTitle')}</h3>
-            <p className="contact-form-lead">{t('contact.formLead')}</p>
+          <div className="contact-panel contact-enquiry-card">
+            <h2 className="contact-panel-title">{t('contact.formTitle')}</h2>
+            <p className="contact-panel-lead">{t('contact.formLead')}</p>
 
             {submitted ? (
-              <div className="contact-form-success">
-                <div className="contact-success-icon">✓</div>
-                <h4>{t('contact.successTitle')}</h4>
+              <div className="contact-form-success" role="status">
+                <div className="contact-success-icon" aria-hidden="true">
+                  ✓
+                </div>
+                <h3>{t('contact.successTitle')}</h3>
                 <p>{t('contact.successText')}</p>
                 <button
                   type="button"
@@ -242,6 +300,7 @@ export default function ContactView({ onNavigate, onBook }) {
                   onClick={() => {
                     setSubmitted(false);
                     setForm({ ...INITIAL_FORM, subject: subjects[0] });
+                    setErrors({});
                   }}
                 >
                   {t('contact.another')}
@@ -257,11 +316,18 @@ export default function ContactView({ onNavigate, onBook }) {
                     id="contact-name"
                     name="name"
                     type="text"
+                    autoComplete="name"
+                    placeholder={t('contact.namePlaceholder')}
                     className={`contact-input ${errors.name ? 'has-error' : ''}`}
                     value={form.name}
                     onChange={handleChange}
+                    aria-invalid={Boolean(errors.name)}
                   />
-                  {errors.name && <span className="error-text">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="error-text" role="alert">
+                      {errors.name}
+                    </span>
+                  )}
                 </div>
 
                 <div className="contact-form-row">
@@ -273,12 +339,20 @@ export default function ContactView({ onNavigate, onBook }) {
                       id="contact-phone"
                       name="phone"
                       type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel"
+                      placeholder="9876543210"
                       className={`contact-input ${errors.phone ? 'has-error' : ''}`}
                       value={form.phone}
                       onChange={handleChange}
                       maxLength={10}
+                      aria-invalid={Boolean(errors.phone)}
                     />
-                    {errors.phone && <span className="error-text">{errors.phone}</span>}
+                    {errors.phone && (
+                      <span className="error-text" role="alert">
+                        {errors.phone}
+                      </span>
+                    )}
                   </div>
 
                   <div className="form-field-group">
@@ -289,11 +363,18 @@ export default function ContactView({ onNavigate, onBook }) {
                       id="contact-email"
                       name="email"
                       type="email"
+                      autoComplete="email"
+                      placeholder="name@email.com"
                       className={`contact-input ${errors.email ? 'has-error' : ''}`}
                       value={form.email}
                       onChange={handleChange}
+                      aria-invalid={Boolean(errors.email)}
                     />
-                    {errors.email && <span className="error-text">{errors.email}</span>}
+                    {errors.email && (
+                      <span className="error-text" role="alert">
+                        {errors.email}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -325,84 +406,102 @@ export default function ContactView({ onNavigate, onBook }) {
                     name="message"
                     className={`contact-input contact-textarea ${errors.message ? 'has-error' : ''}`}
                     rows={4}
+                    placeholder={t('contact.messagePlaceholder')}
                     value={form.message}
                     onChange={handleChange}
+                    aria-invalid={Boolean(errors.message)}
                   />
-                  {errors.message && <span className="error-text">{errors.message}</span>}
+                  {errors.message && (
+                    <span className="error-text" role="alert">
+                      {errors.message}
+                    </span>
+                  )}
                 </div>
 
                 <button type="submit" className="btn primary btn-full contact-submit-btn">
                   {t('contact.submit')}
                 </button>
+                <p className="contact-form-hint">{t('contact.formHint')}</p>
               </form>
             )}
           </div>
         </div>
 
-        <div className="contact-donation-layout">
-          <div className="temple-card contact-bank-card">
-            <div className="temple-eyebrow contact-card-eyebrow">
-              <span>{t('contact.bankEyebrow')}</span>
-            </div>
-            <h3 className="contact-faq-title">{t('contact.bankTitle')}</h3>
-            <p className="contact-form-lead">{t('contact.bankLead')}</p>
-
-            <div className="contact-bank-list">
-              {BANK_DETAILS.map((row) => {
-                const label = isEn ? row.labelEn : row.labelTe;
-                return (
-                  <div className="contact-bank-row" key={row.labelEn}>
-                    <div>
-                      <div className="detail-title">{label}</div>
-                      <div className="detail-value">{row.value}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="contact-copy-btn"
-                      onClick={() => handleCopy(row.labelEn, row.value)}
-                    >
-                      {copiedField === row.labelEn ? t('contact.copied') : t('contact.copy')}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-
-            <p className="contact-bank-note">{t('contact.bankNote')}</p>
+        <div id="contact-donate" className="contact-donate-section">
+          <div className="contact-donate-header">
+            <h2 className="contact-panel-title">{t('contact.donateTitle')}</h2>
+            <p className="contact-panel-lead contact-panel-lead--center">{t('contact.donateLead')}</p>
           </div>
 
-          <div className="temple-card contact-donate-card">
-            <div className="temple-eyebrow contact-card-eyebrow">
-              <span>{t('contact.donateEyebrow')}</span>
-            </div>
-            <h3 className="contact-faq-title">{t('contact.donateTitle')}</h3>
-            <p className="contact-form-lead">{t('contact.donateLead')}</p>
-
-            <div className="contact-donate-grid">
-              {DONATION_OPTIONS.map((opt) => (
-                <button
-                  key={opt.id}
-                  type="button"
-                  className="contact-donate-option"
-                  onClick={() => handleDonation(opt)}
-                >
-                  <span className="donate-opt-title">
-                    {isEn ? opt.titleEn : opt.titleTe}
-                  </span>
-                  <span className="donate-opt-amount">{opt.amount}</span>
+          <div className="contact-donation-layout">
+            <div className="contact-panel contact-bank-card">
+              <div className="contact-panel-head">
+                <h3 className="contact-subhead">{t('contact.bankTitle')}</h3>
+                <button type="button" className="contact-copy-btn contact-copy-btn--all" onClick={handleCopyAllBank}>
+                  {copiedField === 'all' ? t('contact.copied') : t('contact.copyAll')}
                 </button>
-              ))}
+              </div>
+              <p className="contact-panel-lead">{t('contact.bankLead')}</p>
+
+              <div className="contact-bank-list">
+                {BANK_DETAILS.map((row) => {
+                  const label = isEn ? row.labelEn : row.labelTe;
+                  const value = isEn ? row.valueEn : row.valueTe;
+                  return (
+                    <div className="contact-bank-row" key={row.labelEn}>
+                      <div>
+                        <div className="detail-title">{label}</div>
+                        <div className="detail-value">{value}</div>
+                      </div>
+                      <button
+                        type="button"
+                        className="contact-copy-btn"
+                        onClick={() => handleCopy(row.labelEn, value)}
+                      >
+                        {copiedField === row.labelEn ? t('contact.copied') : t('contact.copy')}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <p className="contact-bank-note">{t('contact.bankNote')}</p>
             </div>
 
-            <button
-              type="button"
-              className="btn primary btn-full contact-submit-btn"
-              onClick={() =>
-                onBook('Donation / Dana Sankalpam – Sri Vari Dasudu Charitable Trust')
-              }
-            >
-              {t('contact.donateCta')}
-            </button>
+            <div className="contact-panel contact-donate-card">
+              <h3 className="contact-subhead">{t('contact.donatePick')}</h3>
+              <p className="contact-panel-lead">{t('contact.donatePickLead')}</p>
+
+              <div className="contact-donate-grid" role="radiogroup" aria-label={t('contact.donatePick')}>
+                {DONATION_OPTIONS.map((opt) => {
+                  const selected = selectedDonation === opt.id;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      className={`contact-donate-option${selected ? ' is-selected' : ''}`}
+                      onClick={() => setSelectedDonation(opt.id)}
+                    >
+                      <span className="donate-opt-title">{isEn ? opt.titleEn : opt.titleTe}</span>
+                      <span className="donate-opt-amount">{isEn ? opt.amountEn : opt.amountTe}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button type="button" className="btn primary btn-full contact-submit-btn" onClick={handleDonationConfirm}>
+                {t('contact.donateCta')}
+              </button>
+              <button
+                type="button"
+                className="btn ghost btn-full contact-secondary-btn"
+                onClick={() => onBook('Donation / Dana Sankalpam – Sri Vari Dasudu Adyatmika Kuteer')}
+              >
+                {t('contact.donateBook')}
+              </button>
+            </div>
           </div>
         </div>
       </section>

@@ -12,9 +12,9 @@ const SPIRITUAL_SERVICES = [
     titleTe: 'వేద & ఆధ్యాత్మిక కార్యక్రమాలు',
     titleEn: 'Vedic & Spiritual Activities',
     descTe:
-      'సనాతన ధర్మ పరిరక్షణార్థం వేద–ఆగమ సంప్రదాయాలు, పూజా విధానాలు, వ్రతాలు, పారాయణాలు మరియు ఆధ్యాత్మిక అవగాహనా కార్యక్రమాలను శ్రీవారి దాసుడు ఛారిటబుల్ ట్రస్ట్ ద్వారా నిర్వహించడం.',
+      'సనాతన ధర్మ పరిరక్షణార్థం వేద–ఆగమ సంప్రదాయాలు, పూజా విధానాలు, వ్రతాలు, పారాయణాలు మరియు ఆధ్యాత్మిక అవగాహనా కార్యక్రమాలను శ్రీ వారి దాసుడు ఆధ్యాత్మిక కుటీరం ద్వారా నిర్వహించడం.',
     descEn:
-      'Vedic–Agamic traditions, worship methods, vratas, parayanam, and spiritual awareness programs through Sri Vari Dasudu Charitable Trust for Sanatana Dharma protection.',
+      'Vedic–Agamic traditions, worship methods, vratas, parayanam, and spiritual awareness programs through Sri Vari Dasudu Adyatmika Kuteer for Sanatana Dharma protection.',
     linkTe: 'సంప్రదించండి',
     linkEn: 'Contact Us',
     target: 'contact'
@@ -46,13 +46,13 @@ const SPIRITUAL_SERVICES = [
   {
     id: 'goseva',
     titleTe: 'కామధేను గోసేవ',
-    titleEn: 'Kamadhenu Goseva',
+    titleEn: 'Kamadhenu Gouseva',
     descTe:
       'గోమాత సంరక్షణ, నిత్య పోషణ సమర్పణ మరియు గోదాన సంకల్పం ద్వారా ధర్మ సేవ మరియు లక్ష్మీ కటాక్ష సిద్ధికి ట్రస్ట్ చేపట్టిన గోసేవ కార్యక్రమాలు.',
     descEn:
-      'Cow protection, daily nourishment offerings, and Go Dhanam sankalpam through Trust Goseva initiatives for dharma and prosperity.',
+      'Cow protection, daily nourishment offerings, and Go Dhanam sankalpam through Trust Gouseva initiatives for dharma and prosperity.',
     linkTe: 'గోసేవ వివరాలు',
-    linkEn: 'Goseva Details',
+    linkEn: 'Gouseva Details',
     target: 'goseva'
   },
   {
@@ -126,9 +126,9 @@ const LINEAGE_STEPS = [
     titleTe: 'శ్రీవారి దాసుడు ఛారిటబుల్ మిషన్',
     titleEn: 'Srivari Dasudu Charitable Mission',
     descTe:
-      'శ్రీవారి దాసుడు ఛారిటబుల్ ట్రస్ట్ ద్వారా వైదిక సేవలు, గోసేవ, శ్రాద్ధ కర్మలు, హోమాలు మరియు ఆధ్యాత్మిక అవగాహనను దేశవిదేశాల భక్తులకు చేరవేయడం.',
+      'శ్రీ వారి దాసుడు ఆధ్యాత్మిక కుటీరం ద్వారా వైదిక సేవలు, గోసేవ, శ్రాద్ధ కర్మలు, హోమాలు మరియు ఆధ్యాత్మిక అవగాహనను దేశవిదేశాల భక్తులకు చేరవేయడం.',
     descEn:
-      'Delivering Vedic services, goseva, shraddha rites, homams, and spiritual awareness to devotees worldwide through Sri Vari Dasudu Charitable Trust.'
+      'Delivering Vedic services, gouseva, shraddha rites, homams, and spiritual awareness to devotees worldwide through Sri Vari Dasudu Adyatmika Kuteer.'
   }
 ];
 
@@ -137,7 +137,7 @@ export default function AboutPage({ onNavigate }) {
 
   return (
     <div className="about-page-wrapper" data-lang-primary={isEn ? 'en' : 'te'}>
-      <section className="about-hero-header" aria-label="About Sri Vari Dasudu Charitable Trust">
+      <section className="about-hero-header" aria-label="About Sri Vari Dasudu Adyatmika Kuteer">
         <div className="about-hero-frame" aria-hidden="true" />
         <div className="about-page-container about-hero-layer">
           <nav className="about-breadcrumb" aria-label="Breadcrumb">
@@ -148,20 +148,8 @@ export default function AboutPage({ onNavigate }) {
             <span className="about-crumb-current">{t('about.breadcrumb.about')}</span>
           </nav>
 
-          <div className="about-hero-eyebrow">
-            <span>✦</span>
-            <span>{t('about.hero.eyebrow')}</span>
-            <span>✦</span>
-          </div>
-
           <h1 className="about-hero-title">{t('about.hero.title')}</h1>
           <div className="about-hero-designation">{t('about.hero.desc')}</div>
-
-          <div className="about-hero-actions">
-            <button type="button" className="btn primary about-cta-primary" onClick={() => onNavigate('contact')}>
-              {t('common.contactUs')}
-            </button>
-          </div>
         </div>
       </section>
 
@@ -202,9 +190,9 @@ export default function AboutPage({ onNavigate }) {
             <div className="about-bio-portrait-wrap">
               <div className="about-bio-frame">
                 <img
-                  src="/images/srivaridasudu.jpg"
-                  alt="Sri N. V. Ram Kishore Acharyulu Portrait"
-                  className="about-logo-img"
+                  src="/images/acharyulu-mission.jpg"
+                  alt="Sri N. V. Ram Kishore Acharyulu (Srivari Dasudu) - Spiritual Message & Mission"
+                  className="about-founder-full-img"
                 />
               </div>
               <div className="about-bio-caption-name">
