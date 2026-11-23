@@ -26,7 +26,10 @@ export default function AdminDashboard({ user }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
-    await signOut(auth);
+    localStorage.removeItem('srivari_admin_logged_in');
+    try {
+      await signOut(auth);
+    } catch (e) {}
     window.location.hash = '/home';
     window.location.reload();
   };

@@ -195,23 +195,27 @@ export default function App() {
     }
   };
 
+  const isAdmin = currentPage === 'admin';
+
   return (
     <div className="react-app-root">
       {/* Devotional Preheader Ticker */}
-      <Marquee />
+      {!isAdmin && <Marquee />}
 
       {/* 1. Header Navigation */}
-      <Header
-        activeTab={
-          currentPage === 'remedy-detail' || currentPage === 'remedy-item'
-            ? 'remedies'
-            : currentPage
-        }
-        onSelectTab={navigateTo}
-        onOpenQuickBooking={(service = 'Vedic Ritual / Seva Booking', pricingType = 'general', havanamId = null) =>
-          handleOpenBooking(service, pricingType, havanamId)
-        }
-      />
+      {!isAdmin && (
+        <Header
+          activeTab={
+            currentPage === 'remedy-detail' || currentPage === 'remedy-item'
+              ? 'remedies'
+              : currentPage
+          }
+          onSelectTab={navigateTo}
+          onOpenQuickBooking={(service = 'Vedic Ritual / Seva Booking', pricingType = 'general', havanamId = null) =>
+            handleOpenBooking(service, pricingType, havanamId)
+          }
+        />
+      )}
 
       {/* Main Dynamic React Page Mount */}
       <main className="react-page-content" role="main">
@@ -219,17 +223,19 @@ export default function App() {
       </main>
 
       {/* 8. Footer */}
-      <Footer onNavigate={navigateTo} pageMode={currentPage} />
+      {!isAdmin && <Footer onNavigate={navigateTo} pageMode={currentPage} />}
 
       {/* Booking Modal Dialog */}
-      <BookingModal
-        isOpen={modalState.isOpen}
-        serviceName={modalState.serviceName}
-        pricingType={modalState.pricingType}
-        havanamId={modalState.havanamId}
-        onBooked={modalState.onBooked}
-        onClose={handleCloseBooking}
-      />
+      {!isAdmin && (
+        <BookingModal
+          isOpen={modalState.isOpen}
+          serviceName={modalState.serviceName}
+          pricingType={modalState.pricingType}
+          havanamId={modalState.havanamId}
+          onBooked={modalState.onBooked}
+          onClose={handleCloseBooking}
+        />
+      )}
     </div>
   );
 }

@@ -14706,7 +14706,7 @@ html[data-lang='te'] body {
    ADMIN PANEL STYLES (Clean Form-Based Interface)
    ══════════════════════════════════════════════════════════════ */
 .admin-page-root {
-  min-height: 80vh;
+  min-height: 100vh;
   background: #f4f6f8;
   font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   color: #333;
@@ -14717,7 +14717,7 @@ html[data-lang='te'] body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 100vh;
   padding: 30px 20px;
 }
 

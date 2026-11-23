@@ -65,6 +65,12 @@ export default function AdminLogin({ onAuthenticated }) {
           <h2>Admin Panel</h2>
         </div>
 
+        <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+          <a href="#/home" style={{ fontSize: '0.85rem', color: '#073B2A', textDecoration: 'none', fontWeight: 600 }}>
+            ← Back to Main Website
+          </a>
+        </div>
+
         <form onSubmit={handleLogin} className="admin-login-form">
           {error && <div className="admin-error-msg">{error}</div>}
 
