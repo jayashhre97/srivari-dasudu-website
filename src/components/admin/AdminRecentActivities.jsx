@@ -60,7 +60,6 @@ export default function AdminRecentActivities() {
       }
     } catch (e) {}
   };
-  };
 
   useEffect(() => {
     loadData();
