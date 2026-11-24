@@ -3,8 +3,17 @@ import { KAMYAMU_HOMAMS } from '../../data/kamyamuData';
 import { getKamyamuHomams, saveKamyamuHomam, deleteKamyamuHomam } from '../../utils/adminDataService';
 
 export default function AdminKamyamu() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const getInitialItems = () => {
+    try {
+      const local = localStorage.getItem('srivari_kamyamu');
+      return local ? JSON.parse(local) : KAMYAMU_HOMAMS;
+    } catch (e) {
+      return KAMYAMU_HOMAMS;
+    }
+  };
+
+  const [items, setItems] = useState(getInitialItems);
+  const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
 
@@ -13,20 +22,13 @@ export default function AdminKamyamu() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getKamyamuHomams();
       if (data && data.length > 0) {
         setItems(data);
-      } else {
-        const local = localStorage.getItem('srivari_kamyamu');
-        setItems(local ? JSON.parse(local) : KAMYAMU_HOMAMS);
+        localStorage.setItem('srivari_kamyamu', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_kamyamu');
-      setItems(local ? JSON.parse(local) : KAMYAMU_HOMAMS);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const handleSave = async (e) => {

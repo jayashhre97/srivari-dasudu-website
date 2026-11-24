@@ -4,8 +4,18 @@ import { getRemedies, saveRemedy, deleteRemedy } from '../../utils/adminDataServ
 
 export default function AdminRemedies() {
   const [categories, setCategories] = useState(REMEDY_CATEGORIES);
-  const [remedies, setRemedies] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+  const getInitialRemedies = () => {
+    try {
+      const local = localStorage.getItem('srivari_remedies');
+      return local ? JSON.parse(local) : REMEDIES_DATA;
+    } catch (e) {
+      return REMEDIES_DATA;
+    }
+  };
+
+  const [remedies, setRemedies] = useState(getInitialRemedies);
+  const [loading, setLoading] = useState(false);
   const [selectedCat, setSelectedCat] = useState('financial');
   const [editingRemedy, setEditingRemedy] = useState(null);
   const [editingItem, setEditingItem] = useState(null); // specific item inside category
@@ -16,20 +26,13 @@ export default function AdminRemedies() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getRemedies();
       if (data && data.length > 0) {
         setRemedies(data);
-      } else {
-        const local = localStorage.getItem('srivari_remedies');
-        setRemedies(local ? JSON.parse(local) : REMEDIES_DATA);
+        localStorage.setItem('srivari_remedies', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_remedies');
-      setRemedies(local ? JSON.parse(local) : REMEDIES_DATA);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const currentCategoryData = remedies.find((r) => r.id === selectedCat || r.category === selectedCat);

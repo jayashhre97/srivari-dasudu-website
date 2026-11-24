@@ -3,8 +3,17 @@ import { SMARTA_SEVA_HAVANALU } from '../../data/smartaSevaData';
 import { getSmartaSevaHavanalu, saveSmartaSevaHavanam, deleteSmartaSevaHavanam } from '../../utils/adminDataService';
 
 export default function AdminSmartaSeva() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const getInitialItems = () => {
+    try {
+      const local = localStorage.getItem('srivari_smarta_seva');
+      return local ? JSON.parse(local) : SMARTA_SEVA_HAVANALU;
+    } catch (e) {
+      return SMARTA_SEVA_HAVANALU;
+    }
+  };
+
+  const [items, setItems] = useState(getInitialItems);
+  const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
 
@@ -13,20 +22,13 @@ export default function AdminSmartaSeva() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getSmartaSevaHavanalu();
       if (data && data.length > 0) {
         setItems(data);
-      } else {
-        const local = localStorage.getItem('srivari_smarta_seva');
-        setItems(local ? JSON.parse(local) : SMARTA_SEVA_HAVANALU);
+        localStorage.setItem('srivari_smarta_seva', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_smarta_seva');
-      setItems(local ? JSON.parse(local) : SMARTA_SEVA_HAVANALU);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const handleSave = async (e) => {

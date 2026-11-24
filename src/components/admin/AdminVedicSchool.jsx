@@ -3,8 +3,17 @@ import { VEDIC_DATA, VEDIC_CURRICULUM_STEPS, GURUKUL_PILLARS, DAILY_ROUTINE } fr
 import { getVedicData, saveVedicItem } from '../../utils/adminDataService';
 
 export default function AdminVedicSchool() {
-  const [vedas, setVedas] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const getInitialVedas = () => {
+    try {
+      const local = localStorage.getItem('srivari_vedic_data');
+      return local ? JSON.parse(local) : VEDIC_DATA;
+    } catch (e) {
+      return VEDIC_DATA;
+    }
+  };
+
+  const [vedas, setVedas] = useState(getInitialVedas);
+  const [loading, setLoading] = useState(false);
   const [editingVeda, setEditingVeda] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
 
@@ -13,20 +22,13 @@ export default function AdminVedicSchool() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getVedicData();
       if (data && data.length > 0) {
         setVedas(data);
-      } else {
-        const local = localStorage.getItem('srivari_vedic_data');
-        setVedas(local ? JSON.parse(local) : VEDIC_DATA);
+        localStorage.setItem('srivari_vedic_data', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_vedic_data');
-      setVedas(local ? JSON.parse(local) : VEDIC_DATA);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const handleSave = async (e) => {

@@ -3,8 +3,17 @@ import { SMARTAM_FUNCTIONS } from '../../data/smartamData';
 import { getSmartamFunctions, saveSmartamFunction, deleteSmartamFunction } from '../../utils/adminDataService';
 
 export default function AdminSmartam() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const getInitialItems = () => {
+    try {
+      const local = localStorage.getItem('srivari_smartam');
+      return local ? JSON.parse(local) : SMARTAM_FUNCTIONS;
+    } catch (e) {
+      return SMARTAM_FUNCTIONS;
+    }
+  };
+
+  const [items, setItems] = useState(getInitialItems);
+  const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
 
@@ -13,20 +22,13 @@ export default function AdminSmartam() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getSmartamFunctions();
       if (data && data.length > 0) {
         setItems(data);
-      } else {
-        const local = localStorage.getItem('srivari_smartam');
-        setItems(local ? JSON.parse(local) : SMARTAM_FUNCTIONS);
+        localStorage.setItem('srivari_smartam', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_smartam');
-      setItems(local ? JSON.parse(local) : SMARTAM_FUNCTIONS);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const handleSave = async (e) => {

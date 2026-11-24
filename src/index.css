@@ -14794,7 +14794,9 @@ html[data-lang='te'] body {
 /* Dashboard Layout */
 .admin-dashboard {
   display: flex;
-  min-height: 85vh;
+  min-height: 100vh;
+  width: 100%;
+  align-items: stretch;
 }
 
 .admin-mobile-header {
@@ -14802,12 +14804,16 @@ html[data-lang='te'] body {
 }
 
 .admin-sidebar {
-  width: 250px;
+  width: 260px;
   background: #073B2A;
   color: #fff;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .admin-sidebar-header {
@@ -14833,6 +14839,7 @@ html[data-lang='te'] body {
   flex-direction: column;
   padding: 12px 0;
   flex: 1;
+  overflow-y: auto;
 }
 
 .admin-nav-item {
@@ -14871,6 +14878,7 @@ html[data-lang='te'] body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: auto;
 }
 
 /* Main Area */

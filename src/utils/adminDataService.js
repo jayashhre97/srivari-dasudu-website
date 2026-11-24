@@ -43,34 +43,83 @@ const COLLECTIONS = {
   settings: 'settings'
 };
 
+// Check if Firebase is actually configured with real credentials
+export function isFirebaseConfigured() {
+  try {
+    return Boolean(
+      db &&
+      db.app &&
+      db.app.options &&
+      db.app.options.apiKey &&
+      db.app.options.apiKey !== 'YOUR_API_KEY'
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
+// Timeout wrapper so network calls never hang the UI
+function withTimeout(promise, ms = 1200) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      resolve(null);
+    }, ms);
+    promise
+      .then((res) => {
+        clearTimeout(timer);
+        resolve(res);
+      })
+      .catch((err) => {
+        clearTimeout(timer);
+        resolve(null);
+      });
+  });
+}
+
 // ─── Generic CRUD ─────────────────────────────────────────
 
 export async function getAllDocs(collectionName) {
+  if (!isFirebaseConfigured()) {
+    return [];
+  }
   try {
-    const snap = await getDocs(collection(db, collectionName));
-    return snap.docs.map(d => ({ _id: d.id, ...d.data() }));
+    const fetchPromise = getDocs(collection(db, collectionName)).then((snap) =>
+      snap.docs.map((d) => ({ _id: d.id, ...d.data() }))
+    );
+    const result = await withTimeout(fetchPromise, 1200);
+    return result || [];
   } catch (err) {
-    console.error(`Error fetching ${collectionName}:`, err);
+    console.warn(`[adminDataService] Skipped ${collectionName}:`, err?.message || err);
     return [];
   }
 }
 
 export async function getDocById(collectionName, docId) {
+  if (!isFirebaseConfigured()) {
+    return null;
+  }
   try {
-    const snap = await getDoc(doc(db, collectionName, docId));
-    return snap.exists() ? { _id: snap.id, ...snap.data() } : null;
+    const fetchPromise = getDoc(doc(db, collectionName, docId)).then((snap) =>
+      snap.exists() ? { _id: snap.id, ...snap.data() } : null
+    );
+    const result = await withTimeout(fetchPromise, 1200);
+    return result || null;
   } catch (err) {
-    console.error(`Error fetching ${collectionName}/${docId}:`, err);
+    console.warn(`[adminDataService] Skipped ${collectionName}/${docId}:`, err?.message || err);
     return null;
   }
 }
 
 export async function saveDoc(collectionName, docId, data) {
+  if (!isFirebaseConfigured()) {
+    return true; // saved to local storage
+  }
   try {
-    await setDoc(doc(db, collectionName, docId), data, { merge: true });
+    const savePromise = setDoc(doc(db, collectionName, docId), data, { merge: true });
+    await withTimeout(savePromise, 1500);
     return true;
   } catch (err) {
-    console.error(`Error saving ${collectionName}/${docId}:`, err);
+    console.warn(`[adminDataService] Error saving ${collectionName}/${docId}:`, err);
     return false;
   }
 }

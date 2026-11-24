@@ -4,42 +4,50 @@ import { getGosevaProducts, saveGosevaProduct, deleteGosevaProduct, getGosevaAct
 
 export default function AdminGoseva() {
   const [subTab, setSubTab] = useState('products');
-  const [products, setProducts] = useState([]);
-  const [activities, setActivities] = useState([]);
+
+  const getInitialProducts = () => {
+    try {
+      const local = localStorage.getItem('srivari_goseva_products');
+      return local ? JSON.parse(local) : GO_PRODUCTS;
+    } catch (e) {
+      return GO_PRODUCTS;
+    }
+  };
+
+  const getInitialActivities = () => {
+    try {
+      const local = localStorage.getItem('srivari_goseva_activities');
+      return local ? JSON.parse(local) : GOSEVA_ACTIVITIES;
+    } catch (e) {
+      return GOSEVA_ACTIVITIES;
+    }
+  };
+
+  const [products, setProducts] = useState(getInitialProducts);
+  const [activities, setActivities] = useState(getInitialActivities);
   const [editingProduct, setEditingProduct] = useState(null);
   const [editingActivity, setEditingActivity] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const prodData = await getGosevaProducts();
       if (prodData && prodData.length > 0) {
         setProducts(prodData);
-      } else {
-        const local = localStorage.getItem('srivari_goseva_products');
-        setProducts(local ? JSON.parse(local) : GO_PRODUCTS);
+        localStorage.setItem('srivari_goseva_products', JSON.stringify(prodData));
       }
 
       const actData = await getGosevaActivities();
       if (actData && actData.length > 0) {
         setActivities(actData);
-      } else {
-        const local = localStorage.getItem('srivari_goseva_activities');
-        setActivities(local ? JSON.parse(local) : GOSEVA_ACTIVITIES);
+        localStorage.setItem('srivari_goseva_activities', JSON.stringify(actData));
       }
-    } catch (e) {
-      const localP = localStorage.getItem('srivari_goseva_products');
-      setProducts(localP ? JSON.parse(localP) : GO_PRODUCTS);
-      const localA = localStorage.getItem('srivari_goseva_activities');
-      setActivities(localA ? JSON.parse(localA) : GOSEVA_ACTIVITIES);
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   // Product save

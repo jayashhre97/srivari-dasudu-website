@@ -15,8 +15,17 @@ const DEFAULT_CONTACT = {
 };
 
 export default function AdminContact() {
-  const [contact, setContact] = useState(DEFAULT_CONTACT);
-  const [loading, setLoading] = useState(true);
+  const getInitialContact = () => {
+    try {
+      const local = localStorage.getItem('srivari_contact_info');
+      return local ? JSON.parse(local) : DEFAULT_CONTACT;
+    } catch (e) {
+      return DEFAULT_CONTACT;
+    }
+  };
+
+  const [contact, setContact] = useState(getInitialContact);
+  const [loading, setLoading] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
 
   useEffect(() => {
@@ -24,20 +33,13 @@ export default function AdminContact() {
   }, []);
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getContactInfo();
       if (data) {
         setContact(data);
-      } else {
-        const local = localStorage.getItem('srivari_contact_info');
-        if (local) setContact(JSON.parse(local));
+        localStorage.setItem('srivari_contact_info', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_contact_info');
-      if (local) setContact(JSON.parse(local));
-    }
-    setLoading(false);
+    } catch (e) {}
   };
 
   const handleSave = async (e) => {

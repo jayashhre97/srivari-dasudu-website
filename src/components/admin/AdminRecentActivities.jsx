@@ -37,27 +37,29 @@ const DEFAULT_ACTIVITIES = [
 ];
 
 export default function AdminRecentActivities() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const getInitialItems = () => {
+    try {
+      const local = localStorage.getItem('srivari_recent_activities');
+      return local ? JSON.parse(local) : DEFAULT_ACTIVITIES;
+    } catch (e) {
+      return DEFAULT_ACTIVITIES;
+    }
+  };
+
+  const [items, setItems] = useState(getInitialItems);
+  const [loading, setLoading] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [statusMsg, setStatusMsg] = useState('');
 
   const loadData = async () => {
-    setLoading(true);
     try {
       const data = await getRecentActivities();
       if (data && data.length > 0) {
         setItems(data);
-      } else {
-        // Fallback to local storage or defaults
-        const local = localStorage.getItem('srivari_recent_activities');
-        setItems(local ? JSON.parse(local) : DEFAULT_ACTIVITIES);
+        localStorage.setItem('srivari_recent_activities', JSON.stringify(data));
       }
-    } catch (e) {
-      const local = localStorage.getItem('srivari_recent_activities');
-      setItems(local ? JSON.parse(local) : DEFAULT_ACTIVITIES);
-    }
-    setLoading(false);
+    } catch (e) {}
+  };
   };
 
   useEffect(() => {
